@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import crypto from 'crypto'
 const studentSchema = new mongoose.Schema({
   batch: { type: String }, 
-  id: { type: String, unique: true , require:true }, 
-  password : {type : String , require : true , default : crypto.randomBytes(16).toString('hex')},
+  id: { type: String, unique: true , required:true }, 
+  password : {type : String , required : true , default : crypto.randomBytes(16).toString('hex')},
   name: { type: String  , default : "No Name is Provided" }, 
   gender: { type: String, enum: ['MALE', 'FEMALE', 'OTHER'] },
   cetHtNo: { type: String, unique: true , default:"No Hall Ticket available" }, 
