@@ -3,7 +3,17 @@ export default class StudentService{
         // initialise student repo
     }
 
-    getAllStudent = ()=>{}
+    getAllStudents = (filter)=>{
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+    create = () => {}
+    findById = ()=>{}
+    findByIdAndUpdate = ()=>{}
+    findByIdAndDelete = () => {}
     advancedSearch = ()=>{}
     getSingleStudent = ()=>{}
     updateStudentWithId = ()=>{}
