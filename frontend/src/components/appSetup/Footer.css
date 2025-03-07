@@ -1,0 +1,43 @@
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    margin: 10px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a,
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}

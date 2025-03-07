@@ -1,0 +1,227 @@
+.app-previewProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Search Input */
+input[type="text"] {
+  padding: 12px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+/* Profile Suggestions Grid */
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* Profile Card */
+.profile-preview {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.profile-preview:hover {
+  transform: translateY(-5px);
+}
+
+.profile-preview .profile-pic {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile-preview h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.profile-preview p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.profile-preview button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-preview button:hover {
+  background-color: #0056b3;
+}
+
+/* Detailed Profile Modal */
+.detailed-profile {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.detailed-profile .profile-pic-large {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.detailed-profile h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Two-Column Layout on Larger Screens, One-Column on Mobile */
+.profile-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.profile-details li {
+  font-size: 16px;
+  padding: 8px 0;
+}
+
+.profile-details strong {
+  color: #007bff;
+}
+
+@media (max-width: 768px) {
+  .profile-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 12px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #cc0000;
+}
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Suggestions container */
+.suggestions-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw; /* Full viewport width */
+  padding: 1rem;
+  background-color: #ffffff;
+  position: absolute;
+  top: 50px; /* Adjust this to position below your search bar */
+  left: 0;
+  z-index: 1000; /* Display above other elements */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid #007bff; /* Accent line on top for styling */
+}
+
+/* Styling for each suggestion item */
+.suggestion-item {
+  flex: 1 1 200px; /* Flexible width, minimum width of 200px */
+  margin: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.suggestion-item:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+/* Make sure suggestions fit and wrap correctly on small screens */
+@media (max-width: 600px) {
+  .suggestions-container {
+    padding: 0.5rem;
+  }
+  .suggestion-item {
+    flex: 1 1 120px; /* Smaller minimum width for mobile */
+  }
+}
+
+/* Add smooth scroll for long suggestion lists */
+.suggestions-container {
+  max-height: 50vh; /* Adjust as needed */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Prevent interfering with other layout elements */
+body, .navbar, .content {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+.Search-container{
+  margin-top: 20px;
+}
+
+
+.profile-container{
+  display: flex;
+  
+}
