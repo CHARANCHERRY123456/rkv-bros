@@ -7,8 +7,9 @@ export default class StudentController {
 
     getAllStudents = async (req, res) => {
         try {
-            const students = await this.service.getAllStudents(req.query);
-            res.status(200).json(students);
+            console.log("I am Here");
+            const students = await this.service.find(req.query);
+            return res.status(200).json(students);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
@@ -16,6 +17,7 @@ export default class StudentController {
 
     advancedSearch = async (req, res) => {
         try {
+            console.log("advanced search");
             const filter = {};
             // Extract queries and add them to the filter
             for (let key in req.query) {
@@ -27,7 +29,7 @@ export default class StudentController {
                 }
             }
 
-            const students = await this.service.getAllStudents(filter);
+            const students = await this.service.find(filter);
             res.status(200).json(students);
 
         } catch (error) {
@@ -55,11 +57,8 @@ export default class StudentController {
 
     addStudent = async (req, res) => {
         try {
-            const studentData = {
-                ...req.body,
-                createdBy: req.user.id
-            };
-            const student = await this.service.create(studentData);
+            console.log(req.body);
+            const student = await this.service.create(req.body);
             return res.status(201).json(student);
         } catch (error) {
             return res.status(400).json({ error: error.message });

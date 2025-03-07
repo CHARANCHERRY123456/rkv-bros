@@ -1,14 +1,14 @@
 import express from 'express';
-import StudentController from '../controllers/StudentController';
+import StudentController from '../controllers/StudentController.js';
 
-const router = express.Router();
+const studentRouter = express.Router();
 const studentController = new StudentController();
 
-router.get("/" , studentController.getAllStudent);
-router.get("/filter" ,studentController.advancedSearch);
-router.get("/:id" , studentController.getSingleStudent);
-router.put("/:id" , studentController.updateStudentWithId);
-router.post("/" , studentController.addStudent);
-router.delete("/:id" , studentController.deleteStudentById);
+studentRouter.get("/" , studentController.getAllStudents);
+studentRouter.get("/filter" ,studentController.advancedSearch);
+studentRouter.get("/:id" , studentController.getSingleStudent);
+studentRouter.put("/:id" , studentController.updateStudentWithId);
+studentRouter.post("/" , studentController.addStudent);
+studentRouter.delete("/:id" , studentController.deleteStudentById);
 
-export default router;
+export default studentRouter;

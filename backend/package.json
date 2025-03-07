@@ -2,30 +2,12 @@
   "name": "rkv-bros",
   "version": "1.0.0",
   "description": "1)it will show all the data of the students ",
-  "main": "e one can upload the nptl weekly assignment answers and everyone can see it",
+  "main": "index.js",
   "scripts": {
-    "test": "use it"
+    "test": "use it",
+    "start": "nodemon index.js"
   },
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": " where we can upload the pdfs and the content and all other students will utilise this data"
-  },
-  "keywords": [
-    "give",
-    "it",
-    "a",
-    "open",
-    "source",
-    "so",
-    "that",
-    "any",
-    "one",
-    "can",
-    "contribute",
-    "to",
-    "that"
-  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
