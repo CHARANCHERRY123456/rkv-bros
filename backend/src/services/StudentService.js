@@ -11,6 +11,7 @@ export default class StudentService{
         }
       };
 
+
     find = async (data)=>{
         try {
             return this.repository.find(data);
@@ -18,6 +19,7 @@ export default class StudentService{
           throw Error(`Error while Finding Students :${error.message} `);
         }
     }
+
     findOne = async (data)=>{
         try {
             return this.repository.findOne(data);
@@ -25,6 +27,7 @@ export default class StudentService{
           throw Error(`Error while Finding Student :${error.message} `);
         }
     }
+
     findById =async (id)=>{
         try {
             return await this.repository.findById(id);
@@ -32,6 +35,7 @@ export default class StudentService{
             throw Error(`Error while finding student by id : ${error.message}`);
         }
     }
+
     findByIdAndUpdate = async(id , data)=>{
         try {
             return await this.repository.findByIdAndUpdate(id , data);
@@ -39,11 +43,26 @@ export default class StudentService{
             throw Error(`Error while finding and updating student by id  : ${error.message}`);
         }
     }
+    
     findByIdAndDelete =async (id) => {
         try {
             return await this.repository.findByIdAndDelete(id);
         } catch (error) {
             throw Error(`Error while finding and deleting student by id  : ${error.message}`);
+        }
+    }
+    deleteOne = async(data)=>{
+        try {
+            return await this.repository.delete(data);
+        } catch (error) {
+            throw Error(`Error while deleting student by given data : ${error.message}`);
+        }
+    }
+    deleteMany = async(data)=>{
+        try {
+            return await this.repository.delete(data);
+        } catch (error) {
+            throw Error(`Error while deleting student by given data : ${error.message}`);
         }
     }
 }

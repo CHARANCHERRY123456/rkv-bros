@@ -42,12 +42,12 @@ export default class CrudRepository {
   
     findByIdAndUpdate = async (id, data) => {
       try {
-        const doc = await this.model.findByIdAndUpdate(id, data, { new: true });
+        const doc = await this.model.findByIdAndUpdate(id, data, { new: true, runValidators: true });
         return doc;
       } catch (error) {
         throw Error(`Error while updating document: ${error.message}`);
       }
-    }
+    };    
   
     findByIdAndDelete = async (id) => {
       try {
@@ -55,6 +55,24 @@ export default class CrudRepository {
         return doc;
       } catch (error) {
         throw Error(`Error while deleting document: ${error.message}`);
+      }
+    }
+
+
+    delete = async (query) => {
+      try {
+        const doc = await this.model.deleteOne(query);
+        return doc;
+      } catch (error) {
+        throw Error(`Error while deleting the document: ${error.message}`);
+      }
+    };
+    deleteMany = async (quer)=>{
+      try {
+        const doc = await this.model.deleteMany(quer);
+        return doc;
+      } catch (error) {
+        throw Error(`Error while deleting many docs ${error.message}`);
       }
     }
   }
