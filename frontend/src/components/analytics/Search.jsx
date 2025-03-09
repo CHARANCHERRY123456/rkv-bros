@@ -1,61 +1,72 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import Papa from 'papaparse';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import ProfilePreview from './ProfilePreview.jsx';
 import DetailedProfile from './DetailedProfile.jsx';
-import './Search.css'
+import './Search.css';
+
 const App = () => {
-  const [data, setData] = useState([]);
-  const [filteredNames, setFilteredNames] = useState([]);
+  const [names, setNames] = useState([]); 
+  const [filteredNames, setFilteredNames] = useState([]); 
   const [selectedProfile, setSelectedProfile] = useState(null);
 
-  // Load and parse the CSV file on mount
+  // Fetch only names from the backend when component mounts
   useEffect(() => {
-    fetch("r20.csv")
-      .then(response => response.text())
-      .then(csvText => {
-        Papa.parse(csvText, {
-          header: true,
-          complete: (result) => setData(result.data),
-        });
-      });
+    const fetchNames = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/student/getNames");
+        const fetchedNames = response.data; // Store response in a variable
+        console.log(fetchedNames); // You can perform actions here
+        setNames(fetchedNames); // Set state if needed
+      } catch (error) {
+        console.error("Error fetching names:", error);
+      }
+    };
+  
+    fetchNames();
   }, []);
+  
 
-  // Filter names for autocomplete suggestions based on input
+  // Filter names for autocomplete suggestions
   const handleSearch = useCallback((searchText) => {
-    const filtered = data.filter(item => 
-      item.NAME && item.NAME.toLowerCase().includes(searchText.toLowerCase())
+    const filtered = names.filter(name => 
+      name.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredNames(filtered);
-  }, [data]);
+  }, [names]);
 
-  // Select a profile to view more details
-  const handleSelectProfile = useCallback((profile) => {
-    setSelectedProfile(profile);
+  // Fetch full profile data when a name is selected
+  const handleSelectProfile = useCallback((name) => {
+    fetch(`/api/profile?name=${encodeURIComponent(name)}`)
+      .then(response => response.json())
+      .then(profileData => setSelectedProfile(profileData))
+      .catch(error => console.error("Error fetching profile:", error));
   }, []);
 
-  return <div className='Search-container'>
-    <div className="app-previewProfile">
-      <input
-        type="text"
-        placeholder="Search by name..."
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-      
-      
-      {selectedProfile && (
-        <DetailedProfile profile={selectedProfile} onClose={() => setSelectedProfile(null)} />
+  return (
+    <div className='Search-container'>
+      <div className="app-previewProfile">
+        <input
+          type="text"
+          placeholder="Search by name..."
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        
+        {selectedProfile && (
+          <DetailedProfile profile={selectedProfile} onClose={() => setSelectedProfile(null)} />
         )}
       </div>
+      
       <div className="suggestions">
-        {!selectedProfile && filteredNames.map((item, index) => (
+        {!selectedProfile && filteredNames.map((name, index) => (
           <ProfilePreview
-          key={index}
-          profile={item}
-          onSelect={() => handleSelectProfile(item)}
+            key={index}
+            profile={{ NAME: name }} // Passing name only
+            onSelect={() => handleSelectProfile(name)}
           />
-          ))}
+        ))}
       </div>
     </div>
+  );
 };
 
 export default App;

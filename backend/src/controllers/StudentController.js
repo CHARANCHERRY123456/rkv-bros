@@ -4,10 +4,18 @@ export default class StudentController {
     constructor() {
         this.service = new StudentService();
     }
-
+    getNames = async (req , res)=>{
+        try {
+            const names = await this.service.getNames({});
+            console.log(names);
+            return res.status(200).json(names);
+        } catch (error) {
+            res.status(400).json({error : error.message});
+        }
+    }
     getAllStudents = async (req, res) => {
         try {
-            console.log("I am Here");
+            console.log("in Get all students");
             const students = await this.service.find(req.query);
             return res.status(200).json(students);
         } catch (error) {

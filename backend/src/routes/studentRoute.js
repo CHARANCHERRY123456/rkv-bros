@@ -5,6 +5,7 @@ const studentRouter = express.Router();
 const studentController = new StudentController();
 
 studentRouter.get("/" , studentController.getAllStudents); // working
+studentRouter.get("/getNames" , studentController.getNames);
 studentRouter.get("/filter" ,studentController.advancedSearch); //working
 studentRouter.get("/:id" , studentController.getSingleStudent); // working
 studentRouter.put("/:id" , studentController.updateStudentWithId); //working

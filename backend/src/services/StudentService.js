@@ -10,11 +10,21 @@ export default class StudentService{
           throw Error(`Error while creating Student :${error.message} `);
         }
       };
-
-
+    
     find = async (data)=>{
         try {
-            return this.repository.find(data);
+            const students =  this.repository.find(data);
+            return students;
+        } catch (error) {
+            throw Error(`Error while Finding Students :${error.message} `);
+        }
+    }
+
+    getNames = async (data)=>{
+        try {
+            const students =  await this.repository.find(data);
+            const names = students.map((student)=>student.name);
+            return names;
         } catch (error) {
           throw Error(`Error while Finding Students :${error.message} `);
         }
