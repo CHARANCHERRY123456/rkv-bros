@@ -65,4 +65,12 @@ export default class StudentService{
             throw Error(`Error while deleting student by given data : ${error.message}`);
         }
     }
+    searchStudents = async (searchQuery)=>{
+        try {
+            if(!searchQuery) return [];
+            return await this.repository.findStudents(searchQuery);
+        } catch (error) {
+            console.log(`Erroer searching students ${error.message}`);
+        }
+    }
 }

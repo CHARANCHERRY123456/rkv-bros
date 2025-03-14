@@ -14,7 +14,7 @@ export default function StudentComponentPage(){
       setLoading(true);
 
       try {
-        const result = await axios.get(`${envVars.VITE_BASE_URL}/student/filter?name=${input}`);
+        const result = await axios.get(`${envVars.VITE_BASE_URL}/student/filter?q=${input}`);
         setStudents(result.data);
         // sores the result in the session storage and get when come again
         sessionStorage.setItem("searchedStudents" , JSON.stringify(result.data));

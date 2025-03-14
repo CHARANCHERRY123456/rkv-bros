@@ -18,18 +18,8 @@ export default class StudentController {
     advancedSearch = async (req, res) => {
         try {
             console.log("advanced search");
-            const filter = {};
-            // Extract queries and add them to the filter
-            for (let key in req.query) {
-                if (req.query[key]) {
-                    filter[key] = {
-                        $regex: req.query[key],
-                        $options: 'i' // Case-insensitive search
-                    };
-                }
-            }
-
-            const students = await this.service.find(filter);
+            const searchQuery = req.query.q;
+            const students = await this.service.searchStudents(searchQuery);
             res.status(200).json(students);
 
         } catch (error) {
