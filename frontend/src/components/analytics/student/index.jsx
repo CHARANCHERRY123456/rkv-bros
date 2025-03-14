@@ -19,7 +19,7 @@ export default function StudentComponentPage(props){
       // console.log(data);
       // setResults(data);
       //using axios
-      axios.get(`${envVars.VITE_BASE_URL}student/filter?name=${input}`)
+      axios.get(`${envVars.VITE_BASE_URL}/student/filter?name=${input}`)
       .then((response)=>{
         setResults(response.data)
       }
@@ -53,7 +53,7 @@ export default function StudentComponentPage(props){
     {loading && <h1>Loading bro please wait</h1> }
 
     <div className="w-full max-w-2xl mt-6">
-      {results.length===0 && !loading && input && <h1>No results found</h1> }
+      {results.length==0 && !loading && input && <h1>No results found</h1> }
 
       {results.map((user)=>(
         <div 
