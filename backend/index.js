@@ -5,7 +5,6 @@ import morgan from "morgan";
 import router from './src/routes/index.js';
 import connectDB from './src/config/db-config.js';
 connectDB();
-https://github.com/Ragamalika-123/rkv-bros.git
 const port = 3000;
 const app = express();
 app.use(express.urlencoded({extended:true}));
@@ -18,4 +17,4 @@ app.use("/" , router);
 
 app.listen(port , "0.0.0.0" , ()=>{
     console.log(`sever running on port ${port}`);
-}); https://github.com/Ragamalika-123/rkv-bros.git
+});
