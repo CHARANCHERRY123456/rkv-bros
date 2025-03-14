@@ -1,78 +1,70 @@
 import { useState } from "react";
-import axios from 'axios'
-import {useNavigate} from 'react-router-dom';
-import envVars from '../../../config/config.js'
+import axios from "axios";
+import envVars from "../../../config/config.js";
+import SearchInput from "./searchInput.jsx";
+import StudentResult from "./StudentResult.jsx";
 
+export default function StudentComponentPage() {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
-export default function StudentComponentPage(props){
-  const [input , setInput] = useState("");
-  const [results , setResults] = useState([]);
-  const [loading , setLoading] = useState(false);
-  const handleSearch = async()=>{
-    console.log("in handle search");
-    if(!input.trim()) return;
-    setLoading(true);
-    try {
-      // using fetch
-      // const response = await fetch(`${envVars.VITE_BASE_URL}student/filter?name=${input}`);
-      // const data = response.json();
-      // console.log(data);
-      // setResults(data);
-      //using axios
-      axios.get(`${envVars.VITE_BASE_URL}/student/filter?name=${input}`)
-      .then((response)=>{
-        setResults(response.data)
-      }
-      );
-
-    } catch (error) {
-      console.error(`Error fetching the results ${error.message}`) ;
+  const handleSearch = async (input) => {
+    if (!input.trim()) {
+      return;
     }
-    setLoading(false);
-  }
 
-  return <div className="flex felx-col items-center p-6">
-    {/* input div */}
-    <div className="w-full max-w-2xl">
-      <input 
-        type="text" 
-        placeholder="Search name , id , number , branch"
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        value={input}
-        onChange={(e)=>setInput(e.target.value)}
-        onKeyDown={(e)=>e.key=="Enter" && handleSearch()}
-      />
-      <button 
-        className="w-full mt-3 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        onClick={handleSearch}
-      >Search
-      </button>
-    </div>
+    setLoading(true);
+    setError(null);
+    setSearchPerformed(true);
 
-    {/* output div */}
-    {loading && <h1>Loading bro please wait</h1> }
+    try {
+      const response = await axios.get(
+        `${envVars.VITE_BASE_URL}/student/filter?name=${input}`
+      );
+      setResults(response.data);
+    } catch (err) {
+      console.error(`Error fetching results: ${err.message}`);
+      setError("Failed to fetch results. Please try again.");
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    <div className="w-full max-w-2xl mt-6">
-      {results.length==0 && !loading && input && <h1>No results found</h1> }
+  const handleClear = () => {
+    setResults([]);
+    setSearchPerformed(false);
+    setError(null);
+  };
 
-      {results.map((user)=>(
-        <div 
-        key={user.id}
-        className="flex items-center p-4 mb-4 bg-white shadow-md rounded-lg"
-        >
-          <img src={user.image} alt={user.name}
-            className="w-16 h-16 rounded-full border"
-          />
-          <div className="ml-4 flext-1">
-            <h3 className="text-lg font-semibold">{user.name}</h3>
-            <p className="text-gray-500">ID : {user.sid}</p>
-            <p className="text-grey-500">Phone : {user.phone} | CGPA : {user.cgpa} </p>
+  return (
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="max-w-3xl mx-auto">
+        <SearchInput onSearch={handleSearch} onClear={handleClear} />
+
+        {loading && (
+          <div className="text-center text-blue-600 font-semibold mb-4">
+            Loading...
           </div>
-        </div>
-      ))}
+        )}
+        {error && (
+          <div className="text-center text-red-600 font-semibold mb-4">
+            {error}
+          </div>
+        )}
+
+        {results.length > 0 && (
+          <div className="space-y-4">
+            {results.map((user) => (
+              <StudentResult key={user.id} user={user} />
+            ))}
+          </div>
+        )}
+
+
+      </div>
     </div>
-
-
-    
-  </div>
+  );
 }
