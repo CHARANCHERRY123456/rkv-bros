@@ -28,7 +28,7 @@ const SearchInput = ({ onSearch, onClear }) => {
         {/* Use an arrow function to avoid immediate execution */}
         <button
           onClick={() => onSearch(input)}
-          className="absolute bg-[#334155] rounded inset-y-0 right-0 
+          className="absolute bg-[#334155] rounded-lg inset-y-0 right-0 
                      flex items-center pr-3 pl-3"
         >
           <svg

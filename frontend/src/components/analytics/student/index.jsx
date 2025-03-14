@@ -1,59 +1,48 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import envVars from "../../../config/config.js";
-import SearchInput from "./searchInput.jsx";
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import envVars from '../../../config/config.js';
 import StudentList from "./gridLayout.jsx";
+import SearchInput from "./searchInput.jsx";
+export default function StudentComponentPage(){
+  const [students , setStudents] = useState([]);
+  const [loading , setLoading] = useState(false);
+  const [error , setError] = useState(null);
 
-export default function StudentComponentPage() {
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [searchPerformed, setSearchPerformed] = useState(false);
+  // to search the result
+  const handleSearch = async(input)=>{
+      if (!input.trim()) return;
+      setLoading(true);
 
-  // Load results from sessionStorage on mount
+      try {
+        const result = await axios.get(`${envVars.VITE_BASE_URL}/student/filter?name=${input}`);
+        setStudents(result.data);
+        // sores the result in the session storage and get when come again
+        sessionStorage.setItem("searchedStudents" , JSON.stringify(result.data));
+      } catch (error) {
+        // went wrong so empty students 
+        console.error(`Error while fetching the data ${error.message}`);
+        setError("Error fetching the data please try again");
+        setStudents([]);
+        sessionStorage.removeItem("searchedStudents");
+      }finally{
+        setLoading(false);
+      }
+  }
+
   useEffect(() => {
-    const storedResults = sessionStorage.getItem("searchResults");
+    const storedResults = sessionStorage.getItem("searchedStudents");
     if (storedResults) {
-      setResults(JSON.parse(storedResults));
-      setSearchPerformed(true);
+      setStudents(JSON.parse(storedResults)); // Parse before setting state
     }
   }, []);
-
-  const handleSearch = async (input) => {
-    if (!input.trim()) return;
-
-    setLoading(true);
-    setError(null);
-    setSearchPerformed(true);
-
-    try {
-      const response = await axios.get(
-        `${envVars.VITE_BASE_URL}/student/filter?name=${input}`
-      );
-      setResults(response.data);
-      sessionStorage.setItem("searchResults", JSON.stringify(response.data)); // Store results
-    } catch (err) {
-      console.error(`Error fetching results: ${err.message}`);
-      setError("Failed to fetch results. Please try again.");
-      setResults([]);
-      sessionStorage.removeItem("searchResults"); // Clear stored results on error
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleClear = () => {
-    setResults([]);
-    setSearchPerformed(false);
-    setError(null);
-    sessionStorage.removeItem("searchResults"); // Clear results from sessionStorage
-  };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
+
       {/* Search Box */}
       <div className="w-full max-w-2xl">
-        <SearchInput onSearch={handleSearch} onClear={handleClear} />
+        <SearchInput onSearch={handleSearch}/>
       </div>
 
       {/* Loading & Error Messages */}
@@ -62,16 +51,20 @@ export default function StudentComponentPage() {
           Loading...
         </div>
       )}
+
       {error && (
         <div className="text-center text-red-600 font-semibold my-4">
           {error}
         </div>
       )}
 
-      {/* Student List */}
-      <div className="w-full max-w-6xl">
-        {results.length > 0 && <StudentList students={results} />}
-      </div>
+    <div className="w-full max-w-6xl">
+      {students.length > 0 && <StudentList students={students} />}
     </div>
-  );
+   </div>
+
+  )
+
+
+
 }

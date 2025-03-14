@@ -52,9 +52,9 @@ export default function StudentList({ students }) {
   return (
     <Box sx={{ flexGrow: 1, p: 3, maxWidth: "1400px", mx: "auto" }}>
       <Grid container spacing={3}>
-        {students.map((student) => (
-          <StudentCard key={student.id} student={student} />
-        ))}
+      {students.map((student, index) => (
+        <StudentCard key={student.id || index} student={student} />
+      ))}
       </Grid>
     </Box>
   );

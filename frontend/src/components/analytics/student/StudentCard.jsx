@@ -10,8 +10,9 @@ const StudentCard = ({ student }) => {
   return (
     <div
       onClick={handleClick}
-      className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition cursor-pointer w-full max-w-md md:max-w-sm lg:max-w-[280px]"
+      className="border border-gray-300 rounded-lg shadow-md p-4 bg-white hover:border-gray-500 transition"
     >
+
       {/* Left: Profile Image */}
       <img
         src={student.image}
