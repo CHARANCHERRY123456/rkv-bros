@@ -64,7 +64,4 @@ export default function StudentComponentPage(){
    </div>
 
   )
-
-
-
 }

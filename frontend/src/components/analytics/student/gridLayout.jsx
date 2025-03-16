@@ -29,7 +29,7 @@ const StudentCard = ({ student }) => {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-      <CardItem onClick={() => navigate(`/student/${student.name}`)}>
+      <CardItem onClick={() => navigate(`/student/${student.sid}`)}>
         <Avatar
           src={student.image}
           alt={student.name}

@@ -18,6 +18,7 @@ export default class StudentController {
         try {
             console.log("advanced search");
             const searchQuery = req.query.q;
+            console.log(searchQuery);
             const students = await this.service.searchStudents(searchQuery);
             res.status(200).json(students);
 
@@ -29,7 +30,7 @@ export default class StudentController {
     getSingleStudent = async (req, res) => {
         try {
             console.log(req.params , "in the get SIngle student");
-            const student = await this.service.findOne({"name" : req.params.sid});
+            const student = await this.service.findOne({"sid" : req.params.sid});
             console.log(student , " is sending");
             return res.status(200).json(student);
         } catch (error) {
