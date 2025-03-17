@@ -10,7 +10,7 @@ const studentSchema = new mongoose.Schema({
   classP1: { type: String, default: "not available" },
   caste: { type: String, default: "not available" },
   classP2: { type: String, default: "not available" },
-  dob: { type: Date, default: Date.now }, 
+  dob: { type: String, default : "Not available" }, 
   father: { type: String, default: "not available" },
   mandal: { type: String, default: "not available" },
   district: { type: String, default: "not available" },

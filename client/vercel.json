@@ -1,0 +1,6 @@
+{
+    "rewrites": [
+      { "source": "/student/:sid", "destination": "/" } 
+    ]
+  }
+  
