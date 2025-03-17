@@ -1,0 +1,10 @@
+[
+  {
+    "text": "What is your favorite programming language?",
+    "choices": ["JavaScript", "Python", "Java", "C++"]
+  },
+  {
+    "text": "Which framework do you prefer?",
+    "choices": ["React", "Vue", "Angular", "Svelte"]
+  }
+]

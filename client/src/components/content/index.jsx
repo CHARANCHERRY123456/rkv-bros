@@ -1,101 +1,89 @@
-import React, { useState } from "react"; // Import React and useState hook
-import "./Poll.css"; // Import the CSS file for styling
+import React, { useState } from "react";
+import FolderView from "./FolderView";
+import TestView from "./TestView";
+import QuestionView from "./QuestionView";
 
 const Content = () => {
-  // Sample questions and choices
-  const questions = [
-    {
-      id: 1,
-      text: "What is your favorite programming language?",
-      choices: ["JavaScript", "Python", "Java", "C++"],
-    },
-    {
-      id: 2,
-      text: "Which framework do you prefer for frontend development?",
-      choices: ["React", "Vue", "Angular", "Svelte"],
-    },
-    {
-      id: 2,
-      text: "Which framework do you prefer for frontend development?",
-      choices: ["React", "Vue", "Angular", "Svelte"],
-    },
-    {
-      id: 2,
-      text: "Which framework do you prefer for frontend development?",
-      choices: ["React", "Vue", "Angular", "Svelte"],
-    },
-    {
-      id: 2,
-      text: "Which framework do you prefer for frontend development?",
-      choices: ["React", "Vue", "Angular", "Svelte"],
-    },
-    {
-      id: 2,
-      text: "Which framework do you prefer for frontend development?",
-      choices: ["React", "Vue", "Angular", "Svelte"],
-    },
-    // Add more questions here (up to 10)
-  ];
+  const [folders, setFolders] = useState([
+    { id: 1, name: "Math", tests: [{ id: 1, name: "Test 1" }] },
+    { id: 2, name: "Physics", tests: [{ id: 1, name: "Test 1" }] },
+  ]);
 
-  // State to track votes for each question
-  const [votes, setVotes] = useState(
-    questions.reduce((acc, question) => {
-      acc[question.id] = {};
-      return acc;
-    }, {})
-  );
+  const [currentFolder, setCurrentFolder] = useState(null);
+  const [currentTest, setCurrentTest] = useState(null);
 
-  // Function to handle voting
-  const handleVote = (questionId, choiceIndex) => {
-    setVotes((prevVotes) => ({
-      ...prevVotes,
-      [questionId]: {
-        ...prevVotes[questionId],
-        [choiceIndex]: !prevVotes[questionId][choiceIndex], // Toggle vote
-      },
-    }));
+  const addFolder = (folderName) => {
+    const newFolder = {
+      id: folders.length + 1,
+      name: folderName,
+      tests: [],
+    };
+    setFolders([...folders, newFolder]);
   };
 
-  // Function to calculate the percentage of votes for each choice
-  const calculatePercentage = (questionId, choiceIndex) => {
-    const totalVotes = Object.values(votes[questionId]).filter(Boolean).length;
-    if (totalVotes === 0) return 0;
-    const choiceVotes = votes[questionId][choiceIndex] ? 1 : 0;
-    return ((choiceVotes / totalVotes) * 100).toFixed(0);
+  const renameFolder = (id, newName) => {
+    setFolders(
+      folders.map((folder) =>
+        folder.id === id ? { ...folder, name: newName } : folder
+      )
+    );
+  };
+
+  const addTest = (folderId, testName) => {
+    setFolders(
+      folders.map((folder) =>
+        folder.id === folderId
+          ? {
+              ...folder,
+              tests: [
+                ...folder.tests,
+                { id: folder.tests.length + 1, name: testName },
+              ],
+            }
+          : folder
+      )
+    );
+  };
+
+  const renameTest = (folderId, testId, newName) => {
+    setFolders(
+      folders.map((folder) =>
+        folder.id === folderId
+          ? {
+              ...folder,
+              tests: folder.tests.map((test) =>
+                test.id === testId ? { ...test, name: newName } : test
+              ),
+            }
+          : folder
+      )
+    );
   };
 
   return (
-    <div className="poll-container">
-      {questions.map((question) => (
-        <div key={question.id} className="question-container">
-          <h2>Q{question.id}: {question.text}</h2>
-          <div className="choices-container">
-            {question.choices.map((choice, index) => (
-              <div key={index} className="choice-item">
-                <label className="choice-label">
-                  <input
-                    type="checkbox"
-                    checked={votes[question.id][index] || false}
-                    onChange={() => handleVote(question.id, index)}
-                  />
-                  <span className="choice-text">{choice}</span>
-                </label>
-                <div className="progress-bar">
-                  <div
-                    className="progress-fill"
-                    style={{
-                      width: `${calculatePercentage(question.id, index)}%`,
-                    }}
-                  ></div>
-                </div>
-                <span className="percentage">
-                  {calculatePercentage(question.id, index)}%
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
+    <div style={{ padding: "20px" }}>
+      {!currentFolder && (
+        <FolderView
+          folders={folders}
+          onFolderClick={setCurrentFolder}
+          onAddFolder={addFolder}
+          onRenameFolder={renameFolder}
+        />
+      )}
+      {currentFolder && !currentTest && (
+        <TestView
+          folder={currentFolder}
+          onBack={() => setCurrentFolder(null)}
+          onTestClick={setCurrentTest}
+          onAddTest={(testName) => addTest(currentFolder.id, testName)}
+          onRenameTest={(testId, newName) =>
+            renameTest(currentFolder.id, testId, newName)
+          }
+        />
+      )}
+      {currentTest && (
+        <QuestionView onBack={() => setCurrentTest(null)} />
+      )}
     </div>
   );
 };
