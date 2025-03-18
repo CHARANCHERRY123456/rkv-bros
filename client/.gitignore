@@ -9,6 +9,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 # Build files
 /build
@@ -49,4 +50,4 @@ Thumbs.db
 
 
 # personal data science work
-data-science/
+data-science/.env
