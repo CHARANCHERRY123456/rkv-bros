@@ -1,0 +1,47 @@
+.poll-container {
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.poll-question {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.question-text {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  transition: background-color 0.2s;
+}
+
+.option:hover {
+  background-color: #e0e0e0;
+}
+
+.option.selected {
+  background-color: #c5e1a5;
+}
+
+.percentage {
+  font-size: 14px;
+  color: #555;
+}
