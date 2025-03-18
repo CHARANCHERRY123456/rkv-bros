@@ -15,16 +15,19 @@ const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path='/signup' element={<SignupPage/>} />
+        {/* 🔹 Public Routes (No Layout) */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+
+        {/* 🔹 Protected Routes inside Layout */}
+        <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
             <Route index element={<Content />} />
+            <Route path="/content" element={<Content />} />
             <Route path="/analytics" element={<Analytics />} />
-            <Route path="/student/:sid" element={<StudentProfile />} />
             <Route path="/dashboards" element={<DashBoards />} />
             <Route path="/new" element={<New />} />
-            <Route path="/content" element={<Content />} />
+            <Route path="/student/:sid" element={<StudentProfile />} />  {/* ✅ This will now work correctly */}
           </Route>
           <Route path="/*" element={<Home />} />
         </Route>

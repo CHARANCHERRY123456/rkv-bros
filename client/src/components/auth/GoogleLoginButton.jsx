@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { useAuth } from '../contexts/AuthContext';
+import useAuth from '../contexts/AuthContext';
 import envVars from '../../config/config.js'
 
 import axios from 'axios';
