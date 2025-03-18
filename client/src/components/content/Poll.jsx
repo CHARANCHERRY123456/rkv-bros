@@ -1,60 +1,46 @@
-import React, { useState } from "react"; // Import React and useState hook
-import "./Poll.css"; // Import the CSS file for styling
+import React, { useState } from "react";
+import "./Poll.css";
 
-const Poll = () => {
-  // Sample questions and choices
-  const questions = [
-    {
-      id: 1,
-      text: "What is your favorite programming language?",
-      choices: ["JavaScript", "Python", "Java", "C++"],
-    },
-    {
-      id: 2,
-      text: "Which framework do you prefer for frontend development?",
-      choices: ["React", "Vue", "Angular", "Svelte"],
-    },
-    // Add more questions here (up to 10)
-  ];
+const Poll = ({ folder }) => {
+  const [responses, setResponses] = useState([]);
 
-  // State to track votes for each question
-  const [votes, setVotes] = useState({});
-
-  // Function to handle voting
-  const handleVote = (questionId, choiceIndex) => {
-    setVotes((prevVotes) => ({
-      ...prevVotes,
-      [questionId]: choiceIndex,
-    }));
+  const handleOptionClick = (questionIndex, optionIndex) => {
+    const newResponses = [...responses];
+    newResponses[questionIndex] = optionIndex;
+    setResponses(newResponses);
   };
 
   return (
     <div className="poll-container">
-      <h1>Poll Questions</h1>
-      {questions.map((question) => (
-        <div key={question.id} className="question-container">
-          <h2>{question.text}</h2>
-          <div className="choices-container">
-            {question.choices.map((choice, index) => (
-              <button
-                key={index}
-                className={`choice-button ${
-                  votes[question.id] === index ? "selected" : ""
-                }`}
-                onClick={() => handleVote(question.id, index)}
-              >
-                {choice}
-              </button>
-            ))}
+      {folder.questions.map((question, qIndex) => {
+        const selectedOption = responses[qIndex];
+        const totalVotes = 1;
+
+        return (
+          <div key={qIndex} className="poll-question">
+            <div className="question-text">
+              {qIndex + 1}. {question.question}
+            </div>
+            <div className="options-container">
+              {question.options.map((option, oIndex) => {
+                const isSelected = selectedOption === oIndex;
+                const percentage = isSelected ? "100%" : "0%";
+
+                return (
+                  <div
+                    key={oIndex}
+                    className={`option ${isSelected ? "selected" : ""}`}
+                    onClick={() => handleOptionClick(qIndex, oIndex)}
+                  >
+                    {option}
+                    <span className="percentage">{percentage}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="vote-results">
-            <strong>Votes:</strong>{" "}
-            {votes[question.id] !== undefined
-              ? question.choices[votes[question.id]]
-              : "Not voted yet"}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

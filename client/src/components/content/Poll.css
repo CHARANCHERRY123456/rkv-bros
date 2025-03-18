@@ -1,106 +1,47 @@
 .poll-container {
-  max-width: 800px;
+  text-align: left;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
-.question-container {
-  margin-bottom: 30px;
-  padding: 20px;
+.poll-question {
+  background-color: #fafafa;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
-.question-container h2 {
-  margin-bottom: 15px;
-  font-size: 18px;
-  color: #333;
+.question-text {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.choices-container {
+.options-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.choice-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.choice-label {
-  display: flex;
-  align-items: center;
   gap: 8px;
+}
+
+.option {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  padding: 10px;
   cursor: pointer;
-  min-width: 150px; /* Fixed width for the choice text */
-}
-
-.choice-text {
-  font-size: 16px;
-  color: #333;
-  white-space: nowrap; /* Prevent text from wrapping */
-}
-
-.progress-container {
-  flex-grow: 1;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  transition: background-color 0.2s;
 }
 
-.progress-bar {
-  flex-grow: 1;
-  height: 8px;
+.option:hover {
   background-color: #e0e0e0;
-  border-radius: 4px;
-  overflow: hidden;
 }
 
-.progress-fill {
-  height: 100%;
-  background-color: #007bff;
-  border-radius: 4px;
-  transition: width 0.3s ease;
+.option.selected {
+  background-color: #c5e1a5;
 }
 
 .percentage {
   font-size: 14px;
   color: #555;
-  min-width: 40px; /* Fixed width for the percentage */
-  text-align: right;
-}
-
-/* Responsive Styles for Mobile Devices */
-@media (max-width: 600px) {
-  .poll-container {
-    padding: 10px;
-  }
-
-  .question-container {
-    padding: 15px;
-  }
-
-  .question-container h2 {
-    font-size: 16px;
-  }
-
-  .choice-label {
-    min-width: 120px; /* Reduce min-width for smaller screens */
-  }
-
-  .choice-text {
-    font-size: 14px; /* Smaller font size for mobile */
-  }
-
-  .progress-container {
-    gap: 5px; /* Reduce gap between progress bar and percentage */
-  }
-
-  .percentage {
-    font-size: 12px; /* Smaller font size for percentage */
-  }
 }
