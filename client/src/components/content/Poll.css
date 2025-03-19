@@ -27,21 +27,14 @@
   background-color: #f0f0f0;
   border-radius: 6px;
   padding: 10px;
-  cursor: pointer;
   display: flex;
   justify-content: space-between;
   transition: background-color 0.2s;
+  color: #333;
 }
 
-.option:hover {
-  background-color: #e0e0e0;
-}
-
-.option.selected {
-  background-color: #c5e1a5;
-}
-
-.percentage {
-  font-size: 14px;
-  color: #555;
+.option.correct {
+  background-color: #d4edda; /* Green background for correct answer */
+  border: 1px solid #28a745;
+  color: #155724; /* Dark green text */
 }

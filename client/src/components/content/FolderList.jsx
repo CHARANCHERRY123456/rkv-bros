@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import "./FolderList.css";
 import Poll from "./Poll";
-import questionsData from "./questions.json";
+import deepLearningQuestions from "./questionsDeepLearning.json";
+import oosdQuestions from "./questionsOOSD.json";
+import "./FolderList.css";
 
 const FolderList = () => {
   const [subjects, setSubjects] = useState([
     {
-      folderName: "Math",
+      folderName: "Deep Learning",
       tests: [
-        { folderName: "Test 1", questions: questionsData },
-        { folderName: "Test 2", questions: questionsData },
+        { folderName: "Week 8", questions: deepLearningQuestions },
       ],
     },
     {
-      folderName: "Science",
+      folderName: "OOSD",
       tests: [
-        { folderName: "Test 1", questions: questionsData },
+        { folderName: "Week 8", questions: oosdQuestions },
       ],
     },
   ]);
@@ -23,7 +23,45 @@ const FolderList = () => {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedTest, setSelectedTest] = useState(null);
 
-  // BACK BUTTONS
+  const handleSubjectClick = (subject) => {
+    setSelectedSubject(subject);
+    setSelectedTest(null);
+  };
+
+  const handleTestClick = (test) => {
+    setSelectedTest(test);
+  };
+
+  const handleAddSubjectFolder = () => {
+    const folderName = prompt("Enter new subject name:");
+    if (folderName) {
+      const newSubject = {
+        folderName,
+        tests: [],
+      };
+      setSubjects([...subjects, newSubject]);
+    }
+  };
+
+  const handleAddTestFolder = () => {
+    const folderName = prompt("Enter new test folder name:");
+    if (folderName && selectedSubject) {
+      const updatedSubjects = subjects.map((subject) =>
+        subject.folderName === selectedSubject.folderName
+          ? {
+              ...subject,
+              tests: [
+                ...subject.tests,
+                { folderName, questions: [] }, // empty questions for now
+              ],
+            }
+          : subject
+      );
+      setSubjects(updatedSubjects);
+      setSelectedSubject(updatedSubjects.find(s => s.folderName === selectedSubject.folderName));
+    }
+  };
+
   const handleBackToSubjects = () => {
     setSelectedSubject(null);
     setSelectedTest(null);
@@ -33,55 +71,6 @@ const FolderList = () => {
     setSelectedTest(null);
   };
 
-  // CLICK HANDLERS
-  const handleSubjectClick = (subject) => {
-    setSelectedSubject(subject);
-  };
-
-  const handleTestClick = (test) => {
-    setSelectedTest(test);
-  };
-
-  // ADD NEW SUBJECT
-  const handleAddSubjectFolder = () => {
-    const folderName = prompt("Enter new subject folder name:");
-    if (folderName) {
-      const newSubject = {
-        folderName,
-        tests: [
-          { folderName: "Test 1", questions: questionsData },
-          { folderName: "Test 2", questions: questionsData },
-        ],
-      };
-      setSubjects([...subjects, newSubject]);
-    }
-  };
-
-  // ADD NEW TEST
-  const handleAddTestFolder = () => {
-    const folderName = prompt("Enter new test folder name:");
-    if (folderName) {
-      const updatedSubjects = subjects.map((subject) => {
-        if (subject.folderName === selectedSubject.folderName) {
-          const updatedTests = [
-            ...subject.tests,
-            { folderName, questions: questionsData },
-          ];
-          return { ...subject, tests: updatedTests };
-        }
-        return subject;
-      });
-      setSubjects(updatedSubjects);
-
-      // Sync the selected subject in state to the updated one
-      const updatedSelectedSubject = updatedSubjects.find(
-        (subject) => subject.folderName === selectedSubject.folderName
-      );
-      setSelectedSubject(updatedSelectedSubject);
-    }
-  };
-
-  // DYNAMIC HEADER
   const getHeaderTitle = () => {
     if (!selectedSubject && !selectedTest) return "My Subjects";
     if (selectedSubject && !selectedTest) return `${selectedSubject.folderName} - Tests`;
@@ -90,10 +79,9 @@ const FolderList = () => {
 
   return (
     <div className="folder-list-container">
-      {/* DYNAMIC HEADER */}
       <h1 className="dynamic-header">{getHeaderTitle()}</h1>
 
-      {/* SUBJECTS */}
+      {/* SUBJECTS VIEW */}
       {!selectedSubject && (
         <>
           <div className="folders-grid">
@@ -113,19 +101,17 @@ const FolderList = () => {
               onClick={handleAddSubjectFolder}
             >
               <div className="folder-image add" />
-              <div className="folder-name">+ New Folder</div>
+              <div className="folder-name">+ New Subject</div>
             </div>
           </div>
         </>
       )}
 
-      {/* TESTS */}
+      {/* TESTS VIEW */}
       {selectedSubject && !selectedTest && (
         <>
           <div className="content-header">
-            <button className="back-button" onClick={handleBackToSubjects}>
-              ⬅ Back
-            </button>
+            <button className="back-button" onClick={handleBackToSubjects}>⬅ Back</button>
           </div>
 
           <div className="folders-grid">
@@ -145,24 +131,20 @@ const FolderList = () => {
               onClick={handleAddTestFolder}
             >
               <div className="folder-image add" />
-              <div className="folder-name">+ New Folder</div>
+              <div className="folder-name">+ New Test</div>
             </div>
           </div>
         </>
       )}
 
-      {/* QUESTIONS */}
+      {/* QUESTIONS VIEW */}
       {selectedTest && (
         <>
           <div className="content-header">
-            <button className="back-button" onClick={handleBackToTests}>
-              ⬅ Back
-            </button>
+            <button className="back-button" onClick={handleBackToTests}>⬅ Back</button>
           </div>
 
-          <div className="poll-section">
-            <Poll folder={selectedTest} />
-          </div>
+          <Poll questions={selectedTest.questions} />
         </>
       )}
     </div>

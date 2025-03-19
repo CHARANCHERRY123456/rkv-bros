@@ -64,10 +64,8 @@
 
 .content-header {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
   justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
 .back-button {
@@ -77,15 +75,8 @@
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .back-button:hover {
   background-color: #d5d5d5;
 }
-
-.poll-section {
-  display: flex;
-  justify-content: center;
-}
-

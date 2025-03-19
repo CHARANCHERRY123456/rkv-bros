@@ -1,0 +1,32 @@
+[
+  {
+    "question": "Which design pattern ensures that a class has only one instance and provides a global point of access to it?",
+    "options": [
+      "Factory Pattern",
+      "Singleton Pattern",
+      "Observer Pattern",
+      "Decorator Pattern"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "What is the primary purpose of UML Use Case Diagrams?",
+    "options": [
+      "To model object-oriented classes",
+      "To capture the functional requirements of a system",
+      "To depict the system’s runtime behavior",
+      "To show the interactions between objects"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "question": "Which of the following is NOT an advantage of Object-Oriented Design?",
+    "options": [
+      "Code Reusability",
+      "Modularity",
+      "Tight Coupling",
+      "Scalability"
+    ],
+    "correctAnswerIndex": 2
+  }
+]
