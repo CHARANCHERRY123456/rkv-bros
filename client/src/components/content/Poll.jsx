@@ -1,46 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Poll.css";
 
-const Poll = ({ folder }) => {
-  const [responses, setResponses] = useState([]);
-
-  const handleOptionClick = (questionIndex, optionIndex) => {
-    const newResponses = [...responses];
-    newResponses[questionIndex] = optionIndex;
-    setResponses(newResponses);
-  };
-
+const Poll = ({ questions }) => {
   return (
     <div className="poll-container">
-      {folder.questions.map((question, qIndex) => {
-        const selectedOption = responses[qIndex];
-        const totalVotes = 1;
-
-        return (
-          <div key={qIndex} className="poll-question">
-            <div className="question-text">
-              {qIndex + 1}. {question.question}
-            </div>
-            <div className="options-container">
-              {question.options.map((option, oIndex) => {
-                const isSelected = selectedOption === oIndex;
-                const percentage = isSelected ? "100%" : "0%";
-
-                return (
-                  <div
-                    key={oIndex}
-                    className={`option ${isSelected ? "selected" : ""}`}
-                    onClick={() => handleOptionClick(qIndex, oIndex)}
-                  >
-                    {option}
-                    <span className="percentage">{percentage}</span>
-                  </div>
-                );
-              })}
-            </div>
+      {questions.map((question, index) => (
+        <div key={index} className="poll-question">
+          {/* QUESTION NUMBER + TEXT */}
+          <div className="question-text">
+            {question.questionNumber}. {question.question}
           </div>
-        );
-      })}
+
+          {/* OPTIONS */}
+          <div className="options-container">
+            {question.options.map((option, idx) => {
+              const isCorrect = Array.isArray(question.attemptedAnswer)
+                ? question.attemptedAnswer.includes(option)
+                : option === question.attemptedAnswer;
+
+              return (
+                <div
+                  key={idx}
+                  className={`option ${isCorrect ? "correct" : ""}`}
+                >
+                  {option}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,30 +1,62 @@
 [
   {
-    "question": "What is 2 + 2?",
-    "options": ["3", "4", "5"]
+    "folderName": "Deep Learning",
+    "tests": [
+      {
+        "folderName": "Week 8",
+        "questions": [
+          {
+            "question": "What are the challenges associated with using the Tanh(x) activation function?",
+            "options": [
+              "It is not zero centered",
+              "Computationally expensive",
+              "Non-differentiable at 0",
+              "Saturation"
+            ],
+            "answer": 3
+          },
+          {
+            "question": "Which of the following problems makes training a neural network harder while using sigmoid as the activation function?",
+            "options": [
+              "Not-continuous at 0",
+              "Not-differentiable at 0",
+              "Saturation",
+              "Computationally expensive"
+            ],
+            "answer": 2
+          }
+        ]
+      }
+    ]
   },
   {
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Paris", "Rome"]
-  },
-  {
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Paris", "Rome"]
-  },
-  {
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Paris", "Rome"]
-  },
-  {
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Paris", "Rome"]
-  },
-  {
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Paris", "Rome"]
-  },
-  {
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Paris", "Rome"]
+    "folderName": "Object Oriented System Development",
+    "tests": [
+      {
+        "folderName": "Week 8",
+        "questions": [
+          {
+            "question": "Which design principle is addressed by the DIP Principle?",
+            "options": [
+              "Dependency Inversion Principle",
+              "Single Responsibility Principle",
+              "Open Closed Principle",
+              "Interface Segregation Principle"
+            ],
+            "answer": 0
+          },
+          {
+            "question": "What does GRASP Pattern stand for?",
+            "options": [
+              "General Responsibility Assignment Software Patterns",
+              "Graphic Resource Allocation Software Protocol",
+              "General Resource Assignment Solution Principles",
+              "Graphical Rendering And Structure Planning"
+            ],
+            "answer": 0
+          }
+        ]
+      }
+    ]
   }
 ]
