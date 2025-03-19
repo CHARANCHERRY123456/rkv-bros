@@ -1,6 +1,7 @@
 {
     "rewrites": [
-      { "source": "/student/:sid", "destination": "/" } 
+      { "source": "/student/:sid", "destination": "/" } ,
+      {"source" : "/content/*" , "destination" : "/"}
     ]
-  }
+}
   
