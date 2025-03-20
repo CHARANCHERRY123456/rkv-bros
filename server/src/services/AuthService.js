@@ -45,7 +45,6 @@ export default class AuthService{
     
             let user = await this.repository.findOne({email : googleData.email});
             if(!user) user = await this.repository.createUser(googleData);
-    
             return generateToken(user);
         } catch (error) {
             throw Error(`Error while google logging User :${error.message} `);

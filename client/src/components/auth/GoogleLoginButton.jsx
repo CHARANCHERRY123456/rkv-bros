@@ -16,7 +16,8 @@ const GoogleLoginButton = () => {
       const { data } = await axios.post(backendHandleSucessUrl, {
         token: credentialResponse.credential,
       });
-      login(data.user);
+
+      login(data.token);
     } catch (error) {
       console.error('Google login error:', error);
     }

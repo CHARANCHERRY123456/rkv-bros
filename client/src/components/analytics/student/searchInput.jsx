@@ -5,7 +5,6 @@ const SearchInput = ({ onSearch, onClear }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log("in the enter key");
       onSearch(input);
     }
   };

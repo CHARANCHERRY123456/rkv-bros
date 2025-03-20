@@ -23,7 +23,7 @@ const LoginPage = () => {
         const redirectPath = location.state?.from?.pathname || '/content';
         navigate(redirectPath);
       } catch (error) {
-        console.error('Invalid token:', error);
+        console.error('Invalid token:');
         localStorage.removeItem('token');
       }
     }

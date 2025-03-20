@@ -40,7 +40,8 @@ export default class AuthController {
 
   googleAuth = async (req, res) => {
     try {
-      const jwtToken = await authService.googleLogin(req.body);
+      console.log("checking via oauth");
+      const jwtToken = await this.service.googleLogin(req.body);
       res.status(200).json({ token: jwtToken });
     } catch (error) {
       res.status(400).json({ message: "Google authentication failed" });

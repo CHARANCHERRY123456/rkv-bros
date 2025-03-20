@@ -27,7 +27,7 @@ const AppRouter = () => {
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/dashboards" element={<DashBoards />} />
             <Route path="/new" element={<New />} />
-            <Route path="/student/:sid" element={<StudentProfile />} />  {/* ✅ This will now work correctly */}
+            <Route path="/student/:sid" element={<StudentProfile />} />
           </Route>
           <Route path="/*" element={<Home />} />
         </Route>

@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
           setUser(decodedUser);
         }
       } catch (error) {
-        console.error('Invalid token:', error);
+        console.log('Invalid token:');
         logout(); // Remove invalid token
       }
     }
@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     try {
       localStorage.setItem('token', token);
-      console.log(localStorage.getItem('token'));
       const decodedUser = jwtDecode(token);
       setUser(decodedUser);
     } catch (error) {

@@ -11,9 +11,7 @@ export default function StudentProfile() {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        console.log(sid, "-> is the sid");
         const response = await fetch(`${envVars.VITE_BASE_URL}/student/${sid}`);
-        console.log(response);
         if (!response.ok) throw new Error('Failed to fetch student data');
         const data = await response.json();
         setStudent(data);
