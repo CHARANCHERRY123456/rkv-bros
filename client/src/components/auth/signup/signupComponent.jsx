@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import envVars from '../../../config/config.js';
+import { toast } from 'react-hot-toast';
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,8 @@ const SignupPage = () => {
       setEmailSent(true);
       alert('A verification code has been sent to your email.');
     } catch (error) {
-      alert('Error sending verification email:', error);
+      toast( error.message);
+      console.log(error);
     }
   };
 
@@ -43,6 +45,7 @@ const SignupPage = () => {
       await axios.post(`${envVars.VITE_BASE_URL}/auth/signup`, { email, password, name });
       navigate('/login');
     } catch (error) {
+      toast.error("signup erro");
       console.error('Signup error:', error);
     }
   };

@@ -4,6 +4,7 @@ import useAuth from '../contexts/AuthContext';
 import envVars from '../../config/config.js'
 
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const backendHandleSucessUrl = `${envVars.VITE_BASE_URL}/auth/google`;
 const googleClientId = `${envVars.VITE_GOOGLE_CLIENT_ID}`
@@ -19,12 +20,13 @@ const GoogleLoginButton = () => {
 
       login(data.token);
     } catch (error) {
-      console.error('Google login error:', error);
+      toast.error('Google login error:');
+      console.log(error.message);
     }
   };
 
   const handleError = () => {
-    console.error('Google login failed');
+    toast.error('Google login failed');
   };
 
   return (

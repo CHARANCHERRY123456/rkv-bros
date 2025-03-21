@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import useAuth from '../../contexts/AuthContext';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import GoogleLoginButton from '../GoogleLoginButton.jsx';
 import envVars from '../../../config/config';
 import { jwtDecode } from 'jwt-decode';
@@ -23,7 +24,7 @@ const LoginPage = () => {
         const redirectPath = location.state?.from?.pathname || '/content';
         navigate(redirectPath);
       } catch (error) {
-        console.error('Invalid token:');
+        toast.error("Invalid toast");
         localStorage.removeItem('token');
       }
     }
@@ -35,7 +36,9 @@ const LoginPage = () => {
       const { data } = await axios.post(backendLoginUrl, { email, password });
       login(data.token);
       navigate('/content');
+      toast("successfully loggedin")
     } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
       console.error('Login error:', error);
     }
   };

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
           setUser(decodedUser);
         }
       } catch (error) {
+        toast.error("Inalid token");
         console.log('Invalid token:');
         logout(); // Remove invalid token
       }
@@ -33,6 +35,7 @@ export const AuthProvider = ({ children }) => {
       const decodedUser = jwtDecode(token);
       setUser(decodedUser);
     } catch (error) {
+      toast.error("Error decoding token:");
       console.error('Error decoding token:', error);
     }
   };

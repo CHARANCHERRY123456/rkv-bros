@@ -3,6 +3,7 @@ import axios from 'axios';
 import envVars from '../../../config/config.js';
 import StudentList from "./gridLayout.jsx";
 import SearchInput from "./searchInput.jsx";
+import { toast } from "react-hot-toast";
 export default function StudentComponentPage(){
   const [students , setStudents] = useState([]);
   const [loading , setLoading] = useState(false);
@@ -19,7 +20,7 @@ export default function StudentComponentPage(){
         // sores the result in the session storage and get when come again
         sessionStorage.setItem("searchedStudents" , JSON.stringify(result.data));
       } catch (error) {
-        // went wrong so empty students 
+        toast("Error while fetching the data");
         console.error(`Error while fetching the data ${error.message}`);
         setError("Error fetching the data please try again");
         setStudents([]);
