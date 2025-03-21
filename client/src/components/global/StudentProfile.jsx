@@ -24,88 +24,183 @@ export default function StudentProfile() {
     fetchStudent();
   }, [sid]);
 
-  const getValue = (value) => value ? value : 'Not available';
+  const getValue = (value) => (value ? value : 'Not available');
 
-  if (loading) return <div className="flex justify-center items-center h-screen"><div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div></div>;
-  if (error) return <div className="flex justify-center items-center h-screen"><div className="text-center text-red-500">{error}</div></div>;
-  if (!student) return <div className="flex justify-center items-center h-screen"><div className="text-center text-gray-500">No student data available</div></div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="text-center text-red-500 font-semibold mt-8">{error}</div>
+    );
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 px-4">
-      <div className="relative py-3 max-w-5xl mx-auto w-full">
-        <div className="relative px-6 py-10 bg-white shadow-lg rounded-3xl p-8">
-          <div className="max-w-3xl mx-auto w-full">
-            <div className="mb-8">
-              <div className="flex items-center justify-between">
-                {student.image && (
-                  <img src={student.image} alt={student.name} className="w-32 h-32 rounded-full object-cover" />
-                )}
-                <h1 className="text-3xl font-semibold text-gray-800">{student.name}</h1>
-              </div>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
+      <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl p-8">
+        {/* Student Profile Header */}
+        <div className="text-center">
+          {student.image && (
+            <img
+              src={student.image}
+              alt={student.name}
+              className="w-32 h-32 mx-auto rounded-full border-4 border-blue-500 shadow-lg"
+            />
+          )}
+          <h1 className="text-3xl font-bold text-gray-800 mt-4">
+            {student.name}
+          </h1>
+          <p className="text-gray-600">{getValue(student.branch)}</p>
+        </div>
+
+        {/* Grid Layout for All Fields */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          {/* Personal Information */}
+          <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+            <h2 className="text-xl font-semibold text-blue-600 mb-4">
+              Personal Information
+            </h2>
+            <div className="space-y-2 text-gray-700">
+              <p>
+                <strong>ID:</strong> {getValue(student.sid)}
+              </p>
+              <p>
+                <strong>Name:</strong> {getValue(student.name)}
+              </p>
+              <p>
+                <strong>Email:</strong> {getValue(student.email)}
+              </p>
+              <p>
+                <strong>Phone:</strong> {getValue(student.phone)}
+              </p>
+              <p>
+                <strong>Gender:</strong> {getValue(student.gender)}
+              </p>
+              <p>
+                <strong>Date of Birth:</strong> {getValue(student.dob)}
+              </p>
+              <p>
+                <strong>Blood Group:</strong> {getValue(student.bloodGroup)}
+              </p>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
-              <div className="space-y-6 w-full">
-                <div className="border rounded-lg p-6 w-full">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-4">Personal Information</h2>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="border p-2"><strong>ID:</strong></div> <div className="border p-2">{getValue(student.sid)}</div>
-                    <div className="border p-2"><strong>Name:</strong></div> <div className="border p-2">{getValue(student.name)}</div>
-                    <div className="border p-2"><strong>Email:</strong></div> <div className="border p-2">{getValue(student.email)}</div>
-                    <div className="border p-2"><strong>Phone:</strong></div> <div className="border p-2">{getValue(student.phone)}</div>
-                    <div className="border p-2"><strong>Gender:</strong></div> <div className="border p-2">{getValue(student.gender)}</div>
-                    <div className="border p-2"><strong>Date of Birth:</strong></div> <div className="border p-2">{getValue(student.dob)}</div>
-                    <div className="border p-2"><strong>Blood Group:</strong></div> <div className="border p-2">{getValue(student.bloodGroup)}</div>
-                  </div>
-                </div>
+          {/* Contact Information */}
+          <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+            <h2 className="text-xl font-semibold text-blue-600 mb-4">
+              Contact Information
+            </h2>
+            <div className="space-y-2 text-gray-700">
+              <p>
+                <strong>Parent Contact:</strong> {getValue(student.parent)}
+              </p>
+              <p>
+                <strong>Phone 2:</strong> {getValue(student.phone2)}
+              </p>
+              <p>
+                <strong>Address:</strong> {getValue(student.address)}
+              </p>
+              <p>
+                <strong>Mandal:</strong> {getValue(student.mandal)}
+              </p>
+              <p>
+                <strong>District:</strong> {getValue(student.district)}
+              </p>
+            </div>
+          </div>
 
-                <div className="border rounded-lg p-6 w-full">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-4">Contact Information</h2>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="border p-2"><strong>Parent Contact:</strong></div> <div className="border p-2">{getValue(student.parent)}</div>
-                    <div className="border p-2"><strong>Phone 2:</strong></div> <div className="border p-2">{getValue(student.phone2)}</div>
-                    <div className="border p-2"><strong>Address:</strong></div> <div className="border p-2">{getValue(student.address)}</div>
-                    <div className="border p-2"><strong>Mandal:</strong></div> <div className="border p-2">{getValue(student.mandal)}</div>
-                    <div className="border p-2"><strong>District:</strong></div> <div className="border p-2">{getValue(student.district)}</div>
-                  </div>
-                </div>
-              </div>
+          {/* Academic Information */}
+          <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+            <h2 className="text-xl font-semibold text-blue-600 mb-4">
+              Academic Information
+            </h2>
+            <div className="space-y-2 text-gray-700">
+              <p>
+                <strong>Batch:</strong> {getValue(student.batch)}
+              </p>
+              <p>
+                <strong>Stream:</strong> {getValue(student.stream)}
+              </p>
+              <p>
+                <strong>Branch:</strong> {getValue(student.branch)}
+              </p>
+              <p>
+                <strong>CGPA:</strong> {getValue(student.cgpa)}
+              </p>
+              <p>
+                <strong>Rank:</strong> {getValue(student.rank)}
+              </p>
+              <p>
+                <strong>CET Hall Ticket No:</strong> {getValue(student.cetHtNo)}
+              </p>
+              <p>
+                <strong>School:</strong> {getValue(student.school)}
+              </p>
+              <p>
+                <strong>SSC:</strong> {getValue(student.ssc)}
+              </p>
+              <p>
+                <strong>SSC Board:</strong> {getValue(student.sscBoard)}
+              </p>
+              <p>
+                <strong>PUC CGPA:</strong> {getValue(student.pucCgpa)}
+              </p>
+            </div>
+          </div>
 
-              <div className="space-y-6 w-full">
-                <div className="border rounded-lg p-6 w-full">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-4">Academic Information</h2>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="border p-2"><strong>Batch:</strong></div> <div className="border p-2">{getValue(student.batch)}</div>
-                    <div className="border p-2"><strong>Stream:</strong></div> <div className="border p-2">{getValue(student.stream)}</div>
-                    <div className="border p-2"><strong>Branch:</strong></div> <div className="border p-2">{getValue(student.branch)}</div>
-                    <div className="border p-2"><strong>CGPA:</strong></div> <div className="border p-2">{getValue(student.cgpa)}</div>
-                    <div className="border p-2"><strong>Rank:</strong></div> <div className="border p-2">{getValue(student.rank)}</div>
-                    <div className="border p-2"><strong>CET Hall Ticket No:</strong></div> <div className="border p-2">{getValue(student.cetHtNo)}</div>
-                    <div className="border p-2"><strong>School:</strong></div> <div className="border p-2">{getValue(student.school)}</div>
-                    <div className="border p-2"><strong>SSC:</strong></div> <div className="border p-2">{getValue(student.ssc)}</div>
-                    <div className="border p-2"><strong>SSC Board:</strong></div> <div className="border p-2">{getValue(student.sscBoard)}</div>
-                    <div className="border p-2"><strong>PUC CGPA:</strong></div> <div className="border p-2">{getValue(student.pucCgpa)}</div>
-                    <div className="border p-2"><strong>E1 Sem 1:</strong></div> <div className="border p-2">{getValue(student.e1sem1)}</div>
-                    <div className="border p-2"><strong>E1 Sem 2:</strong></div> <div className="border p-2">{getValue(student.e1sem2)}</div>
-                    <div className="border p-2"><strong>E2 Sem 1:</strong></div> <div className="border p-2">{getValue(student.e2sem1)}</div>
-                    <div className="border p-2"><strong>E2 Sem 2:</strong></div> <div className="border p-2">{getValue(student.e2sem2)}</div>
-                    <div className="border p-2"><strong>Class P1:</strong></div> <div className="border p-2">{getValue(student.classP1)}</div>
-                    <div className="border p-2"><strong>Class P2:</strong></div> <div className="border p-2">{getValue(student.classP2)}</div>
-                    <div className="border p-2"><strong>P1S1:</strong></div> <div className="border p-2">{getValue(student.p1s1)}</div>
-                    <div className="border p-2"><strong>P1S2:</strong></div> <div className="border p-2">{getValue(student.p1s2)}</div>
-                    <div className="border p-2"><strong>P2S1:</strong></div> <div className="border p-2">{getValue(student.p2s1)}</div>
-                    <div className="border p-2"><strong>P2S2:</strong></div> <div className="border p-2">{getValue(student.p2s2)}</div>
-                  </div>
-                </div>
+          {/* Academic Marks */}
+          <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+            <h2 className="text-xl font-semibold text-blue-600 mb-4">
+              Academic Marks
+            </h2>
+            <div className="space-y-2 text-gray-700">
+              <p>
+                <strong>E1 Sem 1:</strong> {getValue(student.e1sem1)}
+              </p>
+              <p>
+                <strong>E1 Sem 2:</strong> {getValue(student.e1sem2)}
+              </p>
+              <p>
+                <strong>E2 Sem 1:</strong> {getValue(student.e2sem1)}
+              </p>
+              <p>
+                <strong>E2 Sem 2:</strong> {getValue(student.e2sem2)}
+              </p>
+              <p>
+                <strong>Class P1:</strong> {getValue(student.classP1)}
+              </p>
+              <p>
+                <strong>Class P2:</strong> {getValue(student.classP2)}
+              </p>
+              <p>
+                <strong>P1S1:</strong> {getValue(student.p1s1)}
+              </p>
+              <p>
+                <strong>P1S2:</strong> {getValue(student.p1s2)}
+              </p>
+              <p>
+                <strong>P2S1:</strong> {getValue(student.p2s1)}
+              </p>
+              <p>
+                <strong>P2S2:</strong> {getValue(student.p2s2)}
+              </p>
+            </div>
+          </div>
 
-                <div className="border rounded-lg p-6 w-full">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-4">Family Details</h2>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="border p-2"><strong>Father:</strong></div> <div className="border p-2">{getValue(student.father)}</div>
-                    <div className="border p-2"><strong>Mother:</strong></div> <div className="border p-2">{getValue(student.mother)}</div>
-                  </div>
-                </div>
-              </div>
+          {/* Family Details */}
+          <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+            <h2 className="text-xl font-semibold text-blue-600 mb-4">
+              Family Details
+            </h2>
+            <div className="space-y-2 text-gray-700">
+              <p>
+                <strong>Father:</strong> {getValue(student.father)}
+              </p>
+              <p>
+                <strong>Mother:</strong> {getValue(student.mother)}
+              </p>
             </div>
           </div>
         </div>
