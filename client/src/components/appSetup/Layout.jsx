@@ -7,10 +7,12 @@ const Layout = () => {
   return (
     <div>
       <Navbar />
-      <div className="content">
+      <div className="content  h-screen">
           <Outlet />
       </div>
+      <Footer />
     </div>
+
   );
 };
 

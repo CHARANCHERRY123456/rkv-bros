@@ -8,6 +8,7 @@ export default function StudentComponentPage(){
   const [students , setStudents] = useState([]);
   const [loading , setLoading] = useState(false);
   const [error , setError] = useState(null);
+  const [output , setOutput] = useState(null);
 
   // to search the result
   const handleSearch = async(input)=>{
@@ -17,10 +18,13 @@ export default function StudentComponentPage(){
       try {
         const result = await axios.get(`${envVars.VITE_BASE_URL}/student/filter?q=${input}`);
         setStudents(result.data);
+        if(result.data.length==0){
+          toast.error("alaantodu evadu ledu bro")
+        }
         // sores the result in the session storage and get when come again
         sessionStorage.setItem("searchedStudents" , JSON.stringify(result.data));
       } catch (error) {
-        toast("Error while fetching the data");
+        toast("Edho teda jarigindhi bro😔");
         console.error(`Error while fetching the data ${error.message}`);
         setError("Error fetching the data please try again");
         setStudents([]);
@@ -58,6 +62,14 @@ export default function StudentComponentPage(){
           {error}
         </div>
       )}
+
+      { output && (
+        <div className="text-center text-red-500 font-semibold my-4">
+          {output}
+        </div>
+      )
+
+      }
 
     <div className="w-full max-w-6xl">
       {students.length > 0 && <StudentList students={students} />}

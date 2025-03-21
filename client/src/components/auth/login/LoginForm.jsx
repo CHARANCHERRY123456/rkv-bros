@@ -24,11 +24,11 @@ const LoginPage = () => {
         const redirectPath = location.state?.from?.pathname || '/content';
         navigate(redirectPath);
       } catch (error) {
-        toast.error("Invalid toast");
+        toast.error("Login avvu bro");
         localStorage.removeItem('token');
       }
     }
-  }, [login, navigate, location]);
+  }, [login]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const LoginPage = () => {
       const { data } = await axios.post(backendLoginUrl, { email, password });
       login(data.token);
       navigate('/content');
-      toast("successfully loggedin")
+      toast("Raaraa chaari nee kosame choostuna")
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
       console.error('Login error:', error);

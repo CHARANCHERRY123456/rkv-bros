@@ -16,19 +16,17 @@ export const AuthProvider = ({ children }) => {
 
         // Check if token is expired
         if (decodedUser.exp * 1000 < Date.now()) {
-          logout(); // Remove expired token
+          logout();
         } else {
           setUser(decodedUser);
         }
       } catch (error) {
         toast.error("Inalid token");
-        console.log('Invalid token:');
-        logout(); // Remove invalid token
+        logout();
       }
     }
   }, []);
 
-  // Login function
   const login = (token) => {
     try {
       localStorage.setItem('token', token);
@@ -40,7 +38,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout function
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
