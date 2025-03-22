@@ -1,8 +1,9 @@
 import React from "react";
 import FolderList from "./FolderList";
+import FolderStructure from "./voting";
 
 const ContentComponent = () => {
-  return <FolderList />;
+  return <FolderStructure />;
 };
 
 export default ContentComponent;
