@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../contexts/AuthContext';
 
 const Navbar = () => {
-  const {user , login , logout} = useAuth();
+  const {user , logout} = useAuth();
   // toast(user);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+  const dropdownRef = useRef(null)
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        closeDropdown();
+      }
+    };
 
-  const getLinkClass = (path) => (
-    location.pathname === path
-      ? 'text-blue-700 md:text-blue-700 dark:text-blue-500' // Active link styling
-      : 'text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-500' // Default styling
-  );
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-white shadow-md dark:bg-gray-900">
@@ -46,10 +51,11 @@ const Navbar = () => {
                 <span className="block text-sm text-gray-500 truncate dark:text-gray-400">{user.email}</span>
               </div>
               <ul className="py-2">
-                <li><Link to="/dashboards" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Dashboard</Link></li>
-                <li><Link to="/content" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Content</Link></li>
-                <li><Link to="/analytics" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Analytics</Link></li>
-                <li><Link to="/new" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">New</Link></li>
+                <li><Link to="/dashboards" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown} >Dashboard</Link></li>
+                <li><Link to="/content" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown} >Content</Link></li>
+                <li><Link to="/analytics" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown} >Analytics</Link></li>
+                <li><Link to="/new" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown} >New</Link></li>
+                <li><Link to="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={logout} >Logout</Link></li>
               </ul>
             </div>
           )}
