@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const assignmentSchema = new mongoose.Schema({
     name : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
 
     folder : {
@@ -13,9 +14,12 @@ const assignmentSchema = new mongoose.Schema({
     },
     questions : [{
         questionText : String,
-        optins : [String],
+        options : [String],
         correctAnswer : [Number],
-        responses : [Number]
+        responses: [{ 
+            optionIndex: Number,
+            count: { type: Number, default: 0 }
+         }],
     }]
 })
 

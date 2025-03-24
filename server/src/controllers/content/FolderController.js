@@ -2,7 +2,7 @@ import FolderService from '../../services/content/FolderService.js'
 
 export default class FolderController{
     constructor(){
-        this.service = FolderService();
+        this.service = new FolderService();
     }
 
     createFolder = async(req , res)=>{
@@ -17,11 +17,10 @@ export default class FolderController{
 
     getFolders = async(req , res)=>{
         try {
-            const folders = await this.service.find();
+            const folders = await this.service.find(req.query);
             return res.status(200).json(folders);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
-
 }
