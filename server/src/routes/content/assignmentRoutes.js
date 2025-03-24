@@ -1,14 +1,10 @@
-import AssignmentController from '../../controllers/content/AssignmentController.js';
+import express from "express";
+import { getAssignmentsByFolder, submitResponse } from "../../controllers/content/AssignmentController.js";
 
 
-import express from 'express';
+const router = express.Router();
 
-const assignmenrRouter = express.Router();
-const assignment = new AssignmentController();
+router.get("/assignment", getAssignmentsByFolder);
+router.post("/assignment/submit-response", submitResponse);
 
-assignmenrRouter.post("/" , assignment.createAssignment);
-assignmenrRouter.get("/" , assignment.getAssignments);
-assignmenrRouter.post("/submit-response" , assignment.submitResponse);
-
-
-export default assignmenrRouter;
+export default router;

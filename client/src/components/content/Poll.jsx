@@ -7,9 +7,10 @@ const Poll = ({ questions, assignmentId }) => {
   const [voteCounts, setVoteCounts] = useState({});
 
   useEffect(() => {
+    // Load vote counts
     const initialCounts = {};
-    questions.forEach((question) => {
-      initialCounts[question._id] = question.responses.reduce((acc, res) => {
+    questions.forEach((question, index) => {
+      initialCounts[index] = question.responses.reduce((acc, res) => {
         acc[res.optionIndex] = res.count;
         return acc;
       }, {});
@@ -24,14 +25,15 @@ const Poll = ({ questions, assignmentId }) => {
         questionIndex,
         selectedOption: optionIndex,
       });
-      
+
+      // Update state after voting
       setVoteCounts((prev) => {
         const updatedCounts = { ...prev };
         if (!updatedCounts[questionIndex]) updatedCounts[questionIndex] = {};
         updatedCounts[questionIndex][optionIndex] = (updatedCounts[questionIndex][optionIndex] || 0) + 1;
         return updatedCounts;
       });
-      
+
       setSelectedAnswers((prev) => ({ ...prev, [questionIndex]: optionIndex }));
     } catch (error) {
       console.error("Error submitting response:", error);
@@ -43,13 +45,11 @@ const Poll = ({ questions, assignmentId }) => {
       {questions.map((question, index) => (
         <div key={index} className="poll-question">
           <div className="question-text">
-            {question.questionNumber}. {question.question}
+            {index + 1}. {question.questionText}
           </div>
           <div className="options-container">
             {question.options.map((option, idx) => {
-              const isCorrect = Array.isArray(question.correctAnswer)
-                ? question.correctAnswer.includes(option)
-                : option === question.correctAnswer;
+              const isCorrect = question.correctAnswer.includes(idx);
               const isSelected = selectedAnswers[index] === idx;
               const voteCount = voteCounts[index]?.[idx] || 0;
               const totalVotes = Object.values(voteCounts[index] || {}).reduce((a, b) => a + b, 0);
