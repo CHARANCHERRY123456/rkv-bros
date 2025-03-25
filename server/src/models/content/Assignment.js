@@ -9,6 +9,10 @@ const AssignmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  dueDate : {
+    type : String,
+    default : "Wed"
+  },
   questions: [
     {
       questionText: {

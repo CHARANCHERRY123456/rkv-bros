@@ -6,14 +6,14 @@ import LoadingSpinner from '../shared/LoadingSpinner.jsx'; // Optional - create 
 import ErrorDisplay from '../shared/ErrorDisplay.jsx'; // Optional - create this component
 
 const AssignmentViewer = () => {
-  const { assignmentId } = useParams();
+  const { assignmentName } = useParams();
   const { 
     assignment, 
     loading, 
     error, 
     submitVote,
     refetch 
-  } = useAssignment(assignmentId);
+  } = useAssignment(assignmentName);
 
   // Handle vote submission
   const handleVote = async (questionIndex, optionIndex) => {

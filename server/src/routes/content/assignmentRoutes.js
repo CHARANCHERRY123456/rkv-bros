@@ -1,7 +1,6 @@
 import express from 'express';
 import Assignment from '../../models/content/Assignment.js'
 
-
 const router = express.Router();
 
 // CREATE - Add new assignment (Admin only)
@@ -26,9 +25,9 @@ router.get('/', async (req, res) => {
 });
 
 // READ - Get specific assignment
-router.get('/:id', async (req, res) => {
+router.get('/:assignmentName', async (req, res) => {
   try {
-    const assignment = await Assignment.findById(req.params.id);
+    const assignment = await Assignment.findOne({ assignmentName: req.params.assignmentName });
     if (!assignment) return res.status(404).json({ message: 'Assignment not found' });
     res.json(assignment);
   } catch (err) {
@@ -37,11 +36,11 @@ router.get('/:id', async (req, res) => {
 });
 
 // UPDATE - Submit vote
-router.post('/:id/vote', async (req, res) => {
+router.post('/:assignmentName/vote', async (req, res) => {
   const { questionIndex, optionIndex } = req.body;
   
   try {
-    const assignment = await Assignment.findById(req.params.id);
+    const assignment = await Assignment.findOne({ assignmentName: req.params.assignmentName });
     if (!assignment) return res.status(404).json({ message: 'Assignment not found' });
     
     const question = assignment.questions[questionIndex];
@@ -57,10 +56,10 @@ router.post('/:id/vote', async (req, res) => {
 });
 
 // UPDATE - Modify assignment (Admin only)
-router.put('/:id', async (req, res) => {
+router.put('/:assignmentName', async (req, res) => {
   try {
-    const updatedAssignment = await Assignment.findByIdAndUpdate(
-      req.params.id,
+    const updatedAssignment = await Assignment.findOneAndUpdate(
+      { assignmentName: req.params.assignmentName },
       req.body,
       { new: true }
     );
@@ -72,9 +71,9 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE - Remove assignment (Admin only)
-router.delete('/:id', async (req, res) => {
+router.delete('/:assignmentName', async (req, res) => {
   try {
-    const deletedAssignment = await Assignment.findByIdAndDelete(req.params.id);
+    const deletedAssignment = await Assignment.findOneAndDelete({ assignmentName: req.params.assignmentName });
     if (!deletedAssignment) return res.status(404).json({ message: 'Assignment not found' });
     res.json({ message: 'Assignment deleted' });
   } catch (err) {

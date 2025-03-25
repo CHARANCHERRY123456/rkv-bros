@@ -28,7 +28,7 @@ export default function Content() {
                 {assignments.map((assignment, index) => (
                     <a
                         key={assignment._id || index}
-                        href={`/assignments/${assignment._id}`}
+                        href={`/assignments/${assignment.assignmentName}`}
                         className="block bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-1 border border-gray-200"
                     >
                         <div className="p-6">
