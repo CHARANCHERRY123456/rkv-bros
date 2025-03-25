@@ -21,8 +21,8 @@ const AssignmentViewer = () => {
 
 
   // Handle vote submission
-  const handleVote = async (questionIndex, optionIndex , email ) => {
-
+  const handleVote = async (questionIndex, optionIndex ) => {
+    const email = user.email;
     const success = await submitVote(questionIndex, optionIndex ,email );
     if (success) {
       // Optional: Show success toast/message

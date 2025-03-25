@@ -38,14 +38,22 @@ router.get('/:assignmentName', async (req, res) => {
 // UPDATE - Submit vote
 router.post('/:assignmentName/vote', async (req, res) => {
   const { questionIndex, optionIndex , email} = req.body;
+  console.log(email);
   
   try {
     const assignment = await Assignment.findOne({ assignmentName: req.params.assignmentName });
     if (!assignment) return res.status(404).json({ message: 'Assignment not found' });
     
     const question = assignment.questions[questionIndex];
+    const option = question.options[optionIndex];
+    // Check if the user has already voted
+    if (option.selections[email]) {
+        console.log("user alradu exist");
+        return res.status(400).json(assignment);
+    }
     question.options[optionIndex].voteCount += 1;
     question.totalVotes += 1;
+    question.options[optionIndex].selections[email] = true;
     
     await assignment.save();
     res.json(assignment);
