@@ -10,7 +10,7 @@ import StudentProfile from '../global/StudentProfile';
 import LoginPage from '../../pages/Login.jsx';
 import SignupPage from '../auth/signup/signupComponent';
 import ProtectedRoute from '../auth/protectedRoute.jsx';
-
+import AssignmentViewer from '../content/assignment-viewer';
 const AppRouter = () => {
   return (
     <Router>
@@ -28,6 +28,7 @@ const AppRouter = () => {
             <Route path="/dashboards" element={<DashBoards />} />
             <Route path="/new" element={<New />} />
             <Route path="/student/:sid" element={<StudentProfile />} />
+            <Route path="/assignments/:assignmentId" element={<AssignmentViewer />} />
           </Route>
           <Route path="/*" element={<Home />} />
         </Route>

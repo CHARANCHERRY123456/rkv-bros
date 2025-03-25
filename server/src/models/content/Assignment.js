@@ -1,28 +1,41 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const assignmentSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true,
-        unique : true
-    },
+const AssignmentSchema = new mongoose.Schema({
+  assignmentName: {
+    type: String,
+    required: true
+  },
+  courseId: {
+    type: String,
+    required: true
+  },
+  questions: [
+    {
+      questionText: {
+        type: String,
+        required: true
+      },
+      questionType: {
+        type: String,
+        enum: ['mcq', 'numeric', 'text'],
+        default: 'mcq'
+      },
+      options: [
+        {
+          optionText: String,
+          voteCount: {
+            type: Number,
+            default: 0
+          }
+        }
+      ],
+      adminChoice: Number, // index of correct option
+      totalVotes: {
+        type: Number,
+        default: 0
+      }
+    }
+  ]
+}, { timestamps: true });
 
-    folder : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "Folder",
-        required : true
-    },
-    questions : [{
-        questionText : String,
-        options : [String],
-        correctAnswer : [Number],
-        responses: [{ 
-            optionIndex: Number,
-            count: { type: Number, default: 0 }
-         }],
-    }]
-})
-
-const Assignment = mongoose.model("Assignment" , assignmentSchema);
-
-export default Assignment;
+export default mongoose.model('Assignment', AssignmentSchema);
