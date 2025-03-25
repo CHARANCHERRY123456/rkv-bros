@@ -3,6 +3,7 @@ import axios from 'axios';
 import envVars from "../../../config/config.js";
 
 export default function Content() {
+    console.log("it is not in this");
     const [assignments, setAssignments] = useState([]);
     const backendUrl = envVars.VITE_BASE_URL;
 

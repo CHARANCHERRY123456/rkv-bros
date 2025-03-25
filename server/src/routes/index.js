@@ -6,7 +6,7 @@ import assignmenrRouter from './content/assignmentRoutes.js';
 const router = Router();
 router.use("/student" , studentRouter);
 router.use("/auth" , authRouter);
-router.use("/api/assignments" , assignmenrRouter);
+router.use("/assignments" , assignmenrRouter);
 
 
 

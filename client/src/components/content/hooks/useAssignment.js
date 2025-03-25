@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
+import envVars from '../../../config/config.js'
 
 const useAssignment = (assignmentId) => {
   const [assignment, setAssignment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const backendUrl=envVars.VITE_BASE_URL;
 
   const fetchAssignment = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/assignments/${assignmentId}`);
+      const response = await fetch(`${backendUrl}/assignments/${assignmentId}`);
       if (!response.ok) throw new Error('Assignment not found');
       const data = await response.json();
       setAssignment(data);
@@ -20,7 +22,7 @@ const useAssignment = (assignmentId) => {
 
   const submitVote = async (questionIndex, optionIndex) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/assignments/${assignmentId}/vote`, {
+      const response = await fetch(`${backendUrl}/assignments/${assignmentId}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ questionIndex, optionIndex })

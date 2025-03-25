@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+  import React, { useState } from 'react';
 
 const QuestionItem = ({ question, questionNumber, onVote }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -24,6 +24,10 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
           <h3 className="text-lg font-medium text-gray-800 break-words">
             {question.questionText}
           </h3>
+          {
+            question.questionType == "numeric" &&
+            <h1 className='m-5 text-black' > Answer : <span className='text-emerald-700 font-bold' >{question.adminChoice} </span></h1>
+          }
           
           <div className="mt-3 space-y-2">
             {question.options.map((option, idx) => (
@@ -45,6 +49,9 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
                 <div className="flex items-start">
                   <div className="flex-1 min-w-0">
                     <p className="text-gray-800 break-words">{option.optionText}</p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h1>{} </h1>
                   </div>
                   <div className="ml-3 flex-shrink-0 flex items-center space-x-2">
                     <span className="text-sm text-gray-500 whitespace-nowrap">

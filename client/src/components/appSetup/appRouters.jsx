@@ -10,7 +10,7 @@ import StudentProfile from '../global/StudentProfile';
 import LoginPage from '../../pages/Login.jsx';
 import SignupPage from '../auth/signup/signupComponent';
 import ProtectedRoute from '../auth/protectedRoute.jsx';
-import AssignmentViewer from '../content/assignment-viewer';
+import AssignmentViewer from '../content/assignment-viewer/Assignment';
 const AppRouter = () => {
   return (
     <Router>
