@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import envVars from "../../../config/config.js";
+import LoadingSpinner from "../shared/LoadingSpinner.jsx";
 
 export default function Content() {
     const [assignments, setAssignments] = useState([]);
+    const [loading , setLoading] = useState(false);
     const backendUrl = envVars.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchAssignments = async () => {
             try {
+                setLoading(true);
                 const response = await axios.get(`${backendUrl}/assignments`);
                 console.log(response);
                 setAssignments(response.data); // Uncomment when needed
             } catch (error) {
                 console.error("Error fetching assignments:", error);
+            }finally{
+                setLoading(false);
             }
         };
 
@@ -24,6 +29,8 @@ export default function Content() {
         <div className="max-w-4xl mx-auto p-6">
             <h1 className="text-3xl font-bold text-gray-800 mb-8">Your Assignments</h1>
             
+            {loading && <LoadingSpinner />}
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {assignments.map((assignment, index) => (
                     <a

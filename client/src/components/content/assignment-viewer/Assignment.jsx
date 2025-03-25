@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAssignment from '../hooks/useAssignment.js';
 import AssignmentQuestionsList from './components/AssignmentQuestionsList.jsx';
 import LoadingSpinner from '../shared/LoadingSpinner.jsx'; // Optional - create this component
 import ErrorDisplay from '../shared/ErrorDisplay.jsx'; // Optional - create this component
+import { toast } from 'react-hot-toast';
+import InfoButton from './components/InfoButton.jsx';
+import useAuth from '../../contexts/AuthContext.jsx';
 
 const AssignmentViewer = () => {
+  const {user} = useAuth();
   const { assignmentName } = useParams();
   const { 
     assignment, 
@@ -15,12 +19,14 @@ const AssignmentViewer = () => {
     refetch 
   } = useAssignment(assignmentName);
 
+
   // Handle vote submission
-  const handleVote = async (questionIndex, optionIndex) => {
-    const success = await submitVote(questionIndex, optionIndex);
+  const handleVote = async (questionIndex, optionIndex , email ) => {
+
+    const success = await submitVote(questionIndex, optionIndex ,email );
     if (success) {
       // Optional: Show success toast/message
-      console.log('Vote recorded successfully');
+      toast.success('Ayya mee votu veyyadam jariginadhi');
     }
   };
 
@@ -45,14 +51,22 @@ const AssignmentViewer = () => {
     <div className="assignment-viewer-container">
       <div className="max-w-4xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         {/* Assignment Header */}
-        <header className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 break-words">
-            {assignment?.assignmentName}
-          </h1>
-          <div className="mt-2 text-sm text-gray-500">
-            {assignment?.questions?.length} questions
-          </div>
-        </header>
+        <header className="mb-8 relative">
+  <div className="flex justify-between items-start gap-4">
+    <div className="flex-1 min-w-0">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 break-words">
+        {assignment?.assignmentName}
+      </h1>
+      <div className="mt-2 text-sm text-gray-500">
+        {assignment?.questions?.length} questions
+      </div>
+    </div>
+    
+    <div className="flex-shrink-0">
+      <InfoButton />
+    </div>
+  </div>
+</header>
 
         {/* Questions List */}
         <AssignmentQuestionsList 

@@ -20,12 +20,12 @@ const useAssignment = (assignmentName) => {
     }
   };
 
-  const submitVote = async (questionIndex, optionIndex) => {
+  const submitVote = async (questionIndex, optionIndex , email) => {
     try {
       const response = await fetch(`${backendUrl}/assignments/${assignmentName}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ questionIndex, optionIndex })
+        body: JSON.stringify({ questionIndex, optionIndex , email })
       });
       
       if (!response.ok) throw new Error('Vote failed');

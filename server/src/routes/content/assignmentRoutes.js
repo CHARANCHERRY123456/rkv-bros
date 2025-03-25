@@ -37,7 +37,7 @@ router.get('/:assignmentName', async (req, res) => {
 
 // UPDATE - Submit vote
 router.post('/:assignmentName/vote', async (req, res) => {
-  const { questionIndex, optionIndex } = req.body;
+  const { questionIndex, optionIndex , email} = req.body;
   
   try {
     const assignment = await Assignment.findOne({ assignmentName: req.params.assignmentName });

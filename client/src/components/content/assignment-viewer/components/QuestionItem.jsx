@@ -5,6 +5,11 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
   const [hasVoted, setHasVoted] = useState(false);
 
   const handleVote = async (optionIndex) => {
+    const isConformed = 
+    window.confirm("Are you sure you are doubt about this quesiton if you click yes it will send data to the admin");
+
+    if(!isConformed) return;
+
     if (hasVoted) return;
     
     const success = await onVote(questionNumber - 1, optionIndex);
