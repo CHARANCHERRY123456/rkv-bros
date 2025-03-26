@@ -6,3 +6,4 @@ export const MONGO_URI = process.env.MONGO_URI;
 export const JWT_SECRET = process.env.JWT_SECRET;
 export const EMAIL = process.env.EMAIL;
 export const EMAIL_PASS = process.env.EMAIL_PASS;
+export const ADMIN = process.env.ADMIN;
