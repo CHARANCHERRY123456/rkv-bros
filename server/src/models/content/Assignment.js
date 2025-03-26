@@ -29,7 +29,7 @@ const AssignmentSchema = new mongoose.Schema({
           optionText: String,
           selections : {
             type : Object ,
-            default : {}
+            default : {} // email : isSelected
           },
           voteCount: {
             type: Number,

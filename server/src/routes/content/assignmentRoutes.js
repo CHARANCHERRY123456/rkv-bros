@@ -37,29 +37,55 @@ router.get('/:assignmentName', async (req, res) => {
 
 // UPDATE - Submit vote
 router.post('/:assignmentName/vote', async (req, res) => {
-  const { questionIndex, optionIndex , email} = req.body;
-  console.log(email);
+  const { questionIndex, optionIndex, email } = req.body;
   
   try {
+    // 1. Find the assignment
     const assignment = await Assignment.findOne({ assignmentName: req.params.assignmentName });
     if (!assignment) return res.status(404).json({ message: 'Assignment not found' });
-    
+
+    // 2. Validate indices
+    if (questionIndex >= assignment.questions.length || optionIndex >= assignment.questions[questionIndex].options.length) {
+      return res.status(400).json({ message: 'Invalid question or option index' });
+    }
+
+    // 3. Get references to the question and option
     const question = assignment.questions[questionIndex];
     const option = question.options[optionIndex];
-    // Check if the user has already voted
-    if (option.selections[email]) {
-        console.log("user alradu exist");
-        return res.status(400).json(assignment);
+
+    // 4. Initialize selections if it doesn't exist
+    if (!option.selections) {
+      option.selections = {};
     }
-    question.options[optionIndex].voteCount += 1;
-    question.totalVotes += 1;
-    question.options[optionIndex].selections[email] = true;
+
+    // 5. Toggle logic
+    const hasVoted = option.selections[email];
     
+    if (hasVoted) {
+      // User already voted - remove their vote
+      option.voteCount -= 1;
+      question.totalVotes -= 1;
+      delete option.selections[email];
+    } else {
+      // User hasn't voted - add their vote
+      option.voteCount += 1;
+      question.totalVotes += 1;
+      option.selections[email] = true;
+    }
+
+    // 6. Mark the change
+    assignment.markModified('questions');
+
+    // 7. Save and return the updated assignment
     await assignment.save();
     res.json(assignment);
+    
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: err.message });
+    console.error('Vote toggle error:', err);
+    res.status(500).json({ 
+      message: 'Failed to process vote toggle',
+      error: err.message 
+    });
   }
 });
 
