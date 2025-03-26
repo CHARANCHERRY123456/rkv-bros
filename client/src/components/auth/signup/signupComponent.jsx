@@ -19,7 +19,7 @@ const SignupPage = () => {
       const { data } = await axios.post(`${envVars.VITE_BASE_URL}/auth/send-otp`, { email });
       setGeneratedOTP(data.otp);
       setEmailSent(true);
-      alert('A verification code has been sent to your email.');
+      toast("A verification code has been sent to your email. also check in spam");
     } catch (error) {
       toast( error.message);
       console.log(error);
