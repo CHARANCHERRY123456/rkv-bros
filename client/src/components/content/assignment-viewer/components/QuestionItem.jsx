@@ -1,4 +1,4 @@
-  import React, { useState } from 'react';
+import React, { useState } from 'react';
 
 const QuestionItem = ({ question, questionNumber, onVote }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -14,6 +14,11 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
     }
   };
 
+  // Check if option is correct (now checks if it's included in the adminChoice array)
+  const isCorrectAnswer = (optionIndex) => {
+    return question.adminChoice?.includes(optionIndex);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-6 border border-gray-100">
       <div className="flex items-start">
@@ -25,8 +30,12 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
             {question.questionText}
           </h3>
           {
-            question.questionType == "numeric" &&
-            <h1 className='m-5 text-black' > Answer : <span className='text-emerald-700 font-bold' >{question.adminChoice} </span></h1>
+            question.questionType === "numeric" &&
+            <h1 className='m-5 text-black'>
+              Answer: <span className='text-emerald-700 font-bold'>
+                {question.adminChoice?.[0]} {/* Display first element for numeric answers */}
+              </span>
+            </h1>
           }
           
           <div className="mt-3 space-y-2">
@@ -35,11 +44,11 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
                 key={idx}
                 onClick={() => handleVote(idx)}
                 className={`p-3 rounded-lg cursor-pointer transition-all ${
-                  hasVoted || question.adminChoice !== undefined
+                  hasVoted || question.adminChoice?.length > 0
                     ? 'cursor-default'
                     : 'hover:bg-gray-50'
                 } ${
-                  question.adminChoice === idx
+                  isCorrectAnswer(idx)
                     ? 'border-2 border-green-300 bg-green-50'
                     : selectedOption === idx
                       ? 'bg-blue-50'
@@ -49,9 +58,6 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
                 <div className="flex items-start">
                   <div className="flex-1 min-w-0">
                     <p className="text-gray-800 break-words">{option.optionText}</p>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h1>{} </h1>
                   </div>
                   <div className="ml-3 flex-shrink-0 flex items-center space-x-2">
                     <span className="text-sm text-gray-500 whitespace-nowrap">

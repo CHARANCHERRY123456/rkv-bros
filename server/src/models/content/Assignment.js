@@ -7,7 +7,6 @@ const AssignmentSchema = new mongoose.Schema({
   },
   courseId: {
     type: String,
-    required: true
   },
   dueDate : {
     type : String,
@@ -15,13 +14,13 @@ const AssignmentSchema = new mongoose.Schema({
   },
   questions: [
     {
+      questionNumber : Number,
       questionText: {
         type: String,
         required: true
       },
       questionType: {
         type: String,
-        enum: ['mcq', 'numeric', 'text'],
         default: 'mcq'
       },
       options: [
@@ -37,7 +36,7 @@ const AssignmentSchema = new mongoose.Schema({
           }
         }
       ],
-      adminChoice: Number, // index of correct option
+      adminChoice: [Number], // index of correct option(s)
       totalVotes: {
         type: Number,
         default: 0

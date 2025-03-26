@@ -6,7 +6,9 @@ const router = express.Router();
 // CREATE - Add new assignment (Admin only)
 router.post('/', async (req, res) => {
   try {
+    console.log("Hi i am here");
     const newAssignment = new Assignment(req.body);
+
     const savedAssignment = await newAssignment.save();
     res.status(201).json(savedAssignment);
   } catch (err) {
@@ -88,6 +90,34 @@ router.post('/:assignmentName/vote', async (req, res) => {
     });
   }
 });
+
+router.put('/:assignmentName/reset-votes', async (req, res) => {
+  try {
+    const assignment = await Assignment.findOne({ "assignmentName"  : req.params.assignmentName});
+    console.log(assignment);
+    if (!assignment) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+
+    // Reset all vote counts
+    assignment.questions.forEach(question => {
+      question.options.forEach(option => {
+        option.voteCount = 0;
+        option.selections = {}; // Also clear selections if needed
+      });
+      question.totalVotes = 0;
+    });
+
+    await assignment.save();
+    console.log("after assignment" , assignment);
+    
+    res.json({ message: 'All votes reset successfully', assignment });
+  } catch (error) {
+    res.status(500).json({ message: 'Error resetting votes', error });
+  }
+});
+
+
 
 // UPDATE - Modify assignment (Admin only)
 router.put('/:assignmentName', async (req, res) => {
