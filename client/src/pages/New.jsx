@@ -1,5 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
-export default function New(){
-    return<h1>hi</h1>
+export default function New() {
+    return <New />
 }

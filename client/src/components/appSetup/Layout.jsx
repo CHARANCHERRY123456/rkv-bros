@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';  // Outlet is used to render the child route components
-import Navbar from './navbar';  // Example: Shared Navbar component
-import Footer from './Footer.jsx';  // Example: Shared Footer component
+import Navbar from './navbar'; 
+import Footer from './Footer.jsx'; 
 
 const Layout = () => {
   return (
@@ -10,7 +10,6 @@ const Layout = () => {
       <div className="content  h-screen">
           <Outlet />
       </div>
-      {/* <Footer /> */}
     </div>
 
   );

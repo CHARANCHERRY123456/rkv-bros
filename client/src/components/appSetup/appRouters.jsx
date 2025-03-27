@@ -26,10 +26,10 @@ const AppRouter = () => {
             <Route path="/content" element={<Content />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/dashboards" element={<DashBoards />} />
-            <Route path="/new" element={<New />} />
             <Route path="/student/:sid" element={<StudentProfile />} />
             <Route path="/assignments/:assignmentName" element={<AssignmentViewer />} />
           </Route>
+          <Route path="/new" element={<New />} />
           <Route path="/*" element={<Home />} />
         </Route>
       </Routes>
