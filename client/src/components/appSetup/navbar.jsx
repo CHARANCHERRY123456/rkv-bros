@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import useAuth from '../contexts/AuthContext';
 
 const Navbar = () => {
   const {user , logout} = useAuth();
-  // toast(user);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null)
 

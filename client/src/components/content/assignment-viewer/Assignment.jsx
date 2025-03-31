@@ -7,6 +7,7 @@ import ErrorDisplay from '../shared/ErrorDisplay.jsx'; // Optional - create this
 import { toast } from 'react-hot-toast';
 import InfoButton from './components/InfoButton.jsx';
 import useAuth from '../../contexts/AuthContext.jsx';
+import envVars from '../../../config/config.js';
 
 const AssignmentViewer = () => {
   const {user} = useAuth();
@@ -23,6 +24,7 @@ const AssignmentViewer = () => {
   // Handle vote submission
   const handleVote = async (questionIndex, optionIndex ) => {
     const email = user.email;
+    if(email != envVars.VITE_ADMIN) return;
     const success = await submitVote(questionIndex, optionIndex ,email );
     if (success) {
       // Optional: Show success toast/message

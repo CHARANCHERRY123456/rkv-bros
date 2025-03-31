@@ -19,7 +19,6 @@ const LoginPage = () => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const decodedUser = jwtDecode(token);
         login(token);
         const redirectPath = location.state?.from?.pathname || '/content';
         navigate(redirectPath);
