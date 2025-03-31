@@ -6,7 +6,6 @@ export const getAnalyticsData = async (req, res) => {
         const genderStats = await Student.aggregate([
             { $group: { _id: "$gender", count: { $sum: 1 } } }
         ]);
-        console.log(genderStats);
         const branchStats = await Student.aggregate([
             { $group: { _id: "$branch", count: { $sum: 1 } } }
         ]);

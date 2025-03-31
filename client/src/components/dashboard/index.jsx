@@ -3,11 +3,12 @@ import axios from "axios";
 import GenderChart from "./GenderChart.jsx";
 import BranchChart from "./BranchChart.jsx";
 import CGPAChart from "./CGPAChart.jsx";
-import DistrictChart from './DistrictChart.jsx'
+import DistrictChart from './DistrictChart.jsx';
+import envVars from "../../config/config.js";
 
 const AnalyticsDashboard = () => {
     const [data, setData] = useState(null);
-    const backendurl = "http://localhost:3000"
+    const backendurl = envVars.VITE_BASE_URL;
     useEffect(() => {
         axios.get(`${backendurl}/dashboard`)
             .then(response => {

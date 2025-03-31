@@ -4,6 +4,7 @@ const COLORS = ["#0088FE", "#FFBB28", "#FF8042"];
 
 const GenderChart = ({ data }) => {
     const chartData = data.map(g => ({ name: g._id, value: g.count }));
+    console.log(chartData);
 
     return (
         <div className="p-4 border rounded-lg shadow-md">
