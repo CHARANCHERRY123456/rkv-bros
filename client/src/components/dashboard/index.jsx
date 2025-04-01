@@ -5,6 +5,7 @@ import BranchChart from "./BranchChart.jsx";
 import CGPAChart from "./CGPAChart.jsx";
 import DistrictChart from './DistrictChart.jsx';
 import envVars from "../../config/config.js";
+import AnalyticContainer from './analyticsContainer.jsx'
 
 const AnalyticsDashboard = () => {
     const [data, setData] = useState(null);
@@ -17,6 +18,10 @@ const AnalyticsDashboard = () => {
             })
             .catch(error => console.error("Error fetching analytics:", error));
     }, []);
+
+    return (
+        data && <AnalyticContainer data={data} />
+    )
 
     return (
         <div className="p-6">
