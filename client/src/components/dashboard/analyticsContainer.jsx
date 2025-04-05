@@ -4,7 +4,6 @@ import {
     CGPAStatsChart,
     DistrictChart,
     CasteChart,
-    BestStreamCard,
     AvgCGPAByBranchChart,
   } from './AnalyticsCharts.jsx';
   
@@ -16,7 +15,6 @@ import {
         <CGPAStatsChart data={data.cgpaStats} />
         <DistrictChart data={data.districtStats} />
         <CasteChart data={data.casteStats} />
-        <BestStreamCard data={data.bestStream} />
         <AvgCGPAByBranchChart data={data.avgCGPAByBranch} />
       </div>
     );

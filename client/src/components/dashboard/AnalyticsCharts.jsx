@@ -14,7 +14,9 @@ import {
     PolarAngleAxis,
     Radar,
     LineChart,
+    CartesianGrid,
     Line,
+    LabelList,
     ResponsiveContainer,
   } from "recharts";
   
@@ -128,34 +130,60 @@ import {
   };
   
   // 4. DistrictChart (Horizontal Bar Chart)
-  const DistrictChart = ({ data }) => {
-    const chartData = data.map((d) => ({ name: d._id, value: d.count }));
+
+
+const DistrictChart = ({ data }) => {
+  // Filter districts with count >= 5
+  const filteredData = data.filter(d => d.count >= 5);
+
+  // Sort by count descending
+  const chartData = filteredData
+    .sort((a, b) => b.count - a.count)
+    .map(d => ({ name: d._id, value: d.count }));
+
+  return (
+    <div className="p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500 rounded-lg shadow-lg shadow-yellow-400/40">
+      <h2 className="text-lg sm:text-xl font-bold text-yellow-300 text-center mb-4"> District-wise Heatmap (Top Districts Only)</h2>
+      <ResponsiveContainer width="100%" height={50 + chartData.length * 40}>
+        <BarChart
+          data={chartData}
+          layout="vertical"
+          margin={{ top: 20, right: 40, left: 80, bottom: 20 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <XAxis type="number" stroke="#fff" />
+          <YAxis
+            dataKey="name"
+            type="category"
+            stroke="#fff"
+            width={100}
+            tick={{ fill: "#fff", fontSize: 14 }}
+          />
+          <Tooltip
+            contentStyle={{ backgroundColor: "#1f1f1f", border: "1px solid #FFD700", color: "white" }}
+            formatter={(value) => [`${value} students`, "Count"]}
+          />
+          <Bar dataKey="value" barSize={24}>
+            <LabelList dataKey="value" position="right" fill="#fff" fontSize={14} />
+            {chartData.map((entry, index) => {
+              // Heat color scaling
+              const intensity = Math.min(entry.value / chartData[0].value, 1);
+              const hue = 35; // warm orange tone
+              const lightness = 75 - intensity * 45;
+              return (
+                <Cell key={`cell-${index}`} fill={`hsl(${hue}, 100%, ${lightness}%)`} />
+              );
+            })}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+
   
-    return (
-      <div className="p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-gray-800 border border-green-500 rounded-lg shadow-lg shadow-green-500/50">
-        <h2 className="text-lg sm:text-xl font-bold text-green-400 text-center mb-4">Students by District</h2>
-        <ResponsiveContainer width="100%" height={400}>
-          <BarChart data={chartData} layout="horizontal" margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
-            <XAxis dataKey="name" stroke="#fff" angle={-45} textAnchor="end" height={100} interval={0} />
-            <YAxis stroke="#fff" />
-            <Tooltip
-              contentStyle={{ backgroundColor: "#1a1a2e", border: "1px solid #00FF00", color: "#fff" }}
-              formatter={(value, name) => [`${value} students`, name]}
-            />
-            <Bar dataKey="value" barSize={20}>
-              {chartData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={`hsl(${index * 360 / chartData.length}, 70%, 50%)`} // Dynamic HSL colors
-                  className="hover:scale-105 transition-transform duration-200"
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-    );
-  };
+  
   
   // 5. CasteChart (Donut Chart)
   const CasteChart = ({ data }) => {
@@ -194,18 +222,7 @@ import {
     );
   };
   
-  // 6. BestStreamCard (Custom Card)
-  const BestStreamCard = ({ data }) => {
-    return (
-      <div className="p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500 rounded-lg shadow-lg shadow-yellow-500/50 text-center">
-        <div className="text-3xl sm:text-4xl text-yellow-400 mb-4 animate-pulse">🏆</div>
-        <h2 className="text-lg sm:text-xl font-bold text-yellow-400">Top Stream: {data?._id}</h2>
-        <p className="text-base sm:text-lg text-white">Avg CGPA: {data?.avgCGPA.toFixed(2)}</p>
-      </div>
-    );
-  };
-  
-  // 7. AvgCGPAByBranchChart (Line Chart)
+  // 6. AvgCGPAByBranchChart (Line Chart)
   const AvgCGPAByBranchChart = ({ data }) => {
     const chartData = data.map((b) => ({ name: b._id, avgCGPA: b.avgCGPA }));
   
@@ -240,6 +257,5 @@ import {
     CGPAStatsChart,
     DistrictChart,
     CasteChart,
-    BestStreamCard,
     AvgCGPAByBranchChart,
   };
