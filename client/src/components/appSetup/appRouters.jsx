@@ -11,6 +11,8 @@ import LoginPage from '../../pages/Login.jsx';
 import SignupPage from '../auth/signup/signupComponent';
 import ProtectedRoute from '../auth/protectedRoute.jsx';
 import AssignmentViewer from '../content/assignment-viewer/Assignment';
+import  GroupChat from '../../components/chat/groupChat.jsx'
+import  ChatRoom from '../../components/chat/chatRoom.jsx'
 const AppRouter = () => {
   return (
     <Router>
@@ -28,8 +30,10 @@ const AppRouter = () => {
             <Route path="/dashboards" element={<DashBoards />} />
             <Route path="/student/:sid" element={<StudentProfile />} />
             <Route path="/assignments/:assignmentName" element={<AssignmentViewer />} />
+            <Route path="/new" element={<New />} />
+            <Route path="/group" element={<GroupChat />} />
+            <Route path="/group/:groupId" element={<ChatRoom />} />
           </Route>
-          <Route path="/new" element={<New />} />
           <Route path="/*" element={<Home />} />
         </Route>
       </Routes>
