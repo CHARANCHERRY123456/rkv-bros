@@ -1,11 +1,11 @@
 // pages/ChatRoom.jsx
 import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../contexts/AuthContext";
 import { io } from "socket.io-client";
-import envVars from '../../config/config.js'
+import envVars from '../../config/config.js';
 
-const backendUrl = envVars.VITE_BASE_URL
+const backendUrl = envVars.VITE_BASE_URL;
 const socket = io(backendUrl, {
   withCredentials: true,
   transports: ["websocket"],

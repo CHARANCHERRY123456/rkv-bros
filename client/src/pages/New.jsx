@@ -1,6 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import NewComponent from './oorke.jsx'
-import Chat from "../components/chat/index.jsx";
+// import NewComponent from './oorke.jsx'
 export default function New() {
-    return <Chat />
+    function unmountFunction(){
+        alert("component is un mounted");
+    }
+
+    function mountFunction(){
+        alert("the componetn is mounted");
+        return unmountFunction;
+    }
+    useEffect(mountFunction , [])
 }

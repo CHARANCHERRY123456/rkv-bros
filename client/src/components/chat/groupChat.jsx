@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import envVars from '../../config/config.js'
+import envVars from '../../config/config.js';
+import LoadingScreen from "../global/Loading";
 const backendUrl = envVars.VITE_BASE_URL;
 
 export default function GroupChat() {
@@ -12,7 +13,7 @@ export default function GroupChat() {
   const [showModal, setShowModal] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [memberEmails, setMemberEmails] = useState("");
-
+  const [loading , setLoading] = useState(true);
   const navigate = useNavigate();
 
   // Fetch groups that user belongs to
@@ -21,6 +22,7 @@ export default function GroupChat() {
       const res = await axios.get(`${backendUrl}/chat/group/${user.email}`);
       setGroups(res.data);
       console.log("✅ Loaded groups:", res.data);
+      setLoading(false);
     } catch (err) {
       console.error("❌ Error loading groups", err);
     }
@@ -62,8 +64,8 @@ export default function GroupChat() {
 
   return (
     <div className="p-4 max-w-2xl mx-auto relative">
+      {loading && <LoadingScreen /> }
       <h2 className="text-2xl font-bold text-center mb-6">Your Groups</h2>
-
       {groups.length === 0 ? (
         <p className="text-center text-gray-500">No groups yet</p>
       ) : (

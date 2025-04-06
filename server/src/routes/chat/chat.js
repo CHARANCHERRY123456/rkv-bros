@@ -5,19 +5,19 @@ import Message from '../../models/chat/message.js';
 
 const router = express.Router();
 
-// ✅ Get all groups that the user is a member of
+// Get all groups that the user is a member of
 router.get("/group/:email", async (req, res) => {
   try {
     const email = req.params.email;
     const groups = await Group.find({ members: email });
     res.json(groups);
   } catch (err) {
-    console.error("❌ Error fetching groups:", err);
+    console.error("Error fetching groups:", err);
     res.status(500).json({ error: "Failed to fetch groups" });
   }
 });
 
-// ✅ Create a new group
+// Create a new group
 router.post("/group", async (req, res) => {
   try {
     const { name, members } = req.body;
@@ -25,18 +25,18 @@ router.post("/group", async (req, res) => {
     await group.save();
     res.json(group);
   } catch (err) {
-    console.error("❌ Error creating group:", err);
+    console.error("Error creating group:", err);
     res.status(500).json({ error: "Failed to create group" });
   }
 });
 
-// ✅ (Optional) Get messages of a group (not currently used in frontend)
+// Get messages of a group (not currently used in frontend)
 router.get("/messages/:groupId", async (req, res) => {
   try {
     const messages = await Message.find({ groupId: req.params.groupId }).sort({ createdAt: 1 });
     res.json(messages);
   } catch (err) {
-    console.error("❌ Error fetching messages:", err);
+    console.error("Error fetching messages:", err);
     res.status(500).json({ error: "Failed to fetch messages" });
   }
 });
