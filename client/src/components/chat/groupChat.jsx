@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import envVars from '../../config/config.js'
+const backendUrl = envVars.VITE_BASE_URL;
 
 export default function GroupChat() {
   const { user } = useAuth();
@@ -16,7 +18,7 @@ export default function GroupChat() {
   // Fetch groups that user belongs to
   const fetchGroups = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/chat/group/${user.email}`);
+      const res = await axios.get(`${backendUrl}/chat/group/${user.email}`);
       setGroups(res.data);
       console.log("✅ Loaded groups:", res.data);
     } catch (err) {
@@ -39,7 +41,7 @@ export default function GroupChat() {
     if (!members.includes(user.email)) members.push(user.email);
 
     try {
-      const res = await axios.post("http://localhost:3000/chat/group", {
+      const res = await axios.post(`${backendUrl}/chat/group`, {
         name: groupName,
         members,
       });

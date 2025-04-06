@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import GroupChat from "./groupChat.jsx";
 import useAuth from "../contexts/AuthContext.jsx";
-
+import envVars from '../../config/config.js'
+const backendUrl = envVars.VITE_BASE_URL;
 export default function DynamicChatPage() {
   const { user } = useAuth();
   alert(user);
@@ -11,7 +12,7 @@ export default function DynamicChatPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/chat/groups/${user.email}`)
+      .get(`${envVars}/chat/groups/${user.email}`)
       .then((res) => {
         setGroups(res.data);
         setActiveGroup(res.data[0]?._id);

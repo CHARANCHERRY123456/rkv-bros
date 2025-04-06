@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import useAuth from "../contexts/AuthContext";
 import { io } from "socket.io-client";
+import envVars from '../../config/config.js'
 
-const socket = io("http://localhost:3000", {
+const backendUrl = envVars.VITE_BASE_URL
+const socket = io(backendUrl, {
   withCredentials: true,
   transports: ["websocket"],
 });
