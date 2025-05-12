@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
+// src/components/LandingPage.jsx
+import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useLocation, useNavigate, Link } from "react-router-dom";
-import useAuth from "../../contexts/AuthContext";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import GoogleLoginButton from "../GoogleLoginButton.jsx";
-import envVars from "../../../config/config";
 
 const features = [
   {
@@ -54,90 +49,18 @@ const images = [
   },
 ];
 
-export default function LandingLoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const backendLoginUrl = `${envVars.VITE_BASE_URL}/auth/login`;
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        login(token);
-        const redirectPath = location.state?.from?.pathname || '/content';
-        navigate(redirectPath);
-      } catch {
-        toast.error("Login failed");
-        localStorage.removeItem('token');
-      }
-    }
-  }, [login]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(backendLoginUrl, { email, password });
-      login(data.token);
-      toast.success("Raaraa chaari nee kosame choostuna");
-      navigate("/content");
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Something went wrong");
-    }
-  };
-
+export default function LandingPage() {
   return (
     <div className="font-sans text-gray-800">
-      {/* Hero with Login */}
-      <section className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 text-white py-16 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-12">
-          <div className="text-center lg:text-left lg:max-w-xl">
-            <h1 className="text-5xl font-bold mb-4 animate-fade-in-down">
-              Welcome to <span className="text-yellow-300">RkvBros</span>
-            </h1>
-            <p className="text-lg mb-6">
-              Get assignments, find students, collaborate, chat with AI, and explore analytics — all in one platform.
-            </p>
-          </div>
-
-          <div className="w-full max-w-md text-white shadow-lg rounded-lg p-6 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900">
-  <h2 className="text-xl font-semibold text-center text-white mb-4">Login</h2>
-  <form onSubmit={handleSubmit} className="space-y-4">
-    <input
-      type="email"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      placeholder="Email"
-      required
-      className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400"
-    />
-    <input
-      type="password"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      placeholder="Password"
-      required
-      className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400"
-    />
-    <button
-      type="submit"
-      className="w-full bg-yellow-400 text-gray-900 font-semibold py-2 rounded-lg hover:bg-yellow-300 transition"
-    >
-      Login
-    </button>
-  </form>
-  <div className="mt-4">
-    <GoogleLoginButton />
-  </div>
-  <p className="text-center text-sm text-gray-300 mt-4">
-    Don&apos;t have an account?{" "}
-    <Link to="/signup" className="text-yellow-400 hover:underline">Sign Up</Link>
-  </p>
-</div>
-
-        </div>
+      {/* Hero */}
+      <section className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 text-white py-20 px-6 text-center">
+      {/* <section className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-20 px-6 text-center"> */}
+        <h1 className="text-5xl font-bold mb-4 animate-fade-in-down">
+          Welcome to <span className="text-yellow-300">RkvBros</span>
+        </h1>
+        <p className="max-w-2xl mx-auto text-lg">
+          Get assignments, find students, collaborate, chat with AI, and explore analytics — all in one platform.
+        </p>
       </section>
 
       {/* Carousel */}
@@ -153,6 +76,7 @@ export default function LandingLoginPage() {
           {images.map((img, idx) => (
             <div key={idx}>
               <img src={img.src} alt={`slide-${idx}`} className="rounded-xl max-h-[400px] object-cover" />
+              {/* <p className="legend text-base">{img.caption}</p> */}
             </div>
           ))}
         </Carousel>
@@ -188,7 +112,7 @@ export default function LandingLoginPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-indigo-700 text-white py-6 text-center">
+      <footer className="bg-indigo-700 dark:bg-gray-900 text-white py-6 text-center">
         <p className="text-sm">
           Made with ❤️ at IIIT RGUKT RK Valley | &copy; {new Date().getFullYear()} RkvBros
         </p>

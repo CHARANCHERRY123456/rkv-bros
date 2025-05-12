@@ -1,13 +1,8 @@
 import React, { useEffect, useRef } from "react";
+
+import LandingPage from '../components/LandingPage/index.jsx';
+
 // import NewComponent from './oorke.jsx'
 export default function New() {
-    function unmountFunction(){
-        alert("component is un mounted");
-    }
-
-    function mountFunction(){
-        alert("the componetn is mounted");
-        return unmountFunction;
-    }
-    useEffect(mountFunction , [])
+    return <LandingPage />;
 }

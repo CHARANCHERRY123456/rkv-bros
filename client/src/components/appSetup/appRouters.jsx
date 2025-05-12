@@ -24,7 +24,7 @@ const AppRouter = () => {
         {/* 🔹 Protected Routes inside Layout */}
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
-            <Route index element={<Content />} />
+            <Route index element={<New />} />
             <Route path="/content" element={<Content />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/dashboards" element={<DashBoards />} />
