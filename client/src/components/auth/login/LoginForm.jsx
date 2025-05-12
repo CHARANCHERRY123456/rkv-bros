@@ -1,80 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useLocation, useNavigate, Link } from "react-router-dom";
-import useAuth from "../../contexts/AuthContext";
+import { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
+import useAuth from "../../contexts/AuthContext.jsx";
 import GoogleLoginButton from "../GoogleLoginButton.jsx";
 import envVars from "../../../config/config";
 
-const features = [
-  {
-    title: "Assignments & Collaboration",
-    description: "Access assignments, collaborate with peers, and even do it anonymously using a duplicate ID.",
-  },
-  {
-    title: "Smart Student Search",
-    description: "Easily search students by name, ID, or batch to view their profiles and connect.",
-  },
-  {
-    title: "Join Groups by Interest",
-    description: "Join academic or interest-based groups and collaborate with like-minded students.",
-  },
-  {
-    title: "Batch-wise Info (R20, R21...)",
-    description: "Browse students grouped by batches like R20, R21, and more.",
-  },
-  {
-    title: "AI Chatbot Help",
-    description: "Get help anytime with our intelligent chatbot about RkvBros or student info.",
-  },
-  {
-    title: "Student Analytics",
-    description: "View charts and insights on student data and activity.",
-  },
-  {
-    title: "News & Feed (Coming Soon)",
-    description: "Soon, you can post news, share feeds, and stay connected!",
-  },
-];
-
-const images = [
-  {
-    src: "https://imgs.search.brave.com/_blzFkZBXjARTJP0kuQ74zQzpI0qt_tRje6BaJOrjqw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL3YyL2Nv/bXAva2FkYXBhL3E0/Lzk5OTlwODU2Mi44/NTYyLjE4MDkwNTE1/MDMyNC5wMnE0L2Nh/dGFsb2d1ZS9yZ3Vr/dC1paWl0LWlkdXB1/bGFwYXlhLWthZGFw/YS11bml2ZXJzaXRp/ZXMtN3hscTVxMG5h/MC5qcGc_dz0zODQw/JnE9NzU",
-    caption: "Explore Our College Campus",
-  },
-  {
-    src: "https://imgs.search.brave.com/ds9Xb3K8p3EssE2mzvlY1S6xNA9S-aaZRh11xt7Pzig/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL3YyL2Nv/bXAva2FkYXBhL3M1/Lzk5OTlwODU2Mi44/NTYyLjIyMTAyMTAx/MzU0OS5sNHM1L2Nh/dGFsb2d1ZS9yZ3Vr/dC1paWl0LWthZGFw/YS1jb2xsZWdlcy13/NHE0N3Y1ejhoLmpw/Zz93PTM4NDAmcT03/NQ",
-    caption: "Modern Learning Spaces",
-  },
-  {
-    src: "https://imgs.search.brave.com/i9SDwOJCARLLnSOCNWuMBJibGdgxZNtJ8K4092K5uMo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL3YyL2Nv/bXAva2FkYXBhL3M1/Lzk5OTlwODU2Mi44/NTYyLjIyMTAyMTAx/MzU0OS5sNHM1L2Nh/dGFsb2d1ZS9yZ3Vr/dC1paWl0LWthZGFw/YS1jb2xsZWdlcy11/dTB0dTZ4czJkLmpw/Zz93PTM4NDAmcT03/NQ",
-    caption: "Join Our Thriving Community",
-  },
-];
-
-export default function LandingLoginPage() {
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const backendLoginUrl = `${envVars.VITE_BASE_URL}/auth/login`;
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        login(token);
-        const redirectPath = location.state?.from?.pathname || '/content';
-        navigate(redirectPath);
-      } catch {
-        toast.error("Login failed");
-        localStorage.removeItem('token');
-      }
-    }
-  }, [login]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,110 +27,39 @@ export default function LandingLoginPage() {
   };
 
   return (
-    <div className="font-sans text-gray-800">
-      {/* Hero with Login */}
-      <section className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 text-white py-16 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-12">
-          <div className="text-center lg:text-left lg:max-w-xl">
-            <h1 className="text-5xl font-bold mb-4 animate-fade-in-down">
-              Welcome to <span className="text-yellow-300">RkvBros</span>
-            </h1>
-            <p className="text-lg mb-6">
-              Get assignments, find students, collaborate, chat with AI, and explore analytics — all in one platform.
-            </p>
-          </div>
-
-          <div className="w-full max-w-md text-white shadow-lg rounded-lg p-6 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900">
-  <h2 className="text-xl font-semibold text-center text-white mb-4">Login</h2>
-  <form onSubmit={handleSubmit} className="space-y-4">
-    <input
-      type="email"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      placeholder="Email"
-      required
-      className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400"
-    />
-    <input
-      type="password"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      placeholder="Password"
-      required
-      className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400"
-    />
-    <button
-      type="submit"
-      className="w-full bg-yellow-400 text-gray-900 font-semibold py-2 rounded-lg hover:bg-yellow-300 transition"
-    >
-      Login
-    </button>
-  </form>
-  <div className="mt-4">
-    <GoogleLoginButton />
-  </div>
-  <p className="text-center text-sm text-gray-300 mt-4">
-    Don&apos;t have an account?{" "}
-    <Link to="/signup" className="text-yellow-400 hover:underline">Sign Up</Link>
-  </p>
-</div>
-
-        </div>
-      </section>
-
-      {/* Carousel */}
-      <section className="mt-10 max-w-5xl mx-auto px-4">
-        <Carousel
-          showThumbs={false}
-          infiniteLoop
-          autoPlay
-          interval={4000}
-          showStatus={false}
-          className="rounded-xl shadow-lg"
+    <div className="w-full max-w-md text-white shadow-lg rounded-lg p-6 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900">
+      <h2 className="text-xl font-semibold text-center mb-4">Login</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+          className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-500 rounded-lg focus:ring-2 focus:ring-yellow-400"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+          className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-500 rounded-lg focus:ring-2 focus:ring-yellow-400"
+        />
+        <button
+          type="submit"
+          className="w-full bg-yellow-400 text-gray-900 font-semibold py-2 rounded-lg hover:bg-yellow-300 transition"
         >
-          {images.map((img, idx) => (
-            <div key={idx}>
-              <img src={img.src} alt={`slide-${idx}`} className="rounded-xl max-h-[400px] object-cover" />
-            </div>
-          ))}
-        </Carousel>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 bg-gray-50 px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-indigo-700">Platform Highlights</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.map((feature, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition duration-300 border-t-4 border-indigo-600"
-            >
-              <h3 className="text-xl font-semibold text-indigo-700 mb-2">{feature.title}</h3>
-              <p className="text-gray-700">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Future Preview */}
-      <section className="py-16 bg-white text-center">
-        <h2 className="text-3xl font-bold text-indigo-700 mb-4">What's Coming Next?</h2>
-        <p className="max-w-2xl mx-auto text-lg mb-6">
-          Stay tuned for amazing features like News Feed, Posts, and more engaging tools for collaboration!
-        </p>
-        <div className="flex justify-center gap-6 text-4xl animate-bounce">
-          <span>✨</span>
-          <span>🚀</span>
-          <span>📢</span>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-indigo-700 text-white py-6 text-center">
-        <p className="text-sm">
-          Made with ❤️ at IIIT RGUKT RK Valley | &copy; {new Date().getFullYear()} RkvBros
-        </p>
-      </footer>
+          Login
+        </button>
+      </form>
+      <div className="mt-4">
+        <GoogleLoginButton />
+      </div>
+      <p className="text-center text-sm text-gray-300 mt-4">
+        Don&apos;t have an account?{" "}
+        <Link to="/signup" className="text-yellow-400 hover:underline">Sign Up</Link>
+      </p>
     </div>
   );
 }
