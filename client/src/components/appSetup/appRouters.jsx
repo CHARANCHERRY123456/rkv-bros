@@ -12,7 +12,7 @@ import SignupPage from '../auth/signup/signupComponent';
 import ProtectedRoute from '../auth/protectedRoute.jsx';
 import AssignmentViewer from '../content/assignment-viewer/Assignment';
 import  GroupChat from '../../components/chat/groupChat.jsx'
-import  ChatRoom from '../../components/chat/chatRoom.jsx'
+import  ChatRoom from '../../components/chat/chatRoom.jsx';
 const AppRouter = () => {
   return (
     <Router>
