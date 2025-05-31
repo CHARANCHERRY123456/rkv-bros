@@ -33,6 +33,8 @@ export default class AuthController {
     try {
       console.log("Logging in");
       const token = await this.service.loginUser(req.body);
+      console.log("Token generated:", token);
+      
       res.status(200).json({ token });
     } catch (error) {
       res.status(400).json({ message: error.message });

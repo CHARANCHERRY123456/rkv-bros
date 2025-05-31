@@ -14,7 +14,7 @@ export default function Content() {
                 setLoading(true);
                 const response = await axios.get(`${backendUrl}/assignments`);
                 console.log(response);
-                setAssignments(response.data); // Uncomment when needed
+                setAssignments(response.data);
             } catch (error) {
                 console.error("Error fetching assignments:", error);
             }finally{

@@ -12,5 +12,10 @@ router.use("/auth" , authRouter);
 router.use("/assignments" , assignmenrRouter);
 router.use("/dashboard" , analyticRouter);
 router.use("/chat" , chatRouter);
+router.use("/" , (req , res)=>{
+    res.send({
+        "message" : "congrats bro nee website pani chesta undi"
+    })
+})
 
 export default router;

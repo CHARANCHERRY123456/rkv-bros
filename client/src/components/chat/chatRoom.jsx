@@ -1,6 +1,6 @@
 // pages/ChatRoom.jsx
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../contexts/AuthContext";
 import { io } from "socket.io-client";
 import envVars from '../../config/config.js';
@@ -11,12 +11,35 @@ const socket = io(backendUrl, {
   transports: ["websocket"],
 });
 
+function ChatBubble({ msg, isOwn }) {
+  return (
+    <div className={`flex ${isOwn ? "justify-end" : "justify-start"} mb-2`}>
+      <div
+        className={`max-w-xs sm:max-w-md px-4 py-2 rounded-2xl shadow
+          ${isOwn
+            ? "bg-blue-600 text-white rounded-br-none"
+            : "bg-gray-200 text-gray-900 rounded-bl-none"
+          }`}
+      >
+        <div className="flex items-center gap-2 mb-1">
+          <span className={`font-semibold text-xs ${isOwn ? "text-blue-100" : "text-blue-700"}`}>
+            {msg.sender}
+          </span>
+          <span className="text-[10px] text-gray-400">{msg.time}</span>
+        </div>
+        <div className="break-words">{msg.text}</div>
+      </div>
+    </div>
+  );
+}
+
 export default function ChatRoom() {
   const { user } = useAuth();
   const { groupId } = useParams();
 
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (!groupId || !user?.email) return;
@@ -41,6 +64,10 @@ export default function ChatRoom() {
     };
   }, [groupId, user]);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleSend = () => {
     if (!text.trim()) return;
 
@@ -55,34 +82,70 @@ export default function ChatRoom() {
     setText(""); // Clear input
   };
 
-  return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Group Chat</h2>
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
-      <div className="bg-gray-100 h-96 p-4 overflow-y-scroll rounded shadow mb-4">
-        {messages.map((msg, idx) => (
-          <div key={idx} className="mb-3">
-            <strong>{msg.sender}</strong>{" "}
-            <span className="text-sm text-gray-500">({msg.time})</span>
-            <p className="ml-4">{msg.text}</p>
-          </div>
-        ))}
+  return (
+    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-white">
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-white border-b px-4 py-3 flex items-center shadow-sm">
+        <span className="text-lg font-bold text-blue-700">Group Chat</span>
+        {/* Placeholder for group info/actions */}
       </div>
 
-      <div className="flex gap-2">
-        <input
-          className="flex-1 p-2 border rounded"
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-2 py-4 sm:px-8 sm:py-6 custom-scrollbar">
+        {messages.length === 0 ? (
+          <div className="flex items-center justify-center h-full text-gray-400">
+            No messages yet. Start the conversation!
+          </div>
+        ) : (
+          messages.map((msg, idx) => (
+            <ChatBubble
+              key={idx}
+              msg={msg}
+              isOwn={msg.sender === user.email}
+            />
+          ))
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input */}
+      <form
+        className="sticky bottom-0 bg-white border-t px-4 py-3 flex gap-2 items-center"
+        onSubmit={e => {
+          e.preventDefault();
+          handleSend();
+        }}
+      >
+        <textarea
+          className="flex-1 resize-none p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
           placeholder="Type a message..."
           value={text}
+          rows={1}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleInputKeyDown}
+          style={{ minHeight: "40px", maxHeight: "120px" }}
         />
         <button
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={handleSend}
+          type="submit"
+          className="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
         >
           Send
         </button>
-      </div>
+      </form>
     </div>
   );
 }
+
+/*
+Add this to your global CSS for custom scrollbar:
+.custom-scrollbar::-webkit-scrollbar { width: 8px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: #cbd5e1 #f1f5f9; }
+*/
