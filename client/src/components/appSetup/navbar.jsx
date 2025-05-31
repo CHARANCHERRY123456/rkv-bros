@@ -80,7 +80,7 @@ const Navbar = () => {
             onClick={toggleDropdown}
           >
             <span className="sr-only">Open user menu</span>
-            <img className="w-8 h-8 rounded-full" src="/logo192.png" alt="User" />
+            <img className="w-8 h-8 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/009/521/808/small/vintage-elegant-lion-king-crown-illustrations-vector.jpg" alt="User" />
           </button>
           {dropdownOpen && (
             <div 
@@ -114,7 +114,7 @@ const Navbar = () => {
           <div className="flex bg-opacity-50 items-center space-x-3 p-4 border-b border-gray-200 dark:border-gray-700">
             {/* <img className="w-8 h-8 rounded-full" src="/logo192.png" alt="User" /> */}
             <img className="w-8 h-8 rounded-full" src="
-            https://m.media-amazon.com/images/S/amzn-author-media-prod/9kk5f3idcpdt322i3oflk4oqb5._SY450_CR8%2C0%2C450%2C450_.jpg
+            https://static.vecteezy.com/system/resources/thumbnails/009/521/808/small/vintage-elegant-lion-king-crown-illustrations-vector.jpg
             " alt="User" />
             <div>
               <span className="block text-sm text-gray-900 dark:text-white">{user.name}</span>
