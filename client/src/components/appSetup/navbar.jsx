@@ -70,6 +70,7 @@ const Navbar = () => {
           <Link to="/content" className="text-gray-700 dark:text-gray-200 hover:underline">Content</Link>
           <Link to="/analytics" className="text-gray-700 dark:text-gray-200 hover:underline">Analytics</Link>
           <Link to="/new" className="text-gray-700 dark:text-gray-200 hover:underline">New</Link>
+          <Link to="/group" className="text-gray-700 dark:text-gray-200 hover:underline">Group Chat</Link>
         </div>
 
         {/* User Dropdown (desktop only) */}
@@ -127,6 +128,7 @@ const Navbar = () => {
             <Link to="/content" className="block py-2 text-gray-700 dark:text-gray-200 hover:underline" onClick={handleNavClick}>Content</Link>
             <Link to="/analytics" className="block py-2 text-gray-700 dark:text-gray-200 hover:underline" onClick={handleNavClick}>Analytics</Link>
             <Link to="/new" className="block py-2 text-gray-700 dark:text-gray-200 hover:underline" onClick={handleNavClick}>New</Link>
+            <Link to="/group" className="block py-2 text-gray-700 dark:text-gray-200 hover:underline" onClick={handleNavClick}>Group Chat</Link>
             <button className="block py-2 w-full text-left text-gray-700 dark:text-gray-200 hover:underline" onClick={() => { handleNavClick(); logout(); }}>Logout</button>
           </div>
         </div>
