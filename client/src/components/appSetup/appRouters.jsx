@@ -21,6 +21,9 @@ const AppRouter = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
+        {/* 🔹 Chat Room Routes (No Layout for iframe embedding) */}
+        <Route path="/chat/:groupId" element={<ProtectedRoute><ChatRoom /></ProtectedRoute>} />
+
         {/* 🔹 Protected Routes inside Layout */}
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>

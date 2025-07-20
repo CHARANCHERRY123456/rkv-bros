@@ -163,10 +163,10 @@ export default function GroupChat() {
       {!isMobile && (
         <div className="flex-1 h-full flex flex-col">
           {activeGroup ? (
-            // Lazy load chatRoom for the selected group
+            // Lazy load chatRoom for the selected group (using route without layout)
             <iframe
               title="Chat"
-              src={`/group/${activeGroup}`}
+              src={`/chat/${activeGroup}`}
               className="w-full h-full border-0"
               style={{ minHeight: "100%", minWidth: "100%" }}
             />
