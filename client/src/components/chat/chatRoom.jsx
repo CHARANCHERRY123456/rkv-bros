@@ -39,6 +39,7 @@ export default function ChatRoom() {
 
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export default function ChatRoom() {
     // Load history from server
     socket.on("loadHistory", (msgs) => {
       setMessages(msgs);
+      setLoading(false); // Stop loading when messages are received
     });
 
     // Listen for real-time messages
@@ -57,10 +59,16 @@ export default function ChatRoom() {
       setMessages((prev) => [...prev, msg]);
     });
 
+    // If no history is received within 2 seconds, stop loading
+    const loadingTimer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     // Cleanup on unmount
     return () => {
       socket.off("receiveMessage");
       socket.off("loadHistory");
+      clearTimeout(loadingTimer);
     };
   }, [groupId, user]);
 
@@ -99,7 +107,14 @@ export default function ChatRoom() {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-2 py-4 sm:px-8 sm:py-6 custom-scrollbar">
-        {messages.length === 0 ? (
+        {loading ? (
+          <div className="flex items-center justify-center h-full">
+            <div className="flex flex-col items-center gap-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              <span className="text-gray-500">Loading messages...</span>
+            </div>
+          </div>
+        ) : messages.length === 0 ? (
           <div className="flex items-center justify-center h-full text-gray-400">
             No messages yet. Start the conversation!
           </div>
