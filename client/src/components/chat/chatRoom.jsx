@@ -45,26 +45,21 @@ export default function ChatRoom() {
   useEffect(() => {
     if (!groupId || !user?.email) return;
 
-    // Join the group room
     socket.emit("joinGroup", groupId);
 
-    // Load history from server
     socket.on("loadHistory", (msgs) => {
       setMessages(msgs);
-      setLoading(false); // Stop loading when messages are received
+      setLoading(false);
     });
 
-    // Listen for real-time messages
     socket.on("receiveMessage", (msg) => {
       setMessages((prev) => [...prev, msg]);
     });
 
-    // If no history is received within 2 seconds, stop loading
     const loadingTimer = setTimeout(() => {
       setLoading(false);
     }, 2000);
 
-    // Cleanup on unmount
     return () => {
       socket.off("receiveMessage");
       socket.off("loadHistory");
@@ -99,13 +94,11 @@ export default function ChatRoom() {
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Header */}
       <div className="sticky top-0 z-10 bg-white border-b px-4 py-3 flex items-center shadow-sm">
         <span className="text-lg font-bold text-blue-700">Group Chat</span>
         {/* Placeholder for group info/actions */}
       </div>
 
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto px-2 py-4 sm:px-8 sm:py-6 custom-scrollbar">
         {loading ? (
           <div className="flex items-center justify-center h-full">
@@ -130,7 +123,6 @@ export default function ChatRoom() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
       <form
         className="sticky bottom-0 bg-white border-t px-4 py-3 flex gap-2 items-center"
         onSubmit={e => {
@@ -157,10 +149,3 @@ export default function ChatRoom() {
     </div>
   );
 }
-
-/*
-Add this to your global CSS for custom scrollbar:
-.custom-scrollbar::-webkit-scrollbar { width: 8px; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-.custom-scrollbar { scrollbar-width: thin; scrollbar-color: #cbd5e1 #f1f5f9; }
-*/
