@@ -6,6 +6,7 @@ class UserSearchRepository extends CrudRepository {
     super(User);
   }
 
+  // Legacy methods - keep for backward compatibility
   async searchByEmail(email) {
     try {
       return await this.model.findOne({ email });
@@ -24,143 +25,71 @@ class UserSearchRepository extends CrudRepository {
     }
   }
 
-  // New enhanced search methods
-  async searchUsers(query, options = {}) {
+  // Pure data access methods - no business logic
+  async findByQuery(filter, options = {}) {
     try {
-      const { excludeUserId = null, limit = 20 } = options;
+      const { 
+        select = 'email name _id', 
+        limit = 20, 
+        sort = null,
+        skip = 0 
+      } = options;
+
+      let query = this.model.find(filter).select(select).limit(limit);
       
-      if (!query || typeof query !== 'string') {
-        throw new Error('Search query is required and must be a string');
+      if (sort) {
+        query = query.sort(sort);
+      }
+      
+      if (skip > 0) {
+        query = query.skip(skip);
       }
 
-      const searchRegex = new RegExp(query, 'i');
-      
-      const filter = {
-        $and: [
-          {
-            $or: [
-              { email: searchRegex },
-              { name: searchRegex }
-            ]
-          }
-        ]
-      };
-
-      if (excludeUserId) {
-        filter.$and.push({ _id: { $ne: excludeUserId } });
-      }
-
-      return await this.model
-        .find(filter)
-        .select('email name _id')
-        .limit(limit)
-        .lean()
-        .exec();
+      return await query.lean().exec();
     } catch (error) {
-      console.error(`Error searching users: ${error.message}`);
+      console.error(`Error finding users by query: ${error.message}`);
       throw error;
     }
   }
 
-  async suggestUsers(query, options = {}) {
+  async findByEmails(emails) {
     try {
-      const { excludeUserId = null, limit = 10 } = options;
-      
-      if (!query || typeof query !== 'string' || query.length < 2) {
-        return [];
-      }
-
-      const searchRegex = new RegExp(`^${this._escapeRegex(query)}`, 'i');
-      
-      const filter = {
-        $and: [
-          {
-            $or: [
-              { email: searchRegex },
-              { name: searchRegex }
-            ]
-          }
-        ]
-      };
-
-      if (excludeUserId) {
-        filter.$and.push({ _id: { $ne: excludeUserId } });
-      }
-
       return await this.model
-        .find(filter)
-        .select('email name _id')
-        .limit(limit)
-        .sort({ name: 1 })
-        .lean()
-        .exec();
-    } catch (error) {
-      console.error(`Error suggesting users: ${error.message}`);
-      throw error;
-    }
-  }
-
-  async getUsersByEmails(emails) {
-    try {
-      if (!Array.isArray(emails) || emails.length === 0) {
-        return [];
-      }
-
-      // Filter out invalid emails
-      const validEmails = emails.filter(email => 
-        email && typeof email === 'string' && this._isValidEmail(email)
-      );
-
-      if (validEmails.length === 0) {
-        return [];
-      }
-
-      return await this.model
-        .find({ email: { $in: validEmails } })
+        .find({ email: { $in: emails } })
         .select('email name _id')
         .lean()
         .exec();
     } catch (error) {
-      console.error(`Error getting users by emails: ${error.message}`);
+      console.error(`Error finding users by emails: ${error.message}`);
       throw error;
     }
   }
 
-  async findUsersWithPagination(query, options = {}) {
+  async countByQuery(filter) {
+    try {
+      return await this.model.countDocuments(filter);
+    } catch (error) {
+      console.error(`Error counting users: ${error.message}`);
+      throw error;
+    }
+  }
+
+  async findWithPagination(filter, options = {}) {
     try {
       const { 
         page = 1, 
         limit = 20, 
-        sortBy = 'name', 
-        sortOrder = 'asc',
-        excludeUserId = null 
+        select = 'email name _id',
+        sort = { name: 1 }
       } = options;
 
       const skip = (page - 1) * limit;
-      const searchRegex = query ? new RegExp(query, 'i') : null;
-
-      let filter = {};
-      if (searchRegex) {
-        filter = {
-          $or: [
-            { email: searchRegex },
-            { name: searchRegex }
-          ]
-        };
-      }
-
-      if (excludeUserId) {
-        filter._id = { $ne: excludeUserId };
-      }
-
-      const sortOptions = {};
-      sortOptions[sortBy] = sortOrder === 'desc' ? -1 : 1;
 
       const [users, total] = await Promise.all([
         this.model
           .find(filter)
-          .select('email name _id')
-          .sort(sortOptions)
+          .select(select)
+          .sort(sort)
           .skip(skip)
           .limit(limit)
           .lean()
@@ -168,29 +97,45 @@ class UserSearchRepository extends CrudRepository {
         this.model.countDocuments(filter)
       ]);
 
-      return {
-        users,
-        pagination: {
-          page,
-          limit,
-          total,
-          pages: Math.ceil(total / limit)
-        }
-      };
+      return { users, total };
     } catch (error) {
       console.error(`Error finding users with pagination: ${error.message}`);
       throw error;
     }
   }
 
-  // Utility methods
-  _escapeRegex(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Raw query methods for specific patterns
+  async findByEmailPattern(emailRegex, options = {}) {
+    try {
+      return await this.findByQuery({ email: emailRegex }, options);
+    } catch (error) {
+      console.error(`Error finding users by email pattern: ${error.message}`);
+      throw error;
+    }
   }
 
-  _isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  async findByNamePattern(nameRegex, options = {}) {
+    try {
+      return await this.findByQuery({ name: nameRegex }, options);
+    } catch (error) {
+      console.error(`Error finding users by name pattern: ${error.message}`);
+      throw error;
+    }
+  }
+
+  async findByEmailOrNamePattern(searchRegex, options = {}) {
+    try {
+      const filter = {
+        $or: [
+          { email: searchRegex },
+          { name: searchRegex }
+        ]
+      };
+      return await this.findByQuery(filter, options);
+    } catch (error) {
+      console.error(`Error finding users by email or name pattern: ${error.message}`);
+      throw error;
+    }
   }
 }
 
