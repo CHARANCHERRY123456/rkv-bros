@@ -4,6 +4,7 @@ import authRouter from './authRoutes.js';
 import assignmenrRouter from './content/assignmentRoutes.js';
 import analyticRouter from './analyticRoute.js'
 import chatRouter from './chat/chat.js';
+import searchRouter from '../features/search/routes/index.js';
 
 
 const router = Router();
@@ -17,5 +18,6 @@ router.use("/" , (req , res)=>{
         "message" : "congrats bro nee website pani chesta undi"
     })
 })
+router.use("/search" , searchRouter);
 
-export default router;
+export default router; 
