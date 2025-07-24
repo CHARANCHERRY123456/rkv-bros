@@ -1,5 +1,6 @@
 // pages/GroupChat.js
 import { useState, useEffect } from "react";
+import EmailAutoComplete from "./EmailAutoComplete";
 import axios from "axios";
 import useAuth from "../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -38,14 +39,11 @@ function CreateGroupModal({ show, onClose, onCreate, groupName, setGroupName, me
             required
             className="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <textarea
-            placeholder="Member emails (comma separated)"
+          <EmailAutoComplete
             value={memberEmails}
-            onChange={(e) => setMemberEmails(e.target.value)}
-            rows={3}
-            required
-            className="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          ></textarea>
+            onChange={setMemberEmails}
+            excludeEmails={[]}
+          />
           <div className="flex justify-end gap-3">
             <button
               type="button"
@@ -88,7 +86,7 @@ export default function GroupChat() {
   const [groups, setGroups] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [groupName, setGroupName] = useState("");
-  const [memberEmails, setMemberEmails] = useState("");
+  const [memberEmails, setMemberEmails] = useState([]); // now array of selected options
   const [loading, setLoading] = useState(true);
   const [activeGroup, setActiveGroup] = useState(null);
   const navigate = useNavigate();
@@ -182,10 +180,7 @@ export default function GroupChat() {
         onClose={() => setShowModal(false)}
         onCreate={async (e) => {
           e.preventDefault();
-          const members = memberEmails
-            .split(",")
-            .map((m) => m.trim())
-            .filter((m) => m);
+          const members = memberEmails.map(opt => opt.value);
           if (!members.includes(user.email)) members.push(user.email);
           try {
             await axios.post(`${backendUrl}/chat/group`, {
@@ -193,7 +188,7 @@ export default function GroupChat() {
               members,
             });
             setGroupName("");
-            setMemberEmails("");
+            setMemberEmails([]);
             setShowModal(false);
             fetchGroups();
           } catch (err) {

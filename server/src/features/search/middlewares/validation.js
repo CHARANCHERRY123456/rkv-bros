@@ -189,7 +189,6 @@ class SearchValidation {
     next();
   };
 
-  // Rate limiting middleware (simple implementation)
   static createRateLimit = (maxRequests = 100, windowMs = 60000) => {
     const requests = new Map();
 
@@ -197,13 +196,12 @@ class SearchValidation {
       const clientId = req.user?.id || req.ip;
       const now = Date.now();
       
-      // Clean old entries
+  
       const cutoff = now - windowMs;
       if (requests.has(clientId)) {
         requests.set(clientId, requests.get(clientId).filter(time => time > cutoff));
       }
 
-      // Check current requests
       const clientRequests = requests.get(clientId) || [];
       
       if (clientRequests.length >= maxRequests) {
@@ -215,7 +213,7 @@ class SearchValidation {
         });
       }
 
-      // Add current request
+
       clientRequests.push(now);
       requests.set(clientId, clientRequests);
 
