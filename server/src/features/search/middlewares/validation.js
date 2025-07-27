@@ -63,6 +63,8 @@ class SearchValidation {
 
   // Validate suggestion query (more lenient)
   static validateSuggestQuery = (req, res, next) => {
+    console.log("checking validation");
+    
     const { q: query, limit } = req.query;
 
     // Query is optional for suggestions, but if provided must be valid

@@ -1,18 +1,17 @@
 import React from "react";
 import AsyncSelect from "react-select/async";
-import axios from "axios";
-import envVars from '../../config/config.js';
-const backendUrl = envVars.VITE_BASE_URL;
+import axiosClient from '../../utils/axiosClient';
 
 export default function EmailAutoComplete({ value, onChange, excludeEmails = [] }) {
+
   // Load options from backend
   const loadOptions = async (inputValue, callback) => {
     if (!inputValue || inputValue.length < 2) return callback([]);
     try {
-      const res = await axios.get(`${backendUrl}/api/search/suggest`, {
+      const res = await axiosClient.get('/search/suggest', {
         params: { q: inputValue, limit: 5 },
-        withCredentials: true,
       });
+      console.log("the response is " + res.data.data.suggestions);
       const options = res.data.data.suggestions
         .filter(user => !excludeEmails.includes(user.email))
         .map(user => ({

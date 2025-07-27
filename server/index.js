@@ -15,11 +15,14 @@ const server = http.createServer(app);
 const io=new Server(server , {
     cors : {
         origin : "*",
-        methods :["GET","POST"],
+        methods :["GET","POST","PUT","DELETE"],
     },
 })
 SocketHandler(io);
-app.use(cors({origin:"*"}));
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 
 

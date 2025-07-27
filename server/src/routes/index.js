@@ -13,11 +13,11 @@ router.use("/auth" , authRouter);
 router.use("/assignments" , assignmenrRouter);
 router.use("/dashboard" , analyticRouter);
 router.use("/chat" , chatRouter);
-router.use("/" , (req , res)=>{
+router.use("/search" , searchRouter);
+router.use("/health" , (req , res)=>{
     res.send({
         "message" : "congrats bro nee website pani chesta undi"
     })
 })
-router.use("/search" , searchRouter);
 
 export default router; 

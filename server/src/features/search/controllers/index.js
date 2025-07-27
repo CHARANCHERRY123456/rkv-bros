@@ -18,6 +18,8 @@ class SearchController {
         exactMatch 
       } = req.query;
 
+      console.log("in the serch controller");
+      
       // Get current user ID from auth middleware
       const currentUserId = req.user?.id || req.user?._id;
 
@@ -28,6 +30,8 @@ class SearchController {
           currentUserId,
           { page: parseInt(page) || 1, limit: parseInt(limit) || 20, sortBy, sortOrder }
         );
+        
+        console.log("the result in search rotuer" , result);
         
         return res.status(200).json({
           success: true,
@@ -80,6 +84,8 @@ class SearchController {
   // Autocomplete suggestions endpoint
   suggest = async (req, res) => {
     try {
+      console.log("i am in search route");
+      
       const { q: query, limit } = req.query;
 
       // Get current user ID from auth middleware
@@ -89,7 +95,7 @@ class SearchController {
       if (limit) options.limit = parseInt(limit);
 
       const result = await this.userSearchService.suggestUsers(query, currentUserId, options);
-
+      console.log('[SUGGESTIONS SENT TO FRONTEND]:', JSON.stringify(result));
       res.status(200).json({
         success: true,
         message: 'Suggestions retrieved successfully',
@@ -98,7 +104,6 @@ class SearchController {
 
     } catch (error) {
       console.error(`Error in suggest controller: ${error.message}`);
-      
       // Suggestions should never fail completely - return empty if error
       res.status(200).json({
         success: true,
