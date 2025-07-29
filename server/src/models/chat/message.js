@@ -11,10 +11,23 @@ const messageSchema = new mongoose.Schema({
     type: String, // email
     required: true,
   },
-  text: {
+  content: {
     type: String,
     required: true,
   },
+  text: {
+    type: String, // Keep for backward compatibility
+    get: function() { return this.content; },
+    set: function(v) { this.content = v; }
+  },
+  type: {
+    type: String,
+    enum: ['text', 'image', 'file'],
+    default: 'text'
+  },
+  readBy: [{
+    type: String // array of email addresses
+  }],
   time: {
     type: String, // Optional: store HH:MM AM/PM
     default: () => new Date().toLocaleTimeString(),
@@ -22,5 +35,9 @@ const messageSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
+
+// Add indexes for better performance
+messageSchema.index({ groupId: 1, createdAt: -1 });
+messageSchema.index({ sender: 1 });
 
 export default mongoose.model("Message", messageSchema);

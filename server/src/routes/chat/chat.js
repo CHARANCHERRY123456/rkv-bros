@@ -5,7 +5,7 @@ import Message from '../../models/chat/message.js';
 
 const router = express.Router();
 
-// Get all groups that the user is a member of
+
 router.get("/group/:email", async (req, res) => {
   try {
     const email = req.params.email;
