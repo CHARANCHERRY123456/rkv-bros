@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     try {
+      console.log(token);
       localStorage.setItem('token', token);
       const decodedUser = jwtDecode(token);
       setUser(decodedUser);

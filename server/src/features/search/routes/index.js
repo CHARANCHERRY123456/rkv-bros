@@ -7,7 +7,7 @@ const router = express.Router();
 const searchController = new SearchController();
 
 
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 router.use(SearchValidation.createRateLimit(100, 60000)); // 100 requests per minute
 

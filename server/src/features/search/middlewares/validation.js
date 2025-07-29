@@ -1,11 +1,8 @@
-// Validation middleware for search endpoints
 class SearchValidation {
   
-  // Validate search query parameters
   static validateSearchQuery = (req, res, next) => {
     const { q: query, page, limit, sortBy, sortOrder } = req.query;
 
-    // Query validation
     if (!query || typeof query !== 'string' || query.trim().length < 1) {
       return res.status(400).json({
         success: false,
@@ -22,7 +19,6 @@ class SearchValidation {
       });
     }
 
-    // Page validation
     if (page && (isNaN(page) || parseInt(page) < 1)) {
       return res.status(400).json({
         success: false,
@@ -31,7 +27,6 @@ class SearchValidation {
       });
     }
 
-    // Limit validation
     if (limit && (isNaN(limit) || parseInt(limit) < 1 || parseInt(limit) > 50)) {
       return res.status(400).json({
         success: false,
@@ -40,7 +35,6 @@ class SearchValidation {
       });
     }
 
-    // Sort validation
     const validSortFields = ['name', 'email', 'createdAt'];
     if (sortBy && !validSortFields.includes(sortBy)) {
       return res.status(400).json({
@@ -61,13 +55,11 @@ class SearchValidation {
     next();
   };
 
-  // Validate suggestion query (more lenient)
   static validateSuggestQuery = (req, res, next) => {
     console.log("checking validation");
     
     const { q: query, limit } = req.query;
 
-    // Query is optional for suggestions, but if provided must be valid
     if (query && (typeof query !== 'string' || query.length > 100)) {
       return res.status(400).json({
         success: false,
@@ -76,7 +68,6 @@ class SearchValidation {
       });
     }
 
-    // Limit validation for suggestions
     if (limit && (isNaN(limit) || parseInt(limit) < 1 || parseInt(limit) > 10)) {
       return res.status(400).json({
         success: false,
@@ -88,7 +79,6 @@ class SearchValidation {
     next();
   };
 
-  // Validate email validation request
   static validateEmailsRequest = (req, res, next) => {
     const { emails } = req.body;
 
@@ -127,7 +117,6 @@ class SearchValidation {
     next();
   };
 
-  // Validate user IDs request
   static validateUserIdsRequest = (req, res, next) => {
     const { ids } = req.body;
 
@@ -166,7 +155,6 @@ class SearchValidation {
     next();
   };
 
-  // Validate email parameter
   static validateEmailParam = (req, res, next) => {
     const { email } = req.params;
 
@@ -178,7 +166,6 @@ class SearchValidation {
       });
     }
 
-    // Basic email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({

@@ -27,20 +27,15 @@ export default class AuthService{
 
     loginUser = async (data)=>{
         try {
-            console.log(data.email, "is trying to login");
             const user = await this.repository.findOne({email : data.email});
-            console.log("User exists");
             if(!user){
-                console.log("user not found");
-                 throw new Error(`User not found`);
+                throw new Error(`User not found`);
             }
     
             if(data.password != user.password) {
-                console.log("passowrd does not matched");
                 throw new Error(`Passowrd not matched`);
             }
             const token = generateToken(user);
-            console.log(token , " token is seding");
             return token;
         } catch (error) {
             throw Error(`Error while logging User :${error.message} `);
