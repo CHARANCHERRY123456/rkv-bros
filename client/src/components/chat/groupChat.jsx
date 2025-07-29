@@ -1,7 +1,7 @@
 // pages/GroupChat.js
 import { useState, useEffect } from "react";
 import EmailAutoComplete from "./EmailAutoComplete";
-import axios from "axios";
+import axiosClient from "../../utils/axiosClient";
 import useAuth from "../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import envVars from '../../config/config.js';
@@ -95,21 +95,49 @@ export default function GroupChat() {
   // Fetch groups that user belongs to
   const fetchGroups = async () => {
     try {
-      const res = await axios.get(`${backendUrl}/chat/group/${user.email}`);
-      setGroups(res.data);
+      // Add cache busting parameter to avoid 304 responses
+      const timestamp = new Date().getTime();
+      const res = await axiosClient.get(`/chat/group/${user.email}?t=${timestamp}`);
+      
+      // Handle both old and new API response formats
+      let groupsData;
+      if (res.data && res.data.data && Array.isArray(res.data.data.groups)) {
+        // New API format: { success, message, data: { groups: [...] } }
+        groupsData = res.data.data.groups;
+      } else if (Array.isArray(res.data)) {
+        // Old API format: [...]
+        groupsData = res.data;
+      } else {
+        groupsData = [];
+      }
+      
+      setGroups(groupsData);
       setLoading(false);
-      if (res.data.length > 0 && !activeGroup) {
-        setActiveGroup(res.data[0]._id);
+      if (groupsData.length > 0 && !activeGroup) {
+        setActiveGroup(groupsData[0]._id || groupsData[0].id);
       }
     } catch (err) {
+      console.error("Error fetching groups:", err);
+      setGroups([]); // Set empty array on error
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchGroups();
+    if (user?.email) {
+      fetchGroups();
+    }
     // eslint-disable-next-line
   }, [user.email]);
+
+  const createTestGroups = async () => {
+    try {
+      await axiosClient.post(`/chat-legacy/test-groups/${user.email}`);
+      fetchGroups(); // Refresh the groups list
+    } catch (err) {
+      console.error("Error creating test groups:", err);
+    }
+  };
 
   // Responsive: detect mobile
   const isMobile = window.innerWidth < 640;
@@ -132,24 +160,33 @@ export default function GroupChat() {
           <h2 className="text-2xl font-extrabold text-blue-700 tracking-tight">
             Groups
           </h2>
-          <button
-            onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white rounded-full w-12 h-12 text-2xl shadow-xl hover:bg-blue-700 flex items-center justify-center transition"
-            aria-label="Create group"
-          >
-            +
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-blue-600 text-white rounded-full w-12 h-12 text-2xl shadow-xl hover:bg-blue-700 flex items-center justify-center transition"
+              aria-label="Create group"
+            >
+              +
+            </button>
+            <button
+              onClick={createTestGroups}
+              className="bg-green-600 text-white rounded-lg px-3 py-2 text-sm shadow-lg hover:bg-green-700 transition"
+              aria-label="Create test groups"
+            >
+              Test
+            </button>
+          </div>
         </div>
         <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-          {groups.length === 0 ? (
+          {!Array.isArray(groups) || groups.length === 0 ? (
             <p className="text-center text-gray-400 mt-10 text-lg">No groups yet</p>
           ) : (
             <ul className="space-y-3">
               {groups.map((group) => (
                 <GroupListItem
-                  key={group._id}
+                  key={group._id || group.id}
                   group={group}
-                  onClick={() => handleGroupClick(group._id)}
+                  onClick={() => handleGroupClick(group._id || group.id)}
                 />
               ))}
             </ul>
@@ -183,7 +220,7 @@ export default function GroupChat() {
           const members = memberEmails.map(opt => opt.value);
           if (!members.includes(user.email)) members.push(user.email);
           try {
-            await axios.post(`${backendUrl}/chat/group`, {
+            await axiosClient.post(`/chat/group`, {
               name: groupName,
               members,
             });
