@@ -27,7 +27,7 @@ function ChatBubble({ msg, isOwn }) {
           </span>
           <span className="text-[10px] text-gray-400">{msg.time}</span>
         </div>
-        <div className="break-words">{msg.text}</div>
+        <div className="break-words">{msg.text || msg.content}</div>
       </div>
     </div>
   );
@@ -67,7 +67,7 @@ export default function ChatRoom() {
     };
   }, [groupId, user]);
 
-  useEffect(() => {
+   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
