@@ -99,7 +99,7 @@ export default function ChatRoom() {
         {/* Placeholder for group info/actions */}
       </div>
 
-      <div className="flex-1 overflow-y-auto px-2 py-4 sm:px-8 sm:py-6 custom-scrollbar">
+      <div className="flex-1 overflow-y-auto px-2 py-4 sm:px-8 sm:py-6 pb-20 custom-scrollbar">
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="flex flex-col items-center gap-4">
@@ -124,7 +124,7 @@ export default function ChatRoom() {
       </div>
 
       <form
-        className="sticky bottom-0 bg-white border-t px-4 py-3 flex gap-2 items-center"
+        className="sticky bottom-4 bg-white border-t px-4 py-3 mb-4 flex gap-2 items-center shadow-lg rounded-t-lg"
         onSubmit={e => {
           e.preventDefault();
           handleSend();

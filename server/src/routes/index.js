@@ -14,7 +14,7 @@ router.use("/auth" , authRouter);
 router.use("/assignments" , assignmenrRouter);
 router.use("/dashboard" , analyticRouter);
 router.use("/chat" , newChatRouter); // New feature-based chat with WhatsApp-style ordering
-router.use("/chat-legacy" , chatRouter); // Keep old routes for emergency fallback
+router.use("/chat-legacy" , chatRouter);// Keep old routes for emergency fallback 
 router.use("/search" , searchRouter);
 router.use("/health" , (req , res)=>{
     res.send({

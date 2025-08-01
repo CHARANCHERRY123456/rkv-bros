@@ -19,7 +19,16 @@ const io=new Server(server , {
     },
 })
 SocketHandler(io);
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://rkv-bros.vercel.app"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"]
+}));
+
+
 
 
 

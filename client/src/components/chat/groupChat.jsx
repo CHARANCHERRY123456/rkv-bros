@@ -95,9 +95,7 @@ export default function GroupChat() {
   // Fetch groups that user belongs to
   const fetchGroups = async () => {
     try {
-      // Add cache busting parameter to avoid 304 responses
-      const timestamp = new Date().getTime();
-      const res = await axiosClient.get(`/chat/group/${user.email}?t=${timestamp}`);
+      const res = await axiosClient.get(`/chat/group/${user.email}`);
       
       // Handle both old and new API response formats
       let groupsData;
@@ -130,15 +128,6 @@ export default function GroupChat() {
     // eslint-disable-next-line
   }, [user.email]);
 
-  const createTestGroups = async () => {
-    try {
-      await axiosClient.post(`/chat-legacy/test-groups/${user.email}`);
-      fetchGroups(); // Refresh the groups list
-    } catch (err) {
-      console.error("Error creating test groups:", err);
-    }
-  };
-
   // Responsive: detect mobile
   const isMobile = window.innerWidth < 640;
 
@@ -160,22 +149,13 @@ export default function GroupChat() {
           <h2 className="text-2xl font-extrabold text-blue-700 tracking-tight">
             Groups
           </h2>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowModal(true)}
-              className="bg-blue-600 text-white rounded-full w-12 h-12 text-2xl shadow-xl hover:bg-blue-700 flex items-center justify-center transition"
-              aria-label="Create group"
-            >
-              +
-            </button>
-            <button
-              onClick={createTestGroups}
-              className="bg-green-600 text-white rounded-lg px-3 py-2 text-sm shadow-lg hover:bg-green-700 transition"
-              aria-label="Create test groups"
-            >
-              Test
-            </button>
-          </div>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-blue-600 text-white rounded-full w-12 h-12 text-2xl shadow-xl hover:bg-blue-700 flex items-center justify-center transition"
+            aria-label="Create group"
+          >
+            +
+          </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
           {!Array.isArray(groups) || groups.length === 0 ? (
