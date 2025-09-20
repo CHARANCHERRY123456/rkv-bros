@@ -18,12 +18,17 @@ class PostController {
     }
 
     getAllPosts = async (req , res)=>{
+        
         try {
-            const {page , limit} = req.query;
+            // const {page , limit} = req.query;
+            const page = Number(req.query.page);
+            const limit = Number(req.query.limit);
             const userId = req.user?.id;
             const posts = await this.service.getAllPosts({page , limit , userId});
             res.status(200).json(posts);
         } catch (error) {
+            console.log(error.message);
+            
             res.status(500).json({message : error.message});
             
         }

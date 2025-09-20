@@ -13,20 +13,21 @@ import ProtectedRoute from '../auth/protectedRoute.jsx';
 import AssignmentViewer from '../content/assignment-viewer/Assignment';
 import  GroupChat from '../../components/chat/groupChat.jsx'
 import  ChatRoom from '../../components/chat/chatRoom.jsx';
+import Post from '../../pages/Posts.jsx';
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        {/* 🔹 Public Routes (No Layout) */}
+        {/*  Public Routes (No Layout) */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
-        {/* 🔹 Chat Room Routes (No Layout for iframe embedding) */}
+        {/* Chat Room Routes (No Layout for iframe embedding) */}
         <Route element={<ProtectedRoute />}>
           <Route path="/chat/:groupId" element={<ChatRoom />} />
         </Route>
 
-        {/* 🔹 Protected Routes inside Layout */}
+        {/* Protected Routes inside Layout */}
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
             <Route index element={<New />} />
@@ -35,6 +36,7 @@ const AppRouter = () => {
             <Route path="/dashboards" element={<DashBoards />} />
             <Route path="/student/:sid" element={<StudentProfile />} />
             <Route path="/assignments/:assignmentName" element={<AssignmentViewer />} />
+            <Route path="/posts" element={<Post />} />
             <Route path="/new" element={<New />} />
             <Route path="/group" element={<GroupChat />} />
             <Route path="/group/:groupId" element={<ChatRoom />} />
