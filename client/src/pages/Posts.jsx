@@ -57,20 +57,22 @@ export default function Post() {
   } , []);
 
   return (
-      
       <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-2xl mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">Posts Feed</h1>
-          <p className="text-gray-600 text-sm mt-1">Discover what's trending</p>
+        {/* Header */}
+        <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+          <div className="max-w-2xl mx-auto px-4 py-4">
+            <h1 className="text-2xl font-bold text-gray-900">Posts Feed</h1>
+            <p className="text-gray-600 text-sm mt-1">Discover what's trending</p>
+          </div>
         </div>
-      </div>
-     <CreateNewPost onPostCreated={handleCreatePost} />
 
-      {/* Posts Container */}
-      <div className="max-w-2xl mx-auto px-4 py-6">
-        <InfiniteScroll
+        {/* Main Content Container */}
+        <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+          {/* Create Post Section */}
+          <CreateNewPost onPostCreated={handleCreatePost} />
+
+          {/* Posts Feed */}
+          <InfiniteScroll
           dataLength={posts.length}
           next={fetchPosts}
           hasMore={hasMore}
