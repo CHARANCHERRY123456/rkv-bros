@@ -29,6 +29,27 @@ class PostController {
         }
     }
 
+    getPostById = async (req , res)=>{
+        try {
+            const userId = req.user?.id;
+            const {postId} = req.params;
+            const post = await this.service.getPostById({postId , userId});
+            res.status(200).json(post);
+        } catch (error) {
+            res.status(500).json({message : error.message});
+        }
+    }
+
+    toggleLike = async (req , res)=>{
+        try {
+            const userId = req.user.id;
+            const {postId} = req.params;
+            const data = await this.service.toggleLike({userId , postId});
+            res.status(201).json(data);
+        } catch (error) {
+            res.status(500).json({message : error.message});
+        }
+    }
 }
 
 export default new PostController();
