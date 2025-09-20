@@ -2,6 +2,7 @@ import { useState } from "react";
 import PostComponent from "../components/posts/Post";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axiosClient from "../utils/axiosClient";
+import { useEffect } from "react";
 
 export default function Post() {
   const [posts, setPosts] = useState([]);
@@ -23,6 +24,10 @@ export default function Post() {
       console.error("Error fetching posts:", error);
     }
   };
+
+  useEffect(() => {
+    fetchPosts();
+  } , []);
 
   return (
     <div className="min-h-screen bg-gray-50">
