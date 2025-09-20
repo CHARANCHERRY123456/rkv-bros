@@ -1,11 +1,11 @@
-export default function PostComponent({content , mediaUrl , likeCount , likedByMe , onLike , userId}){
+export default function PostComponent({content , mediaUrl , likeCount , likedByMe , onLike , userId , username}){
     return (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6 border border-gray-200">
             <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-3">
                     {userId?.slice(-2).toUpperCase()}
                 </div>
-                <span className="text-gray-700 font-semibold">User ID: {userId?.slice(-8)}</span>
+                <span className="text-gray-700 font-semibold">{username.toUpperCase()}</span>
             </div>
             
             <div className="mb-4 text-gray-800 text-lg leading-relaxed">

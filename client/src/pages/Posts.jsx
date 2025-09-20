@@ -113,6 +113,7 @@ export default function Post() {
               likeCount={post.likeCount}
               likedByMe={post.isLikeByMe}
               userId={post.userId}
+              username={post.user?.name || "Unknown"}
               onLike={() => toggleLike(post._id)}
             />
           ))}

@@ -38,7 +38,15 @@ class PostRepository extends CrudRepository {
                 }
             },
 
-            {$project : {likes : 0}}
+            
+            {$lookup : {
+                from : "users",
+                localField : "userId",
+                foreignField : "_id",
+                as : "user"
+            }},
+            {$unwind : "$user"},
+            {$project : {likes : 0 , "user.password": 0 , "user.__v":0}},
         ])
 
         return posts;
