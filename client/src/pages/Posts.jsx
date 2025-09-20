@@ -3,6 +3,7 @@ import PostComponent from "../components/posts/Post";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axiosClient from "../utils/axiosClient";
 import { useEffect } from "react";
+import CreateNewPost from "../components/posts/CreateNewPost";
 
 export default function Post() {
   const [posts, setPosts] = useState([]);
@@ -24,6 +25,10 @@ export default function Post() {
       console.error("Error fetching posts:", error);
     }
   };
+
+  const handleCreatePost = async (newPost) => {
+    setPosts(prev => [newPost, ...prev]);
+  }
 
   const toggleLike = async (postId) => {
     setPosts(prevPosts => {
@@ -52,7 +57,8 @@ export default function Post() {
   } , []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+      
+      <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4">
@@ -60,6 +66,7 @@ export default function Post() {
           <p className="text-gray-600 text-sm mt-1">Discover what's trending</p>
         </div>
       </div>
+     <CreateNewPost onPostCreated={handleCreatePost} />
 
       {/* Posts Container */}
       <div className="max-w-2xl mx-auto px-4 py-6">
