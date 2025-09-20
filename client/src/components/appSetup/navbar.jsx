@@ -66,6 +66,7 @@ const Navbar = () => {
           <Link to="/content" className="text-gray-700 dark:text-gray-200 hover:underline">Content</Link>
           <Link to="/analytics" className="text-gray-700 dark:text-gray-200 hover:underline">Analytics</Link>
           <Link to="/new" className="text-gray-700 dark:text-gray-200 hover:underline">New</Link>
+          <Link to="/posts" className="text-gray-700 dark:text-gray-200 hover:underline">Posts</Link>
           <Link to="/group" className="text-gray-700 dark:text-gray-200 hover:underline">Group Chat</Link>
         </div>
 
@@ -93,6 +94,7 @@ const Navbar = () => {
                 <li><Link to="/content" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown}>Content</Link></li>
                 <li><Link to="/analytics" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown}>Analytics</Link></li>
                 <li><Link to="/new" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown}>New</Link></li>
+                <li><Link to="/posts" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={toggleDropdown}>Posts</Link></li>
                 <li><Link to="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600" onClick={logout}>Logout</Link></li>
               </ul>
             </div>
