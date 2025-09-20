@@ -8,15 +8,12 @@ class GroupRepository extends CrudRepository {
     super(Group);
   }
 
-  // Find groups by user with last message activity (WhatsApp-style ordering)
   async findGroupsByUserWithLastMessage(userEmail) {
     try {
       const pipeline = [
-        // Match groups where user is a member
         {
           $match: { members: userEmail }
         },
-        // Lookup last message for each group
         {
           $lookup: {
             from: "messages",
@@ -29,7 +26,6 @@ class GroupRepository extends CrudRepository {
             ]
           }
         },
-        // Add lastActivity field (either last message time or group creation time)
         {
           $addFields: {
             lastActivity: {
@@ -42,7 +38,6 @@ class GroupRepository extends CrudRepository {
             lastMessage: { $arrayElemAt: ["$messages", 0] }
           }
         },
-        // Sort by last activity (most recent first)
         { $sort: { lastActivity: -1 } },
         // Remove the messages array (we only needed it for sorting)
         {

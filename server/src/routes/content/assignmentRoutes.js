@@ -7,7 +7,6 @@ const router = express.Router();
 // CREATE - Add new assignment (Admin only)
 router.post('/', async (req, res) => {
   try {
-    console.log("Hi i am here");
     const newAssignment = new Assignment(req.body);
 
     const savedAssignment = await newAssignment.save();
@@ -59,7 +58,6 @@ router.post('/:assignmentName/vote', async (req, res) => {
     const question = assignment.questions[questionIndex];
     const option = question.options[optionIndex];
 
-    // Admin logic
     if (email === ADMIN) {
       question.adminChoice = question.adminChoice.includes(optionIndex)
         ? question.adminChoice.filter(index => index !== optionIndex)
