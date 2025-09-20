@@ -25,6 +25,28 @@ export default function Post() {
     }
   };
 
+  const toggleLike = async (postId) => {
+    setPosts(prevPosts => {
+        return prevPosts.map(post => {
+            if(post._id === postId){
+                const liked = !post.isLikeByMe;
+                return {...post,
+                    isLikeByMe: liked,
+                    likeCount: liked ? post.likeCount + 1 : post.likeCount - 1
+                };
+            }
+            return post;
+        });
+
+    });
+    // also send it to the backend
+    try {
+        axiosClient.put(`/post/${postId}/like`); // just call it but don't worry more 
+    } catch (error) {
+        console.error("Error toggling like:", error);
+    }
+  }
+
   useEffect(() => {
     fetchPosts();
   } , []);
@@ -82,6 +104,7 @@ export default function Post() {
               likeCount={post.likeCount}
               likedByMe={post.isLikeByMe}
               userId={post.userId}
+              onLike={() => toggleLike(post._id)}
             />
           ))}
         </InfiniteScroll>
