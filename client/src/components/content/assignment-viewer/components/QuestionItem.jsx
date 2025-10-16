@@ -59,6 +59,9 @@ const QuestionItem = ({ question, questionNumber, onVote }) => {
                   <div className="flex-1 min-w-0">
                     <p className="text-gray-800 break-words">{option.optionText}</p>
                   </div>
+                  <div>
+                    <p className="text-sm text-gray-500">{option.voteCount} votes</p>
+                  </div>
                 </div>
                 
                 {question.totalVotes > 0 && (

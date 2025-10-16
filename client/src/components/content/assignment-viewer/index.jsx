@@ -13,7 +13,6 @@ export default function Content() {
             try {
                 setLoading(true);
                 const response = await axios.get(`${backendUrl}/assignments`);
-                console.log(response);
                 setAssignments(response.data);
             } catch (error) {
                 console.error("Error fetching assignments:", error);
@@ -36,7 +35,8 @@ export default function Content() {
                     <a
                         key={assignment._id || index}
                         href={`/assignments/${assignment.assignmentName}`}
-                        className="block bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-1 border border-gray-200"
+                        className="block bg-white rounded-lg shadow-md overflow-hidden
+                         transition-all duration-300 hover:shadow-xl hover:transform hover:-translate-y-1 border border-gray-200"
                     >
                         <div className="p-6">
                             <h2 className="text-xl font-semibold text-gray-800 mb-2">

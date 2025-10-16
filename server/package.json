@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "use it",
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "npm run dev"
   },
   "type": "module",
   "author": "",
@@ -25,7 +26,8 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.10.0",
     "nodemon": "^3.1.9",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "jest": "^29.7.0",

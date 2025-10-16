@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const AssignmentSchema = new mongoose.Schema({
   assignmentName: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   courseId: {
     type: String,

@@ -1,0 +1,1278 @@
+[{
+  "_id": {
+    "$oid": "67e3a2a88119bf2827ec7761"
+  },
+  "assignmentName": "ooad-week-9",
+  "courseId": "CS301",
+  "dueDate": "Wed",
+  "questions": [
+    {
+      "questionNumber": 1,
+      "questionText": "In which of the following situations, use of the observer pattern should be recommended?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Asynchronous update of model elements",
+          "voteCount": 21,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7763"
+          },
+          "selections": {
+            "rr200491@rguktrkv.ac.in": true,
+            "rr200057@rguktrkv.ac.in": true,
+            "rr200450@rguktrkv.ac.in": true,
+            "saifsyed1504@gmail.com": true,
+            "rr200361@rguktrkv.ac.in": true,
+            "nikithareddy1103@gmail.com": true,
+            "rr200168@rguktrkv.ac.in": true,
+            "rameswarreddy78@gmail.com": true,
+            "rr200528@rguktrkv.ac.in": true,
+            "rajilavln2004@gmail.com": true,
+            "avulatarun123@gmail.com": true,
+            "rr200865@rguktrkv.ac.in": true,
+            "rr200341@rguktrkv.ac.in": true,
+            "r200728@rguktrkv.ac.in": true,
+            "pavankumar1908naik@gmail.com": true,
+            "chinnaswamynaik756@gmail.com": true,
+            "seelamdeepika8@gmail.com": true,
+            "rr200287@rguktrkv.ac.in": true,
+            "harifree286@gmail.com": true,
+            "geethareddy4815@gmail.com": true,
+            "gadigeabhiram@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Model elements hold static information, any updating is not possible",
+          "voteCount": 27,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7764"
+          },
+          "selections": {
+            "rr200018@rguktrkv.ac.in": true,
+            "rr200491@rguktrkv.ac.in": true,
+            "rr200057@rguktrkv.ac.in": true,
+            "nishkaprasan.n@gmail.com": true,
+            "rr200450@rguktrkv.ac.in": true,
+            "rr200022@rguktrkv.ac.in": true,
+            "vidyavandana1234@gmail.com": true,
+            "rr200528@rguktrkv.ac.in": true,
+            "gousiyagous94@gmail.com": true,
+            "rr200999@rguktrkv.ac.in": true,
+            "rafiqshaik097@gmail.com": true,
+            "rr200453@rguktrkv.ac.in": true,
+            "mocharlavarsha@gmail.com": true,
+            "rr200320@rguktrkv.ac.in": true,
+            "sanho8142@gmail.com": true,
+            "rr200258@rguktrkv.ac.in": true,
+            "rr201030@rguktrkv.ac.in": true,
+            "chincholivinitha195@gmail.com": true,
+            "mekalasidhu74@gmail.com": true,
+            "pavankumar1908naik@gmail.com": true,
+            "chinnaswamynaik756@gmail.com": true,
+            "rr200042@rguktrkv.ac.in": true,
+            "chittampriyanka@gmail.com": true,
+            "vyshumaminidu@gmail.com": true,
+            "rr200570@rguktrkv.ac.in": true,
+            "thanmayakrishnap@gmail.com": true,
+            "n200464@rguktn.ac.in": true
+          }
+        },
+        {
+          "optionText": "Observer and model states need to be consistent all the time",
+          "voteCount": 14,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7765"
+          },
+          "selections": {
+            "pbhanuprakash2004@gmail.com": true,
+            "rr200057@rguktrkv.ac.in": true,
+            "rameswarreddy78@gmail.com": true,
+            "gousiyagous94@gmail.com": true,
+            "saibalajipujari@gmail.com": true,
+            "rr200453@rguktrkv.ac.in": true,
+            "r200728@rguktrkv.ac.in": true,
+            "rr200374@rguktrkv.ac.in": true,
+            "pavankumar1908naik@gmail.com": true,
+            "seelamdeepika8@gmail.com": true,
+            "rr200162@rguktrkv.ac.in": true,
+            "vyshumaminidu@gmail.com": true,
+            "charantej1912@gmail.com": true,
+            "gadigeabhiram@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Number of observers can change dynamically",
+          "voteCount": 15,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7766"
+          },
+          "selections": {
+            "pbhanuprakash2004@gmail.com": true,
+            "rr200491@rguktrkv.ac.in": true,
+            "rr200057@rguktrkv.ac.in": true,
+            "madhavikatikala846@gmail.com": true,
+            "rameswarreddy78@gmail.com": true,
+            "rr200999@rguktrkv.ac.in": true,
+            "rafiqshaik097@gmail.com": true,
+            "saibalajipujari@gmail.com": true,
+            "rr200320@rguktrkv.ac.in": true,
+            "avulatarun123@gmail.com": true,
+            "mekalasidhu74@gmail.com": true,
+            "pavankumar1908naik@gmail.com": true,
+            "rr200301@rguktrkv.ac.in": true,
+            "vyshumaminidu@gmail.com": true,
+            "gadigeabhiram@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Observers are fixed and statically configured",
+          "voteCount": 3,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7767"
+          },
+          "selections": {
+            "pavankumar1908naik@gmail.com": true,
+            "kpalspy61@gmail.com": true,
+            "charantej1912@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        0,
+        2,
+        3
+      ],
+      "totalVotes": 80,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7762"
+      }
+    },
+    {
+      "questionNumber": 2,
+      "questionText": "Why is it not advised for model objects to directly invoke the view objects' services?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "View objects are transient",
+          "voteCount": 6,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7769"
+          },
+          "selections": {
+            "rr200094@rguktrkv.ac.in": true,
+            "rr200491@rguktrkv.ac.in": true,
+            "rr200057@rguktrkv.ac.in": true,
+            "thanu232005@gmail.com": true,
+            "vidyavandana1234@gmail.com": true,
+            "rameswarreddy78@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Reuse, extension, maintenance are frequent.",
+          "voteCount": 10,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec776a"
+          },
+          "selections": {
+            "rr200094@rguktrkv.ac.in": true,
+            "sumanthkatam456@gmail.com": true,
+            "madhavikatikala846@gmail.com": true,
+            "rr200244@rguktrkv.ac.in": true,
+            "rr200022@rguktrkv.ac.in": true,
+            "thanu232005@gmail.com": true,
+            "rameswarreddy78@gmail.com": true,
+            "rr200125@rguktrkv.ac.in": true,
+            "sanho8142@gmail.com": true,
+            "rr200226@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "A change to a view object should not require change to the model object",
+          "voteCount": 7,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec776b"
+          },
+          "selections": {
+            "rr200244@rguktrkv.ac.in": true,
+            "thanu232005@gmail.com": true,
+            "rameswarreddy78@gmail.com": true,
+            "rr200125@rguktrkv.ac.in": true,
+            "sanho8142@gmail.com": true,
+            "rr200226@rguktrkv.ac.in": true,
+            "charantej1912@gmail.com": true
+          }
+        },
+        {
+          "optionText": "View objects are encapsulated",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec776c"
+          },
+          "selections": {
+            "thotasowmya2004@gmail.com": true,
+            "sanho8142@gmail.com": true
+          }
+        },
+        {
+          "optionText": "It would impact overall security of the solution",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec776d"
+          }
+        }
+      ],
+      "adminChoice": [
+        2,
+        0,
+        1
+      ],
+      "totalVotes": 25,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7768"
+      }
+    },
+    {
+      "questionNumber": 3,
+      "questionText": "Which of the following pattern hides the complexities of the system and provides an interface to the client using which the client can access the system?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Composite Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec776f"
+          }
+        },
+        {
+          "optionText": "Facade Pattern",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7770"
+          },
+          "selections": {
+            "rr200244@rguktrkv.ac.in": true,
+            "santhikumaryadavalli23@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Bridge Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7771"
+          }
+        },
+        {
+          "optionText": "Decorator Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7772"
+          }
+        },
+        {
+          "optionText": "Proxy Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7773"
+          }
+        }
+      ],
+      "adminChoice": [
+        1
+      ],
+      "totalVotes": 2,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec776e"
+      }
+    },
+    {
+      "questionNumber": 4,
+      "questionText": "Law of Demeter design pattern does not recommend a method call to be made to which one of the following types of objects?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "This object (or self)",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7775"
+          }
+        },
+        {
+          "optionText": "An object parameter of the method",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7776"
+          },
+          "selections": {
+            "rr200758@rguktrkv.ac.in": true,
+            "vasanthimada75@gmail.com": true
+          }
+        },
+        {
+          "optionText": "An object attribute of self",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7777"
+          },
+          "selections": {
+            "rr200214@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "An object that is an attribute of a called method",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7778"
+          },
+          "selections": {
+            "bpk30220@jioso.com": true,
+            "santhikumaryadavalli23@gmail.com": true
+          }
+        },
+        {
+          "optionText": "A controller object",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7779"
+          },
+          "selections": {
+            "rr200351@rguktrkv.ac.in": true
+          }
+        }
+      ],
+      "adminChoice": [
+        3
+      ],
+      "totalVotes": 6,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7774"
+      }
+    },
+    {
+      "questionNumber": 5,
+      "questionText": "In the following Bank package, which one of the following can be said of the BankServices class?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Observer class",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec777b"
+          }
+        },
+        {
+          "optionText": "Creator class",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec777c"
+          },
+          "selections": {
+            "rr200758@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Controller class",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec777d"
+          },
+          "selections": {
+            "rr200347@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Façade class",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec777e"
+          },
+          "selections": {
+            "rr200491@rguktrkv.ac.in": true,
+            "santhikumaryadavalli23@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Model class",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec777f"
+          },
+          "selections": {
+            "rr200347@rguktrkv.ac.in": true
+          }
+        }
+      ],
+      "adminChoice": [
+        3
+      ],
+      "totalVotes": 5,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec777a"
+      }
+    },
+    {
+      "questionNumber": 6,
+      "questionText": "Which of the following pattern is used when there is a one-to-many relationship between objects such that if one object is modified, its dependent objects are to be notified automatically?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Iterator Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7781"
+          }
+        },
+        {
+          "optionText": "Decorator Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7782"
+          }
+        },
+        {
+          "optionText": "Facade Pattern",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7783"
+          }
+        },
+        {
+          "optionText": "Observer Pattern",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7784"
+          },
+          "selections": {
+            "charankumarnaidu2004@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Bridge Pattern",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7785"
+          },
+          "selections": {
+            "ro200972@rguktong.ac.in": true
+          }
+        }
+      ],
+      "adminChoice": [
+        3
+      ],
+      "totalVotes": 2,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7780"
+      }
+    },
+    {
+      "questionNumber": 7,
+      "questionText": "Which one of the following statements is not true of the façade design pattern?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Use of façade class in a server package reduces the overall coupling in the design",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7787"
+          },
+          "selections": {
+            "rameswarreddy78@gmail.com": true,
+            "chincholivinitha195@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Use of façade class in a server package increases the overall cohesion of the classes in the server package",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7788"
+          },
+          "selections": {
+            "rameswarreddy78@gmail.com": true,
+            "rr200351@rguktrkv.ac.in": true,
+            "rr200869@rguktrkv.ac.in": true,
+            "santhikumaryadavalli23@gmail.com": true
+          }
+        },
+        {
+          "optionText": "The façade class often does little more than just delegating requests to other classes inside the package",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7789"
+          },
+          "selections": {
+            "rameswarreddy78@gmail.com": true,
+            "rr200568@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "A façade allows objects with incompatible interfaces to collaborate",
+          "voteCount": 3,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec778a"
+          },
+          "selections": {
+            "rr200361@rguktrkv.ac.in": true,
+            "rameswarreddy78@gmail.com": true,
+            "avulatarun123@gmail.com": true
+          }
+        },
+        {
+          "optionText": "A façade class provides a common interface to the services of the package",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec778b"
+          }
+        }
+      ],
+      "adminChoice": [
+        1
+      ],
+      "totalVotes": 11,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7786"
+      }
+    },
+    {
+      "questionNumber": 8,
+      "questionText": "What can be said about the role of the compiler class in the package?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Façade",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec778d"
+          },
+          "selections": {
+            "santhikumaryadavalli23@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Observer",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec778e"
+          }
+        },
+        {
+          "optionText": "Adapter",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec778f"
+          }
+        },
+        {
+          "optionText": "Expert",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7790"
+          },
+          "selections": {
+            "rr200162@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Controller",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7791"
+          },
+          "selections": {
+            "rr200272@rguktrkv.ac.in": true
+          }
+        }
+      ],
+      "adminChoice": [
+        0
+      ],
+      "totalVotes": 3,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec778c"
+      }
+    },
+    {
+      "questionNumber": 9,
+      "questionText": "In a push from below mechanism for interaction between the view and model classes in an application such as network monitoring?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "View objects are usually transient",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7793"
+          },
+          "selections": {
+            "rr200491@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Intensity of interaction between the view and model objects",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7794"
+          },
+          "selections": {
+            "rr200824@rguktrkv.ac.in": true,
+            "rajeswarimachina02@gmail.com": true,
+            "bhumanagapavan@gmail.com": true,
+            "rr200491@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Sometimes more view objects are added and some view objects are taken off",
+          "voteCount": 3,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7795"
+          },
+          "selections": {
+            "rr200824@rguktrkv.ac.in": true,
+            "rajeswarimachina02@gmail.com": true,
+            "rr201093@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "A change to a view object should not require change to the model object",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7796"
+          }
+        },
+        {
+          "optionText": "Model objects may need to be changed at times",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7797"
+          },
+          "selections": {
+            "rajilavln2004@gmail.com": true,
+            "santhikumaryadavalli23@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        4,
+        1
+      ],
+      "totalVotes": 10,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7792"
+      }
+    },
+    {
+      "questionNumber": 10,
+      "questionText": "Which of the following is achieved through a judicious use of the observer pattern?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Loose coupling between the model and view objects",
+          "voteCount": 3,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec7799"
+          },
+          "selections": {
+            "bpk30220@jioso.com": true,
+            "rafiqshaik097@gmail.com": true,
+            "rr200113@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Encapsulation of the observers",
+          "voteCount": 5,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec779a"
+          },
+          "selections": {
+            "tallabhargavi03@gmail.com": true,
+            "bandarusrujan@gmail.com": true,
+            "rr200113@rguktrkv.ac.in": true,
+            "kpalspy61@gmail.com": true,
+            "rr200347@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Automate interaction between observer and view objects",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec779b"
+          },
+          "selections": {
+            "rr200236@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Polymorphic binding between the observer and observable",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec779c"
+          },
+          "selections": {
+            "rr200347@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Composition of the observers",
+          "voteCount": 3,
+          "_id": {
+            "$oid": "67e3a2a88119bf2827ec779d"
+          },
+          "selections": {
+            "rajeswarimachina02@gmail.com": true,
+            "rr200486@rguktrkv.ac.in": true,
+            "chincholivinitha195@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        0
+      ],
+      "totalVotes": 13,
+      "_id": {
+        "$oid": "67e3a2a88119bf2827ec7798"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-26T06:46:00.594Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-26T18:22:32.007Z"
+  },
+  "__v": 558
+},
+{
+  "_id": {
+    "$oid": "67e3a3d88119bf2827ec779f"
+  },
+  "assignmentName": "DL: Assignment 9",
+  "courseId": "CS101",
+  "dueDate": "Wed",
+  "questions": [
+    {
+      "questionNumber": 1,
+      "questionText": "What is the disadvantage of using Hierarchical Softmax?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "It requires more memory to store the binary tree",
+          "voteCount": 19,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a1"
+          },
+          "selections": {
+            "rr200491@rguktrkv.ac.in": true,
+            "vamsi.kira1416@gmail.com": true,
+            "rr200655@rguktrkv.ac.in": true,
+            "rr200734@rguktrkv.ac.in": true,
+            "rr200330@rguktrkv.ac.in": true,
+            "kothasaikrishna961sm@gmail.com": true,
+            "ranvijaysingh26969@gmail.com": true,
+            "rr200238@rguktrkv.ac.in": true,
+            "rr200137@rguktrkv.ac.in": true,
+            "rr200008@rguktrkv.ac.in": true,
+            "thorthethunder122@gmail.com": true,
+            "rr200516@rguktrkv.ac.in": true,
+            "rr200654@rguktrkv.ac.in": true,
+            "rr200049@rguktrkv.ac.in": true,
+            "rr200272@rguktrkv.ac.in": true,
+            "rr200879@rguktrkv.ac.in": true,
+            "rr200568@rguktrkv.ac.in": true,
+            "raavandbz@gmail.com": true,
+            "beyverse18@gmail.com": true
+          }
+        },
+        {
+          "optionText": "It is slower than computing the softmax function directly",
+          "voteCount": 14,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a2"
+          },
+          "selections": {
+            "rr200243@rguktrkv.ac.in": true,
+            "rr200242@rguktrkv.ac.in": true,
+            "rr200137@rguktrkv.ac.in": true,
+            "thorthethunder122@gmail.com": true,
+            "jrevanth101@gmail.com": true,
+            "rr200654@rguktrkv.ac.in": true,
+            "rr200272@rguktrkv.ac.in": true,
+            "rr200377@rguktrkv.ac.in": true,
+            "rr200568@rguktrkv.ac.in": true,
+            "sarevalasab@gmail.com": true,
+            "avulatarun123@gmail.com": true,
+            "rnkm369@gmail.com": true,
+            "rr200183@rguktrkv.ac.in": true,
+            "rr200482@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "It is less accurate than computing the softmax function directly",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a3"
+          },
+          "selections": {
+            "rr200137@rguktrkv.ac.in": true,
+            "rr200568@rguktrkv.ac.in": true,
+            "sarevalasab@gmail.com": true,
+            "rnkm369@gmail.com": true
+          }
+        },
+        {
+          "optionText": "It is more prone to overfitting than computing the softmax function directly",
+          "voteCount": 5,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a4"
+          },
+          "selections": {
+            "rr200330@rguktrkv.ac.in": true,
+            "rr200137@rguktrkv.ac.in": true,
+            "rr200483@rguktrkv.ac.in": true,
+            "rr200568@rguktrkv.ac.in": true,
+            "hackerstechnology66@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        0
+      ],
+      "totalVotes": 42,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77a0"
+      }
+    },
+    {
+      "questionNumber": 2,
+      "questionText": "Consider the following corpus: 'AI driven user experience optimization. Perception of AI decision making speed. Intelligent interface adaptation system. AI system engineering for enhanced processing efficiency'. What is the size of the vocabulary of the above corpus?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "18",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a6"
+          },
+          "selections": {
+            "santhikumaryadavalli23@gmail.com": true,
+            "rr200049@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "20",
+          "voteCount": 6,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a7"
+          },
+          "selections": {
+            "rr200213@rguktrkv.ac.in": true,
+            "rr200437@rguktrkv.ac.in": true,
+            "kothasaikrishna961sm@gmail.com": true,
+            "paxawo3563@boyaga.com": true,
+            "vengamunireddy040404@gmail.com": true,
+            "rr200272@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "22",
+          "voteCount": 5,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a8"
+          },
+          "selections": {
+            "rr200213@rguktrkv.ac.in": true,
+            "paxawo3563@boyaga.com": true,
+            "rr200238@rguktrkv.ac.in": true,
+            "rajuvaddi753@gmail.com": true,
+            "divyadosti93@gmail.com": true
+          }
+        },
+        {
+          "optionText": "19",
+          "voteCount": 6,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77a9"
+          },
+          "selections": {
+            "rr200213@rguktrkv.ac.in": true,
+            "paxawo3563@boyaga.com": true,
+            "rushi17092004@gmail.com": true,
+            "rajuvaddi753@gmail.com": true,
+            "rnkm369@gmail.com": true,
+            "raavandbz@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        3
+      ],
+      "totalVotes": 19,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77a5"
+      }
+    },
+    {
+      "questionNumber": 3,
+      "questionText": "We add incorrect pairs into our corpus to maximize the probability of words that occur in the same context and minimize the probability of words that occur in different contexts. This technique is called:",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "Negative sampling",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77ab"
+          },
+          "selections": {
+            "rr200230@rguktrkv.ac.in": true,
+            "santhikumaryadavalli23@gmail.com": true,
+            "cmallikarjuna2005@gmail.com": true,
+            "gandeevaramroopesh@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Hierarchical softmax",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77ac"
+          },
+          "selections": {
+            "cmallikarjuna2005@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Contrastive estimation",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77ad"
+          },
+          "selections": {
+            "rr200162@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Glove representations",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77ae"
+          },
+          "selections": {
+            "rr200230@rguktrkv.ac.in": true,
+            "rr200049@rguktrkv.ac.in": true
+          }
+        }
+      ],
+      "adminChoice": [
+        0
+      ],
+      "totalVotes": 8,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77aa"
+      }
+    },
+    {
+      "questionNumber": 4,
+      "questionText": "Let X be the co-occurrence matrix such that the (i,j)-th entry of X captures the PMI between the i-th and j-th word in the corpus. Suppose each row of X is normalized (i.e., the L2 norm of each row is 1) then the (i,j)-th entry of XX^T captures the:",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "PMI between word i and word j",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b0"
+          }
+        },
+        {
+          "optionText": "Euclidean distance between word i and word j",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b1"
+          },
+          "selections": {
+            "reddyhareesh026@gmail.com": true,
+            "rr200929@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "Probability that word i",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b2"
+          },
+          "selections": {
+            "reddyhareesh026@gmail.com": true,
+            "akulathanveer@gmail.com": true
+          }
+        },
+        {
+          "optionText": "Cosine similarity between word i and word j",
+          "voteCount": 5,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b3"
+          },
+          "selections": {
+            "santhikumaryadavalli23@gmail.com": true,
+            "akulathanveer@gmail.com": true,
+            "rr200929@rguktrkv.ac.in": true,
+            "rr200879@rguktrkv.ac.in": true,
+            "rr200105@rguktrkv.ac.in": true
+          }
+        }
+      ],
+      "adminChoice": [
+        3
+      ],
+      "totalVotes": 9,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77af"
+      }
+    },
+    {
+      "questionNumber": 5,
+      "questionText": "Suppose that we use the continuous bag of words (CBOW) model to find vector representations of words. Suppose further that we use a context window of size 3. The size of word vectors is chosen to be 100 and the vocabulary contains 20,000 words. How many parameters (weights), excluding bias, are there in W_word? Enter the answer in thousands.",
+      "questionType": "numeric",
+      "options": [],
+      "adminChoice": [
+        2000
+      ],
+      "totalVotes": 0,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77b4"
+      }
+    },
+    {
+      "questionNumber": 6,
+      "questionText": "You are given the one hot representation of two words below: GEMINI=[1, 0, 0, 0, 1], CLAUDE=[0, 0, 0, 1, 0]. What is the Euclidean distance between GEMINI and CLAUDE?",
+      "questionType": "numeric",
+      "options": [],
+      "adminChoice": [
+        1.732
+      ],
+      "totalVotes": 0,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77b5"
+      }
+    },
+    {
+      "questionNumber": 7,
+      "questionText": "Let count(w,c) be the number of times the words w and c appear together in the corpus. The PMI between w and c is then given by:",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "log(count(w,c)*count(w)/N*count(c)",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b7"
+          },
+          "selections": {
+            "rr200268@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "log(count(w,c)*count(c)/N*count(w)",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b8"
+          },
+          "selections": {
+            "rr200516@rguktrkv.ac.in": true,
+            "rr200584@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "log(count(w,c)*N/count(w)*count(c)",
+          "voteCount": 3,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77b9"
+          },
+          "selections": {
+            "rr200683@rguktrkv.ac.in": true,
+            "rr200516@rguktrkv.ac.in": true,
+            "akulathanveer@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        2
+      ],
+      "totalVotes": 6,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77b6"
+      }
+    },
+    {
+      "questionNumber": 8,
+      "questionText": "Consider a skip-gram model trained using hierarchical softmax for analyzing scientific literature. We observe that the word embeddings for 'Neuron' and 'Brain' are highly similar. Similarly, the embeddings for 'Synapse' and 'Brain' also show high similarity. Which of the following statements can be inferred?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "'Neuron' and 'Brain' frequently appear in similar contexts",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77bb"
+          },
+          "selections": {
+            "rajilavln2004@gmail.com": true
+          }
+        },
+        {
+          "optionText": "The model's learned representations will indicate a high similarity between 'Neuron' and 'Synapse'",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77bc"
+          },
+          "selections": {
+            "akulathanveer@gmail.com": true,
+            "himakiran.zphsdurgi@gmail.com": true
+          }
+        },
+        {
+          "optionText": "The model's learned representations will not show a high similarity between 'Neuron' and 'Synapse'",
+          "voteCount": 1,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77bd"
+          },
+          "selections": {
+            "thorthethunder122@gmail.com": true
+          }
+        },
+        {
+          "optionText": "According to the model's learned representations, 'Neuron' and 'Brain' have a low cosine similarity",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77be"
+          }
+        }
+      ],
+      "adminChoice": [
+        0,
+        1
+      ],
+      "totalVotes": 4,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77ba"
+      }
+    },
+    {
+      "questionNumber": 9,
+      "questionText": "Suppose we are learning the representations of words using Glove representations. If we observe that the cosine similarity between two representations v_i and v_j for words 'i' and 'j' is very high, which of the following statements is true? (parameter b_i = 0.02 and b_j = 0.07)",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "X_ij=0.04",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c0"
+          }
+        },
+        {
+          "optionText": "X_ij=0.17",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c1"
+          },
+          "selections": {
+            "rr200683@rguktrkv.ac.in": true,
+            "rr200330@rguktrkv.ac.in": true
+          }
+        },
+        {
+          "optionText": "X_ij=0",
+          "voteCount": 2,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c2"
+          },
+          "selections": {
+            "rr200683@rguktrkv.ac.in": true,
+            "vishnuboligili@gmail.com": true
+          }
+        },
+        {
+          "optionText": "X_ij=0.95",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c3"
+          },
+          "selections": {
+            "rr200213@rguktrkv.ac.in": true,
+            "santhikumaryadavalli23@gmail.com": true,
+            "vishnuboligili@gmail.com": true,
+            "prahaladreddy80@gmail.com": true
+          }
+        }
+      ],
+      "adminChoice": [
+        3
+      ],
+      "totalVotes": 8,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77bf"
+      }
+    },
+    {
+      "questionNumber": 10,
+      "questionText": "Which of the following is an advantage of using the skip-gram method over the bag-of-words approach?",
+      "questionType": "mcq",
+      "options": [
+        {
+          "optionText": "The skip-gram method is faster to train",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c5"
+          },
+          "selections": {
+            "anjalih364@gmail.com": true,
+            "rr200929@rguktrkv.ac.in": true,
+            "rr200129@rguktrkv.ac.in": true,
+            "kesavulu689@gmail.com": true
+          }
+        },
+        {
+          "optionText": "The skip-gram method performs better on rare words",
+          "voteCount": 6,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c6"
+          },
+          "selections": {
+            "rr200734@rguktrkv.ac.in": true,
+            "rr200213@rguktrkv.ac.in": true,
+            "santhikumaryadavalli23@gmail.com": true,
+            "rr200929@rguktrkv.ac.in": true,
+            "rr200482@rguktrkv.ac.in": true,
+            "sumanthkatam456@gmail.com": true
+          }
+        },
+        {
+          "optionText": "The bag-of-words approach is more accurate",
+          "voteCount": 4,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c7"
+          },
+          "selections": {
+            "rr200213@rguktrkv.ac.in": true,
+            "thorthethunder122@gmail.com": true,
+            "rr200118@rguktrkv.ac.in": true,
+            "nagellasai06@gmail.com": true
+          }
+        },
+        {
+          "optionText": "The bag-of-words approach is better for short texts",
+          "voteCount": 0,
+          "_id": {
+            "$oid": "67e3a3d88119bf2827ec77c8"
+          }
+        }
+      ],
+      "adminChoice": [
+        1
+      ],
+      "totalVotes": 14,
+      "_id": {
+        "$oid": "67e3a3d88119bf2827ec77c4"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-11-01T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-26T17:47:00.401Z"
+  },
+  "__v": 467
+}]
