@@ -1,5 +1,4 @@
 import Message from "../models/chat/message.js";
-import Group from "../models/chat/group.js";
 
 const socketHandler = (io) => {
   io.on("connection", (socket) => {
@@ -18,12 +17,10 @@ const socketHandler = (io) => {
       const { groupId, sender, text, time } = data;
 
       try {
-        // Create message with proper field mapping
         const newMessage = new Message({ 
           groupId, 
           sender, 
-          content: text, // Map text to content field
-          text: text,    // Keep for backward compatibility
+          content: text,
           time 
         });
         await newMessage.save();

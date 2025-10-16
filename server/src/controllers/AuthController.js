@@ -1,7 +1,4 @@
 import AuthServices from "../services/AuthService.js";
-import {storeOTP} from '../utils/otpSotrage.js'
-import { EMAIL , EMAIL_PASS } from "../config/config.js";
-import transporter from "../config/emailTransporter.js";
 
 export default class AuthController {
 
@@ -9,7 +6,6 @@ export default class AuthController {
     this.service = new AuthServices();
   }
 
-  // Send OTP to Email
   sendOTP = async (req, res) => {
     try {
       const otp = await this.service.sendOtp(req.body.email);
@@ -41,7 +37,6 @@ export default class AuthController {
 
   googleAuth = async (req, res) => {
     try {
-      console.log("checking via oauth");
       const jwtToken = await this.service.googleLogin(req.body);
       res.status(200).json({ token: jwtToken });
     } catch (error) {

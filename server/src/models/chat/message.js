@@ -1,4 +1,3 @@
-// models/Message.js
 import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema({
@@ -14,11 +13,6 @@ const messageSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
-  },
-  text: {
-    type: String, // Keep for backward compatibility
-    get: function() { return this.content; },
-    set: function(v) { this.content = v; }
   },
   type: {
     type: String,
@@ -36,7 +30,6 @@ const messageSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Add indexes for better performance
 messageSchema.index({ groupId: 1, createdAt: -1 });
 messageSchema.index({ sender: 1 });
 

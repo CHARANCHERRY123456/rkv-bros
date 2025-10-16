@@ -27,7 +27,7 @@ function ChatBubble({ msg, isOwn }) {
           </span>
           <span className="text-[10px] text-gray-400">{msg.time}</span>
         </div>
-        <div className="break-words">{msg.text || msg.content}</div>
+        <div className="break-words">{msg.content}</div>
       </div>
     </div>
   );

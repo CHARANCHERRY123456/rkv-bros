@@ -1,11 +1,11 @@
-// for current i am not using the bycrypt passoword
+// for current i am not using the bycrypt password
 import bycrypt from 'bcryptjs';
 import axios from 'axios';
 import generateToken from '../utils/tokenUtils.js';
 import transporter from '../config/emailTransporter.js';
 import UserRepository from '../repositories/UserRepository.js';
-import { storeOTP , getOTP , deleteOTP } from '../utils/otpSotrage.js';
-import { EMAIL , EMAIL_PASS } from '../config/config.js';
+import { storeOTP  } from '../utils/otpSotrage.js';
+import { EMAIL } from '../config/config.js';
 
 export default class AuthService{
     constructor(){
@@ -69,8 +69,7 @@ export default class AuthService{
             };
             
             await transporter.sendMail(mailOptions);
-            console.log(otp);
-            return otp; // Return OTP if successfully sent
+            return otp;
     
         } catch (error) {
             throw Error(`Failed to send OTP: ${error.message}`);

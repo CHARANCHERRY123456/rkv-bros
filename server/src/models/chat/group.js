@@ -23,7 +23,6 @@ const groupSchema = new mongoose.Schema({
     }
 },{timestamps:true});
 
-// Add indexes for better performance
 groupSchema.index({ members: 1 });
 groupSchema.index({ lastActivity: -1 });
 
