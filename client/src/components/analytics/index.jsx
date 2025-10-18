@@ -10,7 +10,6 @@ export default function StudentComponentPage(){
   const [students , setStudents] = useState([]);
   const [loading , setLoading] = useState(false);
   const [error , setError] = useState(null);
-  const [output , setOutput] = useState(null);
 
   const handleSearch = async(input)=>{
       if (!input.trim()) return;
@@ -39,7 +38,7 @@ export default function StudentComponentPage(){
   // use callback to prevnt code to create the callback on each render
   // if it created new then old timouts will be removed
   const debouncedSearch = useCallback(
-    debounce(handleSearch, 500),
+    debounce(handleSearch, 1000),
     []
   );
 
@@ -71,14 +70,6 @@ export default function StudentComponentPage(){
           {error}
         </div>
       )}
-
-      { output && (
-        <div className="text-center text-red-500 font-semibold my-4">
-          {output}
-        </div>
-      )
-
-      }
 
     <div className="w-full max-w-6xl">
       {students.length > 0 && <StudentList students={students} />}
