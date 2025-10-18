@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from 'axios';
 import envVars from '../../config/config.js';
 import StudentList from "./gridLayout.jsx";
 import SearchInput from "./searchInput.jsx";
 import { toast } from "react-hot-toast";
+import debounce from "../../utils/debounce.js";
+
 export default function StudentComponentPage(){
   const [students , setStudents] = useState([]);
   const [loading , setLoading] = useState(false);
   const [error , setError] = useState(null);
   const [output , setOutput] = useState(null);
 
-  // to search the result
   const handleSearch = async(input)=>{
       if (!input.trim()) return;
       setLoading(true);
@@ -35,10 +36,17 @@ export default function StudentComponentPage(){
       }
   }
 
+  // use callback to prevnt code to create the callback on each render
+  // if it created new then old timouts will be removed
+  const debouncedSearch = useCallback(
+    debounce(handleSearch, 500),
+    []
+  );
+
   useEffect(() => {
     const storedResults = sessionStorage.getItem("searchedStudents");
     if (storedResults) {
-      setStudents(JSON.parse(storedResults)); // Parse before setting state
+      setStudents(JSON.parse(storedResults));
     }
   }, []);
   
@@ -48,7 +56,7 @@ export default function StudentComponentPage(){
 
       {/* Search Box */}
       <div className="w-full max-w-2xl">
-        <SearchInput onSearch={handleSearch}/>
+        <SearchInput onSearch={debouncedSearch} onSearchImmediate={handleSearch}/>
       </div>
 
       {/* Loading & Error Messages */}

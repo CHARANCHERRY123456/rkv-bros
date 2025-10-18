@@ -1,12 +1,19 @@
 import { useState } from "react"
 
-const SearchInput = ({ onSearch, onClear }) => {
+const SearchInput = ({ onSearch, onSearchImmediate }) => {
   const [input, setInput] = useState("");
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      onSearch(input);
+      onSearchImmediate(input);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInput(value);
+    // Trigger debounced search on typing
+    onSearch(value);
   };
 
   return (
@@ -20,13 +27,13 @@ const SearchInput = ({ onSearch, onClear }) => {
                      transition-shadow pr-12 bg-white text-gray-700 
                      placeholder-gray-400"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
 
         {/* Use an arrow function to avoid immediate execution */}
         <button
-          onClick={() => onSearch(input)}
+          onClick={() => onSearchImmediate(input)}
           className="absolute bg-[#334155] rounded-lg inset-y-0 right-0 
                      flex items-center pr-3 pl-3"
         >
