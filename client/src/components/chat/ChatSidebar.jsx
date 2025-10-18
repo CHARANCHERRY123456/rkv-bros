@@ -5,9 +5,6 @@ import GroupListItem from "./GroupListItem";
 import CreateGroupModal from "./CreateGroupModal";
 import LoadingScreen from "../global/Loading";
 import { useSidebar } from "./SidebarContext";
-import envVars from '../../config/config.js';
-
-const backendUrl = envVars.VITE_BASE_URL;
 
 export default function ChatSidebar({ onGroupSelect, activeGroup }) {
   const { user } = useAuth();
@@ -23,7 +20,7 @@ export default function ChatSidebar({ onGroupSelect, activeGroup }) {
   const fetchGroups = async () => {
     setLoading(true);
     try {
-      const res = await axiosClient.get(`/chat/group/${user.email}`);
+      const res = await axiosClient.get(`/chat/groups/${user.email}`);
       
       // Handle both old and new API response formats
       let groupsData;
@@ -62,7 +59,7 @@ export default function ChatSidebar({ onGroupSelect, activeGroup }) {
       .filter((m) => m);
     if (!members.includes(user.email)) members.push(user.email);
     try {
-      await axiosClient.post(`/chat/group`, {
+      await axiosClient.post(`/chat/groups`, {
         name: groupName,
         members,
       });

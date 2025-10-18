@@ -30,7 +30,9 @@ const messageSchema = new mongoose.Schema({
   timestamps: true
 });
 
+// helps to fetch the messages of a group in reverse order
 messageSchema.index({ groupId: 1, createdAt: -1 });
+// helps to get the messages of a user
 messageSchema.index({ sender: 1 });
 
 export default mongoose.model("Message", messageSchema);

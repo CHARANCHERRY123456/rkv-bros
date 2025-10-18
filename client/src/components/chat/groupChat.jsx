@@ -95,7 +95,7 @@ export default function GroupChat() {
   // Fetch groups that user belongs to
   const fetchGroups = async () => {
     try {
-      const res = await axiosClient.get(`/chat/group/${user.email}`);
+      const res = await axiosClient.get(`/chat/groups/${user.email}`);
       
       // Handle both old and new API response formats
       let groupsData;
@@ -200,7 +200,7 @@ export default function GroupChat() {
           const members = memberEmails.map(opt => opt.value);
           if (!members.includes(user.email)) members.push(user.email);
           try {
-            await axiosClient.post(`/chat/group`, {
+            await axiosClient.post(`/chat/groups`, {
               name: groupName,
               members,
             });

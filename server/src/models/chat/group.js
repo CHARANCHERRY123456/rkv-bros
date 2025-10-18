@@ -23,7 +23,10 @@ const groupSchema = new mongoose.Schema({
     }
 },{timestamps:true});
 
+// search groups of a specific user
 groupSchema.index({ members: 1 });
+
+// search groups having recent activity
 groupSchema.index({ lastActivity: -1 });
 
 const Group = mongoose.model("Group",groupSchema);
