@@ -46,6 +46,14 @@ studentSchema.pre('save', function (next) {
   next();
 });
 
+// Text index for efficient search
+studentSchema.index({ 
+  name: 'text', 
+  sid: 'text', 
+  batch: 'text',
+  phone: 'text'
+});
+
 const Student = mongoose.model('Student', studentSchema);
 
 export default Student;

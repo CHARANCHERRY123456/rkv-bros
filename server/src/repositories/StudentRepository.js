@@ -5,19 +5,15 @@ export default class StudentRepository extends CrudRepository{
     constructor(){
         super(Student);
     }
-    findStudents = async (searchQuery)=>{
+    
+    // Text search using MongoDB text index (faster than $regex)
+    findStudents = async (searchQuery) => {
         try {
             return await Student.find({
-                $or: [
-                    { name: { $regex: searchQuery, $options: "i" } },
-                    { sid: { $regex: searchQuery, $options: "i" } },
-                    { batch: { $regex: searchQuery, $options: "i" } },
-                    { phone: { $regex: searchQuery, $options: "i" } },
-                ],
-            })
+                $text: { $search: searchQuery }
+            });
         } catch (error) {
-            console.error(`Error findign student : ${error.message}`);
+            throw new Error(`Error finding student: ${error.message}`);
         }
     }
-
 }

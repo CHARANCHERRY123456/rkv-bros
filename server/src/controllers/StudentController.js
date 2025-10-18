@@ -67,7 +67,7 @@ export default class StudentController {
             const student = await this.service.deleteMany(req.body);
             return res.status(204).json(student);
         } catch (error) {
-            throw Error(`Error deleting student ${error.message}`);
+            res.status(400).json({ error: error.message });
         }
     }
 }
