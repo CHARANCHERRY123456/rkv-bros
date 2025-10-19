@@ -204,9 +204,6 @@ export default function StudentProfile() {
                 <strong>Rank:</strong> {getValue(student.rank)}
               </p>
               <p>
-                <strong>CET Hall Ticket No:</strong> {getValue(student.cetHtNo)}
-              </p>
-              <p>
                 <strong>School:</strong> {getValue(student.school)}
               </p>
               <p>
