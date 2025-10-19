@@ -1,28 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PostComponent from "../components/posts/Post";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axiosClient from "../utils/axiosClient";
-import { useEffect } from "react";
 import CreateNewPost from "../components/posts/CreateNewPost";
 
 export default function Post() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const hasFetchedInitial = useRef(false);
   const limit = 1;
 
   const fetchPosts = async () => {
+    if (isLoading) return;
+    
+    setIsLoading(true);
     try {
       const res = await axiosClient.get(`/post?page=${page}&limit=${limit}`);
       if (Array.isArray(res.data)) {
         if (res.data.length < limit) setHasMore(false);
-        setPosts(prev => [...prev, ...res.data]);
+        
+        setPosts(prev => {
+          const existingIds = new Set(prev.map(p => p._id));
+          const newPosts = res.data.filter(p => !existingIds.has(p._id));
+          return [...prev, ...newPosts];
+        });
+        
         setPage(prev => prev + 1);
       } else {
         throw new Error("Invalid response format");
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -31,30 +43,50 @@ export default function Post() {
   }
 
   const toggleLike = async (postId) => {
-    setPosts(prevPosts => {
-        return prevPosts.map(post => {
-            if(post._id === postId){
-                const liked = !post.isLikeByMe;
-                return {...post,
-                    isLikeByMe: liked,
-                    likeCount: liked ? post.likeCount + 1 : post.likeCount - 1
-                };
-            }
-            return post;
-        });
-
-    });
-    // also send it to the backend
+    // Optimistic update
+    setPosts(prevPosts => 
+      prevPosts.map(post => {
+        if(post._id === postId){
+          const liked = !post.isLikeByMe;
+          return {
+            ...post,
+            isLikeByMe: liked,
+            likeCount: liked ? post.likeCount + 1 : post.likeCount - 1
+          };
+        }
+        return post;
+      })
+    );
+    
+    // Send to backend
     try {
-        axiosClient.put(`/post/${postId}/like`); // just call it but don't worry more 
+      await axiosClient.put(`/post/${postId}/like`);
     } catch (error) {
-        console.error("Error toggling like:", error);
+      console.error("Error toggling like:", error);
+      // Revert optimistic update on error
+      setPosts(prevPosts => 
+        prevPosts.map(post => {
+          if(post._id === postId){
+            const liked = post.isLikeByMe;
+            return {
+              ...post,
+              isLikeByMe: !liked,
+              likeCount: liked ? post.likeCount - 1 : post.likeCount + 1
+            };
+          }
+          return post;
+        })
+      );
     }
   }
 
   useEffect(() => {
-    fetchPosts();
-  } , []);
+    // Only fetch once on mount
+    if (!hasFetchedInitial.current) {
+      hasFetchedInitial.current = true;
+      fetchPosts();
+    }
+  }, []);
 
   return (
       <div className="min-h-screen bg-gray-50">

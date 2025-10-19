@@ -1,21 +1,27 @@
 import { useState } from "react";
 import axiosClient from "../../utils/axiosClient";
+import { toast } from "react-hot-toast";
 
 export default function CreateNewPost({onPostCreated}){
     const [content , setContent] = useState("");
     const [mediaUrl , setMediaUrl] = useState("");
 
     const handleSubmit = async(e) => {
-        alert("submitting form");
         e.preventDefault();
         if(!content.trim()) return;
+        
+        toast.loading("Creating post...");
         try {
             const res = await axiosClient.post("/post" , {content , mediaUrl});
             onPostCreated(res.data);
             setContent("");
             setMediaUrl("");
+            toast.dismiss();
+            toast.success("Post created successfully!");
         } catch (error) {
             console.error("error posting : " , error.message);
+            toast.dismiss();
+            toast.error("Failed to create post. Please try again.");
         }
     }
 
