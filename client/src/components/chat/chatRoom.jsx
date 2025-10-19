@@ -9,6 +9,7 @@ const backendUrl = envVars.VITE_BASE_URL;
 const socket = io(backendUrl, {
   withCredentials: true,
   transports: ["websocket"],
+
 });
 
 function ChatBubble({ msg, isOwn }) {
@@ -82,7 +83,7 @@ export default function ChatRoom() {
     };
 
     socket.emit("sendMessage", data);
-    setText(""); // Clear input
+    setText("");
   };
 
   const handleInputKeyDown = (e) => {
