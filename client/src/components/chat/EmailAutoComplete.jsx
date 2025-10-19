@@ -11,7 +11,6 @@ export default function EmailAutoComplete({ value, onChange, excludeEmails = [] 
       const res = await axiosClient.get('/search/suggest', {
         params: { q: inputValue, limit: 5 },
       });
-      console.log("the response is " + res.data.data.suggestions);
       const options = res.data.data.suggestions
         .filter(user => !excludeEmails.includes(user.email))
         .map(user => ({
